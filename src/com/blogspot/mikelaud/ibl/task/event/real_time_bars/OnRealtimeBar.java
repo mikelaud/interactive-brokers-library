@@ -1,9 +1,9 @@
-package com.blogspot.mikelaud.nyse.task.event.real_time_bars;
+package com.blogspot.mikelaud.ibl.task.event.real_time_bars;
 
-import com.blogspot.mikelaud.nyse.connection.ConnectionContext;
-import com.blogspot.mikelaud.nyse.task.Task;
-import com.blogspot.mikelaud.nyse.task.event.EventTaskEx;
-import com.blogspot.mikelaud.nyse.task.event.EventType;
+import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
+import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * This event receives the real-time bars data results.

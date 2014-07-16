@@ -1,10 +1,10 @@
-package com.blogspot.mikelaud.nyse.task.event;
+package com.blogspot.mikelaud.ibl.task.event;
 
-import com.blogspot.mikelaud.nyse.Logger;
-import com.blogspot.mikelaud.nyse.connection.ConnectionContext;
-import com.blogspot.mikelaud.nyse.task.Task;
-import com.blogspot.mikelaud.nyse.task.call.CallKind;
-import com.blogspot.mikelaud.nyse.task.call.CallType;
+import com.blogspot.mikelaud.ibl.Logger;
+import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.call.CallKind;
+import com.blogspot.mikelaud.ibl.task.call.CallType;
 
 /**
  * EWrapper events you can use when connecting to TWS.

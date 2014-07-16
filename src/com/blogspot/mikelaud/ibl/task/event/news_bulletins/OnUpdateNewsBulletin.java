@@ -1,9 +1,9 @@
-package com.blogspot.mikelaud.nyse.task.event.news_bulletins;
+package com.blogspot.mikelaud.ibl.task.event.news_bulletins;
 
-import com.blogspot.mikelaud.nyse.connection.ConnectionContext;
-import com.blogspot.mikelaud.nyse.task.Task;
-import com.blogspot.mikelaud.nyse.task.event.EventTaskEx;
-import com.blogspot.mikelaud.nyse.task.event.EventType;
+import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
+import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * This event is triggered for each new bulletin if the client has subscribed,

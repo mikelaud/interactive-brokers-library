@@ -1,9 +1,9 @@
-package com.blogspot.mikelaud.nyse.task.event.executions;
+package com.blogspot.mikelaud.ibl.task.event.executions;
 
-import com.blogspot.mikelaud.nyse.connection.ConnectionContext;
-import com.blogspot.mikelaud.nyse.task.Task;
-import com.blogspot.mikelaud.nyse.task.event.EventTaskEx;
-import com.blogspot.mikelaud.nyse.task.event.EventType;
+import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
+import com.blogspot.mikelaud.ibl.task.event.EventType;
 import com.ib.client.CommissionReport;
 
 /**

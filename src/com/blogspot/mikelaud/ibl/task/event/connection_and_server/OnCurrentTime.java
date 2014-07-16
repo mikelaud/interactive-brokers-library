@@ -1,14 +1,14 @@
-package com.blogspot.mikelaud.nyse.task.event.connection_and_server;
+package com.blogspot.mikelaud.ibl.task.event.connection_and_server;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
-import com.blogspot.mikelaud.nyse.connection.ConnectionContext;
-import com.blogspot.mikelaud.nyse.task.Task;
-import com.blogspot.mikelaud.nyse.task.event.EventTaskEx;
-import com.blogspot.mikelaud.nyse.task.event.EventType;
+import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
+import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * This event receives the current system time on the server side.

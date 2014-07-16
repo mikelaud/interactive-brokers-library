@@ -1,9 +1,9 @@
-package com.blogspot.mikelaud.nyse.task;
+package com.blogspot.mikelaud.ibl.task;
 
 import java.util.concurrent.Callable;
 
-import com.blogspot.mikelaud.nyse.connection.Connection;
-import com.blogspot.mikelaud.nyse.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.connection.Connection;
+import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.ib.client.EClientSocket;
 
 public abstract class Task implements Callable<Task> {

@@ -1,4 +1,4 @@
-package com.blogspot.mikelaud.nyse.connection;
+package com.blogspot.mikelaud.ibl.connection;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorCompletionService;
@@ -6,7 +6,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.blogspot.mikelaud.nyse.task.Task;
+import com.blogspot.mikelaud.ibl.task.Task;
 
 public class ConnectionContext {
 

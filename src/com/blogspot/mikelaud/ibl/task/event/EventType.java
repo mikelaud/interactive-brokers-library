@@ -1,7 +1,7 @@
-package com.blogspot.mikelaud.nyse.task.event;
+package com.blogspot.mikelaud.ibl.task.event;
 
-import com.blogspot.mikelaud.nyse.task.TaskGroup;
-import com.blogspot.mikelaud.nyse.task.call.CallType;
+import com.blogspot.mikelaud.ibl.task.TaskGroup;
+import com.blogspot.mikelaud.ibl.task.call.CallType;
 
 /**
  * EClientSocket events enum.

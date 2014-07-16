@@ -1,9 +1,9 @@
-package com.blogspot.mikelaud.nyse.task.call.contract_details;
+package com.blogspot.mikelaud.ibl.task.call.contract_details;
 
-import com.blogspot.mikelaud.nyse.connection.ConnectionContext;
-import com.blogspot.mikelaud.nyse.task.Task;
-import com.blogspot.mikelaud.nyse.task.call.CallTaskEx;
-import com.blogspot.mikelaud.nyse.task.call.CallType;
+import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
+import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.ib.client.Contract;
 
 /**

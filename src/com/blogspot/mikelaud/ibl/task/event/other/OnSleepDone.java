@@ -1,12 +1,12 @@
-package com.blogspot.mikelaud.nyse.task.event.other;
+package com.blogspot.mikelaud.ibl.task.event.other;
 
 import java.util.concurrent.TimeUnit;
 
-import com.blogspot.mikelaud.nyse.connection.ConnectionContext;
-import com.blogspot.mikelaud.nyse.task.Task;
-import com.blogspot.mikelaud.nyse.task.call.other.CallSleep;
-import com.blogspot.mikelaud.nyse.task.event.EventTaskEx;
-import com.blogspot.mikelaud.nyse.task.event.EventType;
+import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.call.other.CallSleep;
+import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
+import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * Artificial event for sync call CallSleep.

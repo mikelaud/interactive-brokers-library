@@ -1,15 +1,15 @@
-package com.blogspot.mikelaud.nyse;
+package com.blogspot.mikelaud.ibl;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
-import com.blogspot.mikelaud.nyse.connection.ConnectionContext;
-import com.blogspot.mikelaud.nyse.task.Task;
-import com.blogspot.mikelaud.nyse.task.call.connection_and_server.CallConnect;
-import com.blogspot.mikelaud.nyse.task.call.connection_and_server.CallDisconnect;
-import com.blogspot.mikelaud.nyse.task.call.connection_and_server.CallReqCurrentTime;
-import com.blogspot.mikelaud.nyse.task.call.contract_details.CallReqContractDetails;
-import com.blogspot.mikelaud.nyse.task.call.other.CallSleep;
+import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.call.connection_and_server.CallConnect;
+import com.blogspot.mikelaud.ibl.task.call.connection_and_server.CallDisconnect;
+import com.blogspot.mikelaud.ibl.task.call.connection_and_server.CallReqCurrentTime;
+import com.blogspot.mikelaud.ibl.task.call.contract_details.CallReqContractDetails;
+import com.blogspot.mikelaud.ibl.task.call.other.CallSleep;
 import com.ib.client.Contract;
 
 public class Program implements Callable<Object> {

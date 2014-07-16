@@ -1,12 +1,12 @@
-package com.blogspot.mikelaud.nyse.task.call.other;
+package com.blogspot.mikelaud.ibl.task.call.other;
 
 import java.util.concurrent.TimeUnit;
 
-import com.blogspot.mikelaud.nyse.connection.ConnectionContext;
-import com.blogspot.mikelaud.nyse.task.Task;
-import com.blogspot.mikelaud.nyse.task.call.CallTaskEx;
-import com.blogspot.mikelaud.nyse.task.call.CallType;
-import com.blogspot.mikelaud.nyse.task.event.other.OnSleepDone;
+import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
+import com.blogspot.mikelaud.ibl.task.call.CallType;
+import com.blogspot.mikelaud.ibl.task.event.other.OnSleepDone;
 
 /**
  * Sleep call.

@@ -1,6 +1,6 @@
-package com.blogspot.mikelaud.nyse.task.event;
+package com.blogspot.mikelaud.ibl.task.event;
 
-import com.blogspot.mikelaud.nyse.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 
 /**
  * EWrapper events you can use when connecting to TWS.

@@ -1,4 +1,4 @@
-package com.blogspot.mikelaud.nyse;
+package com.blogspot.mikelaud.ibl;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.EnumSet;
 
-import com.blogspot.mikelaud.nyse.data.Day;
+import com.blogspot.mikelaud.ibl.data.Day;
 
 // add truncate & exact file resize
 public class TestFile {

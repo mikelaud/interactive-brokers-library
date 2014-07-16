@@ -1,12 +1,12 @@
-package com.blogspot.mikelaud.nyse.task.command;
+package com.blogspot.mikelaud.ibl.task.command;
 
 import java.util.concurrent.TimeUnit;
 
-import com.blogspot.mikelaud.nyse.Logger;
-import com.blogspot.mikelaud.nyse.connection.ConnectionContext;
-import com.blogspot.mikelaud.nyse.task.Task;
-import com.blogspot.mikelaud.nyse.task.call.CallTask;
-import com.blogspot.mikelaud.nyse.task.event.EventTask;
+import com.blogspot.mikelaud.ibl.Logger;
+import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.call.CallTask;
+import com.blogspot.mikelaud.ibl.task.event.EventTask;
 
 public abstract class Command extends Task {
 

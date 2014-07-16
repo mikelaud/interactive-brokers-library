@@ -1,4 +1,4 @@
-package com.blogspot.mikelaud.nyse.connection;
+package com.blogspot.mikelaud.ibl.connection;
 
 import com.ib.client.EClientSocket;
 

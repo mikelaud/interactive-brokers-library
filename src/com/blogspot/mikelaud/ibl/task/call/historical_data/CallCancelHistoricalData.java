@@ -1,9 +1,9 @@
-package com.blogspot.mikelaud.nyse.task.call.historical_data;
+package com.blogspot.mikelaud.ibl.task.call.historical_data;
 
-import com.blogspot.mikelaud.nyse.connection.ConnectionContext;
-import com.blogspot.mikelaud.nyse.task.Task;
-import com.blogspot.mikelaud.nyse.task.call.CallTaskEx;
-import com.blogspot.mikelaud.nyse.task.call.CallType;
+import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
+import com.blogspot.mikelaud.ibl.task.call.CallType;
 
 /**
  * Call the CallCancelHistoricalData call to stop receiving

@@ -1,9 +1,9 @@
-package com.blogspot.mikelaud.nyse.task.command;
+package com.blogspot.mikelaud.ibl.task.command;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import com.blogspot.mikelaud.nyse.task.event.EventTask;
+import com.blogspot.mikelaud.ibl.task.event.EventTask;
 
 public class MulticastContext {
 

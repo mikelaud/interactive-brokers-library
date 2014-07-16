@@ -1,12 +1,12 @@
-package com.blogspot.mikelaud.nyse.task.call;
+package com.blogspot.mikelaud.ibl.task.call;
 
 import java.util.concurrent.TimeUnit;
 
-import com.blogspot.mikelaud.nyse.Logger;
-import com.blogspot.mikelaud.nyse.connection.ConnectionContext;
-import com.blogspot.mikelaud.nyse.task.Task;
-import com.blogspot.mikelaud.nyse.task.command.Command;
-import com.blogspot.mikelaud.nyse.task.command.CommandFactory;
+import com.blogspot.mikelaud.ibl.Logger;
+import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.command.Command;
+import com.blogspot.mikelaud.ibl.task.command.CommandFactory;
 
 /**
  * EClientSocket calls you use when connecting to TWS.

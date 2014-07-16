@@ -1,6 +1,6 @@
-package com.blogspot.mikelaud.nyse.task.call;
+package com.blogspot.mikelaud.ibl.task.call;
 
-import com.blogspot.mikelaud.nyse.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 
 /**
  * EClientSocket calls you use when connecting to TWS.
