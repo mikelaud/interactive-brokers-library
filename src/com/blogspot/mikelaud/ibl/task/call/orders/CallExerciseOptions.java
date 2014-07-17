@@ -14,10 +14,10 @@ import com.ib.client.Contract;
  *       whenever any API initiated exercise or lapse is attempted.
  */
 public class CallExerciseOptions
-	extends CallTaskEx<CallExerciseOptions.Info>
+	extends CallTaskEx<CallExerciseOptions.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * The Id for the exercise request.
@@ -54,7 +54,7 @@ public class CallExerciseOptions
 		 */
 		public final int OVERRIDE;
 		
-		public Info
+		public In
 		(	int aTickerId
 		,	Contract aContract
 		,	int aExerciseAction
@@ -76,12 +76,12 @@ public class CallExerciseOptions
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().exerciseOptions
-		(	INFO.TICKER_ID
-		,	INFO.CONTRACT
-		,	INFO.EXERCISE_ACTION
-		,	INFO.EXERCISE_QUANTITY
-		,	INFO.ACCOUNT
-		,	INFO.OVERRIDE
+		(	IN.TICKER_ID
+		,	IN.CONTRACT
+		,	IN.EXERCISE_ACTION
+		,	IN.EXERCISE_QUANTITY
+		,	IN.ACCOUNT
+		,	IN.OVERRIDE
 		);
 		return null;
 	}
@@ -91,16 +91,16 @@ public class CallExerciseOptions
 		return String.format
 		(	"%s[%d] { exerciseAction=\"%d\" exerciseQuantity=\"%d\" account=\"%s\" override=\"%d\" }"
 		,	super.toString()
-		,	INFO.TICKER_ID
-		,	INFO.EXERCISE_ACTION
-		,	INFO.EXERCISE_QUANTITY
-		,	INFO.ACCOUNT
-		,	INFO.OVERRIDE
+		,	IN.TICKER_ID
+		,	IN.EXERCISE_ACTION
+		,	IN.EXERCISE_QUANTITY
+		,	IN.ACCOUNT
+		,	IN.OVERRIDE
 		);
 	}
 
-	public CallExerciseOptions(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.exerciseOptions);
+	public CallExerciseOptions(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.exerciseOptions);
 	}
 
 	public CallExerciseOptions
@@ -112,7 +112,7 @@ public class CallExerciseOptions
 	,	String aAccount
 	,	int aOverride
 	) {
-		this(aContext, new Info
+		this(aContext, new In
 		(	aTickerId
 		,	aContract
 		,	aExerciseAction

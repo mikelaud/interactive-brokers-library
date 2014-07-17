@@ -1,9 +1,13 @@
 package com.blogspot.mikelaud.ibl.task.call.account_and_portfolio;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.out.OutEvents;
+import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.call.CallType;
+import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnAccountSummary;
+import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnAccountSummaryEnd;
 
 /**
  * Call this call to request and keep up to date the data
@@ -14,10 +18,10 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  *       to a Financial Advisor (FA) account.
  */
 public class CallReqAccountSummary
-	extends CallTaskEx<CallReqAccountSummary.Info>
+	extends CallTaskEx<CallReqAccountSummary.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * The ID of the data request.
@@ -74,7 +78,7 @@ public class CallReqAccountSummary
 		 */
 		public final String TAGS;		
 		
-		public Info(int aReqId, String aGroup, String aTags) {
+		public In(int aReqId, String aGroup, String aTags) {
 			REQ_ID = aReqId;
 			GROUP = aGroup;
 			TAGS = aTags;
@@ -82,13 +86,18 @@ public class CallReqAccountSummary
 		
 	}
 	//------------------------------------------------------------------------
+	
+	public final OutEvents<OnAccountSummary> OUT_ACCOUNT_SUMMARY;
+	public final OutTerminator<OnAccountSummaryEnd> OUT_ACCOUNT_SUMMARY_END;
 
+	//------------------------------------------------------------------------
+	
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqAccountSummary
-		(	INFO.REQ_ID
-		,	INFO.GROUP
-		,	INFO.TAGS
+		(	IN.REQ_ID
+		,	IN.GROUP
+		,	IN.TAGS
 		);
 		return null;
 	}
@@ -98,27 +107,16 @@ public class CallReqAccountSummary
 		return String.format
 		(	"%s(\"%s\")[%d] { group=\"%s\" }"
 		,	super.toString()
-		,	INFO.TAGS
-		,	INFO.REQ_ID
-		,	INFO.GROUP
+		,	IN.TAGS
+		,	IN.REQ_ID
+		,	IN.GROUP
 		);
 	}
 
-	public CallReqAccountSummary(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.reqAccountSummary);
-	}
-
-	public CallReqAccountSummary
-	(	ConnectionContext aContext
-	,	int aReqId
-	,	String aGroup
-	,	String aTags
-	) {
-		this(aContext, new Info
-		(	aReqId
-		,	aGroup
-		,	aTags
-		));
+	public CallReqAccountSummary(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.reqAccountSummary);
+		OUT_ACCOUNT_SUMMARY = new OutEvents<OnAccountSummary>(getRouter());
+		OUT_ACCOUNT_SUMMARY_END = new OutTerminator<OnAccountSummaryEnd>(getRouter());
 	}
 
 }

@@ -1,9 +1,16 @@
 package com.blogspot.mikelaud.ibl.task.call.account_and_portfolio;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.out.OutEvent;
+import com.blogspot.mikelaud.ibl.out.OutEvents;
+import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.call.CallType;
+import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnAccountDownloadEnd;
+import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnUpdateAccountTime;
+import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnUpdateAccountValue;
+import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnUpdatePortfolio;
 
 /**
  * Call this call to start getting account values, portfolio,
@@ -35,10 +42,10 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  * https://institutions.interactivebrokers.com/en/software/tws/usersguidebook/realtimeactivitymonitoring/the_account_window.htm
  */
 public class CallReqAccountUpdates
-	extends CallTaskEx<CallReqAccountUpdates.Info>
+	extends CallTaskEx<CallReqAccountUpdates.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * If set to TRUE, the client will start receiving account
@@ -52,7 +59,7 @@ public class CallReqAccountUpdates
 		 */
 		public final String ACCT_CODE;
 		
-		public Info
+		public In
 		(	boolean aSubscribe
 		,	String aAcctCode
 		) {
@@ -63,11 +70,18 @@ public class CallReqAccountUpdates
 	}
 	//------------------------------------------------------------------------
 
+	public final OutEvent<OnUpdateAccountTime> OUT_UPDATE_ACCOUNT_TIME;
+	public final OutEvents<OnUpdateAccountValue> OUT_UPDATE_ACCOUNT_VALUE;
+	public final OutEvents<OnUpdatePortfolio> OUT_UPDATE_PORTFOLIO;
+	public final OutTerminator<OnAccountDownloadEnd> OUT_ACCOUNT_DOWNLOAD_END;
+	
+	//------------------------------------------------------------------------
+	
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqAccountUpdates
-		(	INFO.SUBSCRIBE
-		,	INFO.ACCT_CODE
+		(	IN.SUBSCRIBE
+		,	IN.ACCT_CODE
 		);
 		return null;
 	}
@@ -77,24 +91,17 @@ public class CallReqAccountUpdates
 		return String.format
 		(	"%s { subscribe=\"%b\" acctCode=\"%s\" }"
 		,	super.toString()
-		,	INFO.SUBSCRIBE
-		,	INFO.ACCT_CODE
+		,	IN.SUBSCRIBE
+		,	IN.ACCT_CODE
 		);
 	}
 
-	public CallReqAccountUpdates(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.reqAccountUpdates);
-	}
-
-	public CallReqAccountUpdates
-	(	ConnectionContext aContext
-	,	boolean aSubscribe
-	,	String aAcctCode
-	) {
-		this(aContext, new Info
-		(	aSubscribe
-		,	aAcctCode
-		));
+	public CallReqAccountUpdates(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.reqAccountUpdates);
+		OUT_UPDATE_ACCOUNT_TIME = new OutEvent<OnUpdateAccountTime>(getRouter());
+		OUT_UPDATE_ACCOUNT_VALUE = new OutEvents<OnUpdateAccountValue>(getRouter());
+		OUT_UPDATE_PORTFOLIO = new OutEvents<OnUpdatePortfolio>(getRouter());
+		OUT_ACCOUNT_DOWNLOAD_END = new OutTerminator<OnAccountDownloadEnd>(getRouter());
 	}
 
 }

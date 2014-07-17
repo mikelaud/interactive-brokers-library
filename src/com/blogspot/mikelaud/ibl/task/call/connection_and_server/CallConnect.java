@@ -1,9 +1,12 @@
 package com.blogspot.mikelaud.ibl.task.call.connection_and_server;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.out.OutEvent;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.call.CallType;
+import com.blogspot.mikelaud.ibl.task.event.financial_advisors.OnManagedAccounts;
+import com.blogspot.mikelaud.ibl.task.event.orders.OnNextValidId;
 
 /**
  * This call must be called before any other.
@@ -12,10 +15,10 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  * the message "Already connected."
  */
 public class CallConnect
-	extends CallTaskEx<CallConnect.Info>
+	extends CallTaskEx<CallConnect.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * The host name or IP address of the machine where TWS is running.
@@ -35,7 +38,7 @@ public class CallConnect
 		 */
 		public final int CLIENT_ID;
 		
-		public Info
+		public In
 		(	String aHost
 		,	int aPort
 		,	int aClientId
@@ -48,12 +51,17 @@ public class CallConnect
 	}
 	//------------------------------------------------------------------------
 
+	public final OutEvent<OnManagedAccounts> OUT_MANAGED_ACCOUNTS;
+	public final OutEvent<OnNextValidId> OUT_NEXT_VALID_ID;
+	
+	//------------------------------------------------------------------------
+	
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().eConnect
-		(	INFO.HOST
-		,	INFO.PORT
-		,	INFO.CLIENT_ID
+		(	IN.HOST
+		,	IN.PORT
+		,	IN.CLIENT_ID
 		);
 		return null;
 	}
@@ -63,14 +71,16 @@ public class CallConnect
 		return String.format
 		(	"%s(%s:%d) { clientId=\"%d\" }"
 		,	super.toString()
-		,	INFO.HOST
-		,	INFO.PORT
-		,	INFO.CLIENT_ID
+		,	IN.HOST
+		,	IN.PORT
+		,	IN.CLIENT_ID
 		);
 	}
 	
-	public CallConnect(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.connect);
+	public CallConnect(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.connect);
+		OUT_MANAGED_ACCOUNTS = new OutEvent<OnManagedAccounts>(getRouter());
+		OUT_NEXT_VALID_ID = new OutEvent<OnNextValidId>(getRouter());
 	}
 	
 	public CallConnect
@@ -79,7 +89,7 @@ public class CallConnect
 	,	int aPort
 	,	int aClientId
 	) {
-		this(aContext, new Info
+		this(aContext, new In
 		(	aHost
 		,	aPort
 		,	aClientId

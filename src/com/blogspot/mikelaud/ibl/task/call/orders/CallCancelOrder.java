@@ -9,10 +9,10 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  * Call this call to cancel an order.
  */
 public class CallCancelOrder
-	extends CallTaskEx<CallCancelOrder.Info>
+	extends CallTaskEx<CallCancelOrder.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * The order Id that was specified previously
@@ -20,7 +20,7 @@ public class CallCancelOrder
 		 */
 		public final int ID;
 		
-		public Info(int aId) {
+		public In(int aId) {
 			ID = aId;
 		}
 		
@@ -29,7 +29,7 @@ public class CallCancelOrder
 
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().cancelOrder(INFO.ID);
+		getClientSocket().cancelOrder(IN.ID);
 		return null;
 	}
 
@@ -38,16 +38,16 @@ public class CallCancelOrder
 		return String.format
 		(	"%s[%d]"
 		,	super.toString()
-		,	INFO.ID
+		,	IN.ID
 		);
 	}
 
-	public CallCancelOrder(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.cancelOrder);
+	public CallCancelOrder(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.cancelOrder);
 	}
 
 	public CallCancelOrder(ConnectionContext aContext, int aId) {
-		this(aContext, new Info(aId));
+		this(aContext, new In(aId));
 	}
 
 }

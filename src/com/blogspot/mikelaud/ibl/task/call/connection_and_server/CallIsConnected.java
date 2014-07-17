@@ -9,12 +9,12 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  * Call this call to check if there is a connection with TWS.
  */
 public class CallIsConnected
-	extends CallTaskEx<CallIsConnected.Info>
+	extends CallTaskEx<CallIsConnected.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
-		public Info() {
+		public In() {
 			// void
 		}
 		
@@ -42,12 +42,12 @@ public class CallIsConnected
 		);
 	}
 
-	private CallIsConnected(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.isConnected);
+	private CallIsConnected(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.isConnected);
 	}
 
 	public CallIsConnected(ConnectionContext aContext) {
-		this(aContext, new Info());
+		this(aContext, new In());
 	}
 
 }

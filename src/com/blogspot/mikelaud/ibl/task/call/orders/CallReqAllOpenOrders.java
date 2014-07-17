@@ -1,9 +1,14 @@
 package com.blogspot.mikelaud.ibl.task.call.orders;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.out.OutEvents;
+import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.call.CallType;
+import com.blogspot.mikelaud.ibl.task.event.orders.OnOpenOrder;
+import com.blogspot.mikelaud.ibl.task.event.orders.OnOpenOrderEnd;
+import com.blogspot.mikelaud.ibl.task.event.orders.OnOrderStatus;
 
 /**
  * Call this call to request all open orders that were placed
@@ -17,16 +22,22 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  *       and the requesting client.
  */
 public class CallReqAllOpenOrders
-	extends CallTaskEx<CallReqAllOpenOrders.Info>
+	extends CallTaskEx<CallReqAllOpenOrders.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
-		public Info() {
+		public In() {
 			// void
 		}
 		
 	}
+	//------------------------------------------------------------------------
+
+	public final OutEvents<OnOrderStatus> OUT_ORDER_STATUS;
+	public final OutEvents<OnOpenOrder> OUT_OPEN_ORDER;
+	public final OutTerminator<OnOpenOrderEnd> OUT_OPEN_ORDER_END;
+
 	//------------------------------------------------------------------------
 
 	@Override
@@ -43,12 +54,15 @@ public class CallReqAllOpenOrders
 		);
 	}
 
-	private CallReqAllOpenOrders(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.reqAllOpenOrders);
+	private CallReqAllOpenOrders(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.reqAllOpenOrders);
+		OUT_ORDER_STATUS = new OutEvents<OnOrderStatus>(getRouter());
+		OUT_OPEN_ORDER = new OutEvents<OnOpenOrder>(getRouter());
+		OUT_OPEN_ORDER_END = new OutTerminator<OnOpenOrderEnd>(getRouter());
 	}
 
 	public CallReqAllOpenOrders(ConnectionContext aContext) {
-		this(aContext, new Info());
+		this(aContext, new In());
 	}
 
 }

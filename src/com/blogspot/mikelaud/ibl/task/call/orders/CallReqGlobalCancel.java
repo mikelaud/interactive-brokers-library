@@ -13,12 +13,12 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  * If the order was initiated in the API, it also gets canceled.
  */
 public class CallReqGlobalCancel
-	extends CallTaskEx<CallReqGlobalCancel.Info>
+	extends CallTaskEx<CallReqGlobalCancel.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
-		public Info() {
+		public In() {
 			// void
 		}
 		
@@ -39,12 +39,12 @@ public class CallReqGlobalCancel
 		);
 	}
 
-	private CallReqGlobalCancel(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.reqGlobalCancel);
+	private CallReqGlobalCancel(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.reqGlobalCancel);
 	}
 
 	public CallReqGlobalCancel(ConnectionContext aContext) {
-		this(aContext, new Info());
+		this(aContext, new In());
 	}
 
 }

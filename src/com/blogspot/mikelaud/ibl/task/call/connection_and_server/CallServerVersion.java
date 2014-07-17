@@ -11,12 +11,12 @@ import com.blogspot.mikelaud.ibl.task.event.connection_and_server.OnServerVersio
  * to which the API application is connected.
  */
 public class CallServerVersion
-	extends CallTaskEx<CallServerVersion.Info>
+	extends CallTaskEx<CallServerVersion.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
-		public Info() {
+		public In() {
 			// void
 		}
 		
@@ -50,12 +50,12 @@ public class CallServerVersion
 		);
 	}
 
-	private CallServerVersion(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.serverVersion);
+	private CallServerVersion(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.serverVersion);
 	}
 
 	public CallServerVersion(ConnectionContext aContext) {
-		this(aContext, new Info());
+		this(aContext, new In());
 	}
 
 }

@@ -12,10 +12,10 @@ import com.blogspot.mikelaud.ibl.task.event.other.OnSleepDone;
  * Sleep call.
  */
 public class CallSleep
-	extends CallTaskEx<CallSleep.Info>
+	extends CallTaskEx<CallSleep.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * Sleep time.
@@ -26,7 +26,7 @@ public class CallSleep
 		 */
 		public final TimeUnit TIME_UNIT;
 		
-		public Info(long aTime, TimeUnit aTimeUnit) {
+		public In(long aTime, TimeUnit aTimeUnit) {
 			TIME = aTime;
 			TIME_UNIT = aTimeUnit;
 		}
@@ -36,9 +36,10 @@ public class CallSleep
 
 	@Override
 	protected Task onCall() throws Exception {
-		long timeMs = TimeUnit.MILLISECONDS.convert(INFO.TIME, INFO.TIME_UNIT);
+		long timeMs = TimeUnit.MILLISECONDS.convert(IN.TIME, IN.TIME_UNIT);
 		Thread.sleep(timeMs);
-		new OnSleepDone(mContext, INFO).call();
+		OnSleepDone.Info info = new OnSleepDone.Info(IN.TIME, IN.TIME_UNIT);
+		new OnSleepDone(mContext, info).call();
 		return null;
 	}
 
@@ -47,17 +48,17 @@ public class CallSleep
 		return String.format
 		(	"%s(%d %s)"
 		,	super.toString()
-		,	INFO.TIME
-		,	INFO.TIME_UNIT.name().toLowerCase()
+		,	IN.TIME
+		,	IN.TIME_UNIT.name().toLowerCase()
 		);
 	}
 
-	public CallSleep(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.sleep);
+	public CallSleep(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.sleep);
 	}
 
 	public CallSleep(ConnectionContext aContext, long aTime, TimeUnit aTimeUnit) {
-		this(aContext, new Info(aTime, aTimeUnit));
+		this(aContext, new In(aTime, aTimeUnit));
 	}
 
 }

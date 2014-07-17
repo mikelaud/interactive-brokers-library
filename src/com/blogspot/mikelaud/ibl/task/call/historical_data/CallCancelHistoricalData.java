@@ -10,17 +10,17 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  * historical data results.
  */
 public class CallCancelHistoricalData
-	extends CallTaskEx<CallCancelHistoricalData.Info>
+	extends CallTaskEx<CallCancelHistoricalData.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * The Id that was specified in the call to CallReqHistoricalData.
 		 */
 		public final int TICKER_ID;
 		
-		public Info(int aTickerId) {
+		public In(int aTickerId) {
 			TICKER_ID = aTickerId;
 		}
 		
@@ -29,7 +29,7 @@ public class CallCancelHistoricalData
 
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().cancelHistoricalData(INFO.TICKER_ID);
+		getClientSocket().cancelHistoricalData(IN.TICKER_ID);
 		return null;
 	}
 
@@ -38,16 +38,16 @@ public class CallCancelHistoricalData
 		return String.format
 		(	"%s[%d]"
 		,	super.toString()
-		,	INFO.TICKER_ID
+		,	IN.TICKER_ID
 		);
 	}
 
-	public CallCancelHistoricalData(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.cancelHistoricalData);
+	public CallCancelHistoricalData(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.cancelHistoricalData);
 	}
 
 	public CallCancelHistoricalData(ConnectionContext aContext, int aTickerId) {
-		this(aContext, new Info(aTickerId));
+		this(aContext, new In(aTickerId));
 	}
 
 }

@@ -32,7 +32,7 @@ public class Program implements Callable<Object> {
 		contract.m_exchange = "SMART";
 		contract.m_primaryExch = "SMART";
 		contract.m_currency = "USD";
-		CallReqContractDetails.Info contractInfo = new CallReqContractDetails.Info(0, contract);
+		CallReqContractDetails.In contractInfo = new CallReqContractDetails.In(0, contract);
 		mContext.onTask(new CallReqContractDetails(mContext, contractInfo).getCommand(10, TimeUnit.SECONDS));
 		//
 		mContext.onTask(new CallReqCurrentTime(mContext).getCommand(10, TimeUnit.SECONDS));
@@ -41,13 +41,13 @@ public class Program implements Callable<Object> {
 		//new CallDisconnect(mContext).callCommand();
 
 		/*
-		new CallSleep(mContext, new CallSleep.Info(3, TimeUnit.SECONDS)).call();
+		new CallSleep(mContext, new CallSleep.In(3, TimeUnit.SECONDS)).call();
 		mContext.onTask(new CallServerVersion(mContext));
 		//
-		new CallSleep(mContext, new CallSleep.Info(1, TimeUnit.SECONDS)).call();
+		new CallSleep(mContext, new CallSleep.In(1, TimeUnit.SECONDS)).call();
 		mContext.onTask(new CallTwsConnectionTime(mContext));
 		//
-		new CallSleep(mContext, new CallSleep.Info(1, TimeUnit.SECONDS)).call();
+		new CallSleep(mContext, new CallSleep.In(1, TimeUnit.SECONDS)).call();
 		mContext.onTask(new CallReqCurrentTime(mContext));
 		//
 		TestCommand testCommand = new TestCommand(mContext, 1);

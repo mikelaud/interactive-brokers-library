@@ -11,10 +11,10 @@ import com.ib.client.Contract;
  * for a supplied option price and underlying price.
  */
 public class CallCalculateImpliedVolatility
-	extends CallTaskEx<CallCalculateImpliedVolatility.Info>
+	extends CallTaskEx<CallCalculateImpliedVolatility.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * The ticker id.
@@ -33,7 +33,7 @@ public class CallCalculateImpliedVolatility
 		 */
 		public final double UNDER_PRICE;
 		
-		public Info
+		public In
 		(	int aReqId
 		,	Contract aOptionContract
 		,	double aOptionPrice
@@ -51,10 +51,10 @@ public class CallCalculateImpliedVolatility
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().calculateImpliedVolatility
-		(	INFO.REQ_ID
-		,	INFO.OPTION_CONTRACT
-		,	INFO.OPTION_PRICE
-		,	INFO.UNDER_PRICE
+		(	IN.REQ_ID
+		,	IN.OPTION_CONTRACT
+		,	IN.OPTION_PRICE
+		,	IN.UNDER_PRICE
 		);
 		return null;
 	}
@@ -64,14 +64,14 @@ public class CallCalculateImpliedVolatility
 		return String.format
 		(	"%s[%d] { optionPrice=\"%f\" underPrice=\"%f\" }"
 		,	super.toString()
-		,	INFO.REQ_ID
-		,	INFO.OPTION_PRICE
-		,	INFO.UNDER_PRICE
+		,	IN.REQ_ID
+		,	IN.OPTION_PRICE
+		,	IN.UNDER_PRICE
 		);
 	}
 
-	public CallCalculateImpliedVolatility(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.calculateImpliedVolatility);
+	public CallCalculateImpliedVolatility(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.calculateImpliedVolatility);
 	}
 
 	public CallCalculateImpliedVolatility
@@ -81,7 +81,7 @@ public class CallCalculateImpliedVolatility
 	,	double aOptionPrice
 	,	double aUnderPrice
 	) {
-		this(aContext, new Info
+		this(aContext, new In
 		(	aReqId
 		,	aOptionContract
 		,	aOptionPrice

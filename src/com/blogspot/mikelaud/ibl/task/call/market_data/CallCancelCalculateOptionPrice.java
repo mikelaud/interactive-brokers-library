@@ -10,17 +10,17 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  * and greek values for a supplied volatility and underlying price.
  */
 public class CallCancelCalculateOptionPrice
-	extends CallTaskEx<CallCancelCalculateOptionPrice.Info>
+	extends CallTaskEx<CallCancelCalculateOptionPrice.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * The ticker id.
 		 */
 		public final int REQ_ID;
 		
-		public Info(int aReqId) {
+		public In(int aReqId) {
 			REQ_ID = aReqId;
 		}
 		
@@ -29,7 +29,7 @@ public class CallCancelCalculateOptionPrice
 
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().cancelCalculateOptionPrice(INFO.REQ_ID);
+		getClientSocket().cancelCalculateOptionPrice(IN.REQ_ID);
 		return null;
 	}
 
@@ -38,16 +38,16 @@ public class CallCancelCalculateOptionPrice
 		return String.format
 		(	"%s[%d]"
 		,	super.toString()
-		,	INFO.REQ_ID
+		,	IN.REQ_ID
 		);
 	}
 
-	public CallCancelCalculateOptionPrice(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.cancelCalculateOptionPrice);
+	public CallCancelCalculateOptionPrice(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.cancelCalculateOptionPrice);
 	}
 
 	public CallCancelCalculateOptionPrice(ConnectionContext aContext, int aReqId) {
-		this(aContext, new Info(aReqId));
+		this(aContext, new In(aReqId));
 	}
 
 }

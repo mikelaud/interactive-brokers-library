@@ -9,12 +9,12 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  * Call this call to stop receiving news bulletins.
  */
 public class CallCancelNewsBulletins
-	extends CallTaskEx<CallCancelNewsBulletins.Info>
+	extends CallTaskEx<CallCancelNewsBulletins.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
-		public Info() {
+		public In() {
 			// void
 		}
 		
@@ -35,12 +35,12 @@ public class CallCancelNewsBulletins
 		);
 	}
 
-	private CallCancelNewsBulletins(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.cancelNewsBulletins);
+	private CallCancelNewsBulletins(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.cancelNewsBulletins);
 	}
 
 	public CallCancelNewsBulletins(ConnectionContext aContext) {
-		this(aContext, new Info());
+		this(aContext, new In());
 	}
 
 }

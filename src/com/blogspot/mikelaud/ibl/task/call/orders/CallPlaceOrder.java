@@ -11,10 +11,10 @@ import com.ib.client.Order;
  * Call this call to place an order.
  */
 public class CallPlaceOrder
-	extends CallTaskEx<CallPlaceOrder.Info>
+	extends CallTaskEx<CallPlaceOrder.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * The order Id. You must specify a unique value.
@@ -32,7 +32,7 @@ public class CallPlaceOrder
 		 */
 		public final Order ORDER;
 		
-		public Info(int aId, Contract aContract, Order aOrder) {
+		public In(int aId, Contract aContract, Order aOrder) {
 			ID = aId;
 			CONTRACT = aContract;
 			ORDER = aOrder;
@@ -44,9 +44,9 @@ public class CallPlaceOrder
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().placeOrder
-		(	INFO.ID
-		,	INFO.CONTRACT
-		,	INFO.ORDER
+		(	IN.ID
+		,	IN.CONTRACT
+		,	IN.ORDER
 		);
 		return null;
 	}
@@ -56,12 +56,12 @@ public class CallPlaceOrder
 		return String.format
 		(	"%s[%d]"
 		,	super.toString()
-		,	INFO.ID
+		,	IN.ID
 		);
 	}
 
-	public CallPlaceOrder(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.placeOrder);
+	public CallPlaceOrder(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.placeOrder);
 	}
 
 	public CallPlaceOrder
@@ -70,7 +70,7 @@ public class CallPlaceOrder
 	,	Contract aContract
 	,	Order aOrder
 	) {
-		this(aContext, new Info
+		this(aContext, new In
 		(	aId
 		,	aContract
 		,	aOrder

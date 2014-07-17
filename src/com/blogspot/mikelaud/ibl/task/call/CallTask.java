@@ -4,21 +4,29 @@ import java.util.concurrent.TimeUnit;
 
 import com.blogspot.mikelaud.ibl.Logger;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.router.Router;
 import com.blogspot.mikelaud.ibl.task.Task;
-import com.blogspot.mikelaud.ibl.task.command.Command;
-import com.blogspot.mikelaud.ibl.task.command.CommandFactory;
+import com.blogspot.mikelaud.ibl.test_command.Command;
+import com.blogspot.mikelaud.ibl.test_command.CommandFactory;
 
 /**
  * EClientSocket calls you use when connecting to TWS.
  */
 public abstract class CallTask extends Task {
 
-	protected final CallType CALL_TYPE;
+	private final CallType CALL_TYPE;
+	private final Router ROUTER;
 
 	private Command mCommand;
 	private Integer mRequestId;
 	
-	public CallType getCallType() { return CALL_TYPE; }
+	public CallType getCallType() {
+		return CALL_TYPE;
+	}
+	
+	public Router getRouter() {
+		return ROUTER;
+	}
 	
 	public int getRequestId() {
 		if (null == mRequestId) {
@@ -63,6 +71,7 @@ public abstract class CallTask extends Task {
 	public CallTask(ConnectionContext aContext, CallType aCallType) {
 		super(aContext);
 		CALL_TYPE = aCallType;
+		ROUTER = null;
 		mCommand = null;
 		mRequestId = null;
 	}

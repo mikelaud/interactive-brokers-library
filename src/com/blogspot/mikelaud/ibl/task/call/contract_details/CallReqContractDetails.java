@@ -1,9 +1,14 @@
 package com.blogspot.mikelaud.ibl.task.call.contract_details;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.out.OutEvents;
+import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.call.CallType;
+import com.blogspot.mikelaud.ibl.task.event.contract_details.OnBondContractDetails;
+import com.blogspot.mikelaud.ibl.task.event.contract_details.OnContractDetails;
+import com.blogspot.mikelaud.ibl.task.event.contract_details.OnContractDetailsEnd;
 import com.ib.client.Contract;
 
 /**
@@ -12,10 +17,10 @@ import com.ib.client.Contract;
  * via the OnContractDetails method on the EWrapper.
  */
 public class CallReqContractDetails
-	extends CallTaskEx<CallReqContractDetails.Info>
+	extends CallTaskEx<CallReqContractDetails.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * The ID of the data request. Ensures that responses are matched
@@ -27,7 +32,7 @@ public class CallReqContractDetails
 		 */
 		public final Contract CONTRACT;
 		
-		public Info
+		public In
 		(	int aReqId
 		,	Contract aContract
 		) {
@@ -38,11 +43,17 @@ public class CallReqContractDetails
 	}
 	//------------------------------------------------------------------------
 
+	public final OutEvents<OnContractDetails> OUT_CONTRACT_DETAILS;
+	public final OutEvents<OnBondContractDetails> OUT_BOND_CONTRACT_DETAILS;
+	public final OutTerminator<OnContractDetailsEnd> OUT_CONTRACT_DETAILS_END;
+	
+	//------------------------------------------------------------------------
+	
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqContractDetails
 		(	getRequestId()
-		,	INFO.CONTRACT
+		,	IN.CONTRACT
 		);
 		return null;
 	}
@@ -56,19 +67,11 @@ public class CallReqContractDetails
 		);
 	}
 
-	public CallReqContractDetails(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.reqContractDetails);
-	}
-
-	public CallReqContractDetails
-	(	ConnectionContext aContext
-	,	int aReqId
-	,	Contract aContract
-	) {
-		this(aContext, new Info
-		(	aReqId
-		,	aContract
-		));
+	public CallReqContractDetails(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.reqContractDetails);
+		OUT_CONTRACT_DETAILS = new OutEvents<OnContractDetails>(getRouter());
+		OUT_BOND_CONTRACT_DETAILS = new OutEvents<OnBondContractDetails>(getRouter());
+		OUT_CONTRACT_DETAILS_END = new OutTerminator<OnContractDetailsEnd>(getRouter());
 	}
 
 }

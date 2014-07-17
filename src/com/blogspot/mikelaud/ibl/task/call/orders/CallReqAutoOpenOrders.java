@@ -1,9 +1,14 @@
 package com.blogspot.mikelaud.ibl.task.call.orders;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.out.OutEvents;
+import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.call.CallType;
+import com.blogspot.mikelaud.ibl.task.event.orders.OnOpenOrder;
+import com.blogspot.mikelaud.ibl.task.event.orders.OnOpenOrderEnd;
+import com.blogspot.mikelaud.ibl.task.event.orders.OnOrderStatus;
 
 /**
  * Call this call to request that newly created TWS orders
@@ -16,10 +21,10 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  * Note: TWS orders can only be bound to clients with a clientId of 0.
  */
 public class CallReqAutoOpenOrders
-	extends CallTaskEx<CallReqAutoOpenOrders.Info>
+	extends CallTaskEx<CallReqAutoOpenOrders.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * If set to TRUE, newly created TWS orders
@@ -28,16 +33,22 @@ public class CallReqAutoOpenOrders
 		 */
 		public final boolean AUTO_BIND;
 		
-		public Info(boolean aAutoBind) {
+		public In(boolean aAutoBind) {
 			AUTO_BIND = aAutoBind;
 		}
 		
 	}
 	//------------------------------------------------------------------------
 
+	public final OutEvents<OnOrderStatus> OUT_ORDER_STATUS;
+	public final OutEvents<OnOpenOrder> OUT_OPEN_ORDER;
+	public final OutTerminator<OnOpenOrderEnd> OUT_OPEN_ORDER_END;
+
+	//------------------------------------------------------------------------
+
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().reqAutoOpenOrders(INFO.AUTO_BIND);
+		getClientSocket().reqAutoOpenOrders(IN.AUTO_BIND);
 		return null;
 	}
 
@@ -46,16 +57,15 @@ public class CallReqAutoOpenOrders
 		return String.format
 		(	"%s { autoBind=\"%b\" }"
 		,	super.toString()
-		,	INFO.AUTO_BIND
+		,	IN.AUTO_BIND
 		);
 	}
 
-	public CallReqAutoOpenOrders(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.reqAutoOpenOrders);
-	}
-
-	public CallReqAutoOpenOrders(ConnectionContext aContext, boolean aAutoBind) {
-		this(aContext, new Info(aAutoBind));
+	public CallReqAutoOpenOrders(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.reqAutoOpenOrders);
+		OUT_ORDER_STATUS = new OutEvents<OnOrderStatus>(getRouter());
+		OUT_OPEN_ORDER = new OutEvents<OnOpenOrder>(getRouter());
+		OUT_OPEN_ORDER_END = new OutTerminator<OnOpenOrderEnd>(getRouter());
 	}
 
 }

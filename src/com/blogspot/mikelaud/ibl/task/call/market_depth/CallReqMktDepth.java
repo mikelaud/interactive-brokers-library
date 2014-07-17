@@ -12,10 +12,10 @@ import com.ib.client.Contract;
  * and OnUpdateMktDepthL2 events.
  */
 public class CallReqMktDepth
-	extends CallTaskEx<CallReqMktDepth.Info>
+	extends CallTaskEx<CallReqMktDepth.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * The ticker Id. Must be a unique value. When the market depth data
@@ -32,7 +32,7 @@ public class CallReqMktDepth
 		 */
 		public final int NUM_ROWS;
 		
-		public Info
+		public In
 		(	int aTickerId
 		,	Contract aContract
 		,	int aNumRows
@@ -48,9 +48,9 @@ public class CallReqMktDepth
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqMktDepth
-		(	INFO.TICKER_ID
-		,	INFO.CONTRACT
-		,	INFO.NUM_ROWS
+		(	IN.TICKER_ID
+		,	IN.CONTRACT
+		,	IN.NUM_ROWS
 		);
 		return null;
 	}
@@ -60,13 +60,13 @@ public class CallReqMktDepth
 		return String.format
 		(	"%s[%d] { numRows=\"%d\" }"
 		,	super.toString()
-		,	INFO.TICKER_ID
-		,	INFO.NUM_ROWS
+		,	IN.TICKER_ID
+		,	IN.NUM_ROWS
 		);
 	}
 
-	public CallReqMktDepth(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.reqMktDepth);
+	public CallReqMktDepth(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.reqMktDepth);
 	}
 
 	public CallReqMktDepth
@@ -75,7 +75,7 @@ public class CallReqMktDepth
 	,	Contract aContract
 	,	int aNumRows
 	) {
-		this(aContext, new Info
+		this(aContext, new In
 		(	aTickerId
 		,	aContract
 		,	aNumRows

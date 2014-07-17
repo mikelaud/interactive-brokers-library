@@ -9,7 +9,9 @@ public abstract class EventTaskEx<T> extends EventTask {
 
 	protected final T INFO;
 		
-	public T getInfo() { return INFO;  }
+	public T getInfo() {
+		return INFO; 
+	}
 
 	public EventTaskEx(ConnectionContext aContext, T aInfo, EventType aEventType) {
 		super(aContext, aEventType);

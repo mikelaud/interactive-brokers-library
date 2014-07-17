@@ -11,10 +11,10 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  * https://www.interactivebrokers.com/en/software/api/apiguide/tables/api_logging.htm
  */
 public class CallSetServerLogLevel
-	extends CallTaskEx<CallSetServerLogLevel.Info>
+	extends CallTaskEx<CallSetServerLogLevel.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * Specifies the level of log entry detail used by the server (TWS)
@@ -27,7 +27,7 @@ public class CallSetServerLogLevel
 		 */
 		public final int LOG_LEVEL;
 		
-		public Info(int aLogLevel) {
+		public In(int aLogLevel) {
 			LOG_LEVEL = aLogLevel;
 		}
 		
@@ -36,7 +36,7 @@ public class CallSetServerLogLevel
 
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().setServerLogLevel(INFO.LOG_LEVEL);
+		getClientSocket().setServerLogLevel(IN.LOG_LEVEL);
 		return null;
 	}
 
@@ -45,19 +45,19 @@ public class CallSetServerLogLevel
 		return String.format
 		(	"%s(%d)"
 		,	super.toString()
-		,	INFO.LOG_LEVEL
+		,	IN.LOG_LEVEL
 		);
 	}
 
-	public CallSetServerLogLevel(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.setServerLogLevel);
+	public CallSetServerLogLevel(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.setServerLogLevel);
 	}
 
 	public CallSetServerLogLevel
 	(	ConnectionContext aContext
 	,	int aLogLevel
 	) {
-		this(aContext, new Info(aLogLevel));
+		this(aContext, new In(aLogLevel));
 	}
 
 }

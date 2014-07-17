@@ -9,17 +9,17 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  * Call this call to stop receiving Reuters global fundamental data.
  */
 public class CallCancelFundamentalData
-	extends CallTaskEx<CallCancelFundamentalData.Info>
+	extends CallTaskEx<CallCancelFundamentalData.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * The ID of the data request.
 		 */
 		public final int REQ_ID;
 		
-		public Info(int aReqId) {
+		public In(int aReqId) {
 			REQ_ID = aReqId;
 		}
 		
@@ -28,7 +28,7 @@ public class CallCancelFundamentalData
 
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().cancelFundamentalData(INFO.REQ_ID);
+		getClientSocket().cancelFundamentalData(IN.REQ_ID);
 		return null;
 	}
 
@@ -37,16 +37,16 @@ public class CallCancelFundamentalData
 		return String.format
 		(	"%s[%d]"
 		,	super.toString()
-		,	INFO.REQ_ID
+		,	IN.REQ_ID
 		);
 	}
 
-	public CallCancelFundamentalData(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.cancelFundamentalData);
+	public CallCancelFundamentalData(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.cancelFundamentalData);
 	}
 
 	public CallCancelFundamentalData(ConnectionContext aContext, int aReqId) {
-		this(aContext, new Info(aReqId));
+		this(aContext, new In(aReqId));
 	}
 
 }

@@ -1,19 +1,21 @@
 package com.blogspot.mikelaud.ibl.task.call.financial_advisors;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.call.CallType;
+import com.blogspot.mikelaud.ibl.task.event.financial_advisors.OnReceiveFA;
 
 /**
  * Call this call to request FA configuration information from TWS.
  * The data returns in an XML string via the OnReceiveFA event.
  */
 public class CallRequestFA
-	extends CallTaskEx<CallRequestFA.Info>
+	extends CallTaskEx<CallRequestFA.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * Specifies the type of Financial Advisor configuration data
@@ -24,16 +26,20 @@ public class CallRequestFA
 		 */
 		public final int FA_DATA_TYPE;	
 				
-		public Info(int aFaDataType) {
+		public In(int aFaDataType) {
 			FA_DATA_TYPE = aFaDataType;
 		}
 		
 	}
 	//------------------------------------------------------------------------
 
+	public final OutTerminator<OnReceiveFA> OUT_RECEIVE_FA;
+	
+	//------------------------------------------------------------------------
+	
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().requestFA(INFO.FA_DATA_TYPE);
+		getClientSocket().requestFA(IN.FA_DATA_TYPE);
 		return null;
 	}
 
@@ -42,16 +48,17 @@ public class CallRequestFA
 		return String.format
 		(	"%s { faDataType=\"%d\" }"
 		,	super.toString()
-		,	INFO.FA_DATA_TYPE
+		,	IN.FA_DATA_TYPE
 		);
 	}
 
-	public CallRequestFA(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.requestFA);
+	public CallRequestFA(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.requestFA);
+		OUT_RECEIVE_FA = new OutTerminator<OnReceiveFA>(getRouter());
 	}
 
 	public CallRequestFA(ConnectionContext aContext, int aFaDataType) {
-		this(aContext, new Info(aFaDataType));
+		this(aContext, new In(aFaDataType));
 	}
 
 }

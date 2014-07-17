@@ -10,12 +10,12 @@ import com.blogspot.mikelaud.ibl.task.event.connection_and_server.OnTwsConnectio
  * Returns the time the API application made a connection to TWS.
  */
 public class CallTwsConnectionTime
-	extends CallTaskEx<CallTwsConnectionTime.Info>
+	extends CallTaskEx<CallTwsConnectionTime.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
-		public Info() {
+		public In() {
 			// void
 		}
 		
@@ -49,12 +49,12 @@ public class CallTwsConnectionTime
 		);
 	}
 
-	private CallTwsConnectionTime(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.twsConnectionTime);
+	private CallTwsConnectionTime(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.twsConnectionTime);
 	}
 
 	public CallTwsConnectionTime(ConnectionContext aContext) {
-		this(aContext, new Info());
+		this(aContext, new In());
 	}
 
 }

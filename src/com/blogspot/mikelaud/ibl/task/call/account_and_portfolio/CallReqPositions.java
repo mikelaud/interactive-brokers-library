@@ -1,9 +1,13 @@
 package com.blogspot.mikelaud.ibl.task.call.account_and_portfolio;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.out.OutEvents;
+import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.call.CallType;
+import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnPosition;
+import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnPositionEnd;
 
 /**
  * Requests real-time position data for all accounts.
@@ -12,18 +16,23 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  *       to a Financial Advisor (FA) account.
  */
 public class CallReqPositions
-	extends CallTaskEx<CallReqPositions.Info>
+	extends CallTaskEx<CallReqPositions.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
-		public Info() {
+		public In() {
 			// void
 		}
 		
 	}
 	//------------------------------------------------------------------------
+	
+	public final OutEvents<OnPosition> OUT_POSITION;
+	public final OutTerminator<OnPositionEnd> OUT_POSITION_END;
 
+	//------------------------------------------------------------------------
+	
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqPositions();
@@ -38,12 +47,14 @@ public class CallReqPositions
 		);
 	}
 
-	private CallReqPositions(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.reqPositions);
+	private CallReqPositions(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.reqPositions);
+		OUT_POSITION = new OutEvents<OnPosition>(getRouter());
+		OUT_POSITION_END = new OutTerminator<OnPositionEnd>(getRouter());
 	}
 
 	public CallReqPositions(ConnectionContext aContext) {
-		this(aContext, new Info());
+		this(aContext, new In());
 	}
 
 }

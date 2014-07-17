@@ -16,10 +16,10 @@ import com.ib.client.TagValue;
  * OnTickGeneric, OnTickString and OnTickEFP events.
  */
 public class CallReqMktData
-	extends CallTaskEx<CallReqMktData.Info>
+	extends CallTaskEx<CallReqMktData.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * The ticker id. Must be a unique value.
@@ -47,7 +47,7 @@ public class CallReqMktData
 		 */
 		public final List<TagValue> MKT_DATA_OPTIONS;
 		
-		public Info
+		public In
 		(	int aTickerId
 		,	Contract aContract
 		,	String aGenericTicklist
@@ -67,10 +67,10 @@ public class CallReqMktData
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqMktData
-		(	INFO.TICKER_ID
-		,	INFO.CONTRACT
-		,	INFO.GENERIC_TICKLIST
-		,	INFO.SNAPSHOT
+		(	IN.TICKER_ID
+		,	IN.CONTRACT
+		,	IN.GENERIC_TICKLIST
+		,	IN.SNAPSHOT
 		);
 		return null;
 	}
@@ -80,14 +80,14 @@ public class CallReqMktData
 		return String.format
 		(	"%s[%d] { genericTicklist=\"%s\" snapshot=\"%b\" }"
 		,	super.toString()
-		,	INFO.TICKER_ID
-		,	INFO.GENERIC_TICKLIST
-		,	INFO.SNAPSHOT
+		,	IN.TICKER_ID
+		,	IN.GENERIC_TICKLIST
+		,	IN.SNAPSHOT
 		);
 	}
 
-	public CallReqMktData(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.reqMktData);
+	public CallReqMktData(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.reqMktData);
 	}
 
 	public CallReqMktData
@@ -98,7 +98,7 @@ public class CallReqMktData
 	,	boolean aSnapshot
 	,	List<TagValue> aMktDataOptions
 	) {
-		this(aContext, new Info
+		this(aContext, new In
 		(	aTickerId
 		,	aContract
 		,	aGenericTicklist

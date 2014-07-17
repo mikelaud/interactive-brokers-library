@@ -1,26 +1,32 @@
 package com.blogspot.mikelaud.ibl.task.call.connection_and_server;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.call.CallType;
+import com.blogspot.mikelaud.ibl.task.event.connection_and_server.OnCurrentTime;
 
 /**
  * Returns the current system time on the server side
  * via the OnCurrentTime EWrapper event.
  */
 public class CallReqCurrentTime
-	extends CallTaskEx<CallReqCurrentTime.Info>
+	extends CallTaskEx<CallReqCurrentTime.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
-		public Info() {
+		public In() {
 			// void
 		}
 		
 	}
 	//------------------------------------------------------------------------
+	
+	public final OutTerminator<OnCurrentTime> OUT_CURRENT_TIME;
+	
+	//------------------------------------------------------------------------	
 
 	@Override
 	protected Task onCall() throws Exception {
@@ -36,12 +42,13 @@ public class CallReqCurrentTime
 		);
 	}
 
-	private CallReqCurrentTime(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.reqCurrentTime);
+	private CallReqCurrentTime(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.reqCurrentTime);
+		OUT_CURRENT_TIME = new OutTerminator<OnCurrentTime>(getRouter()); 
 	}
 
 	public CallReqCurrentTime(ConnectionContext aContext) {
-		this(aContext, new Info());
+		this(aContext, new In());
 	}
 
 }

@@ -11,10 +11,10 @@ import com.ib.client.Contract;
  * through the OnRealtimeBar EWrapper event.
  */
 public class CallReqRealTimeBars
-	extends CallTaskEx<CallReqRealTimeBars.Info>
+	extends CallTaskEx<CallReqRealTimeBars.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * The Id for the request. Must be a unique value. When the data is
@@ -51,7 +51,7 @@ public class CallReqRealTimeBars
 		 */
 		public final boolean USE_RTH;
 				
-		public Info
+		public In
 		(	int aTickerId
 		,	Contract aContract
 		,	int aBarSize
@@ -71,11 +71,11 @@ public class CallReqRealTimeBars
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqRealTimeBars
-		(	INFO.TICKER_ID
-		,	INFO.CONTRACT
-		,	INFO.BAR_SIZE
-		,	INFO.WHAT_TO_SHOW
-		,	INFO.USE_RTH
+		(	IN.TICKER_ID
+		,	IN.CONTRACT
+		,	IN.BAR_SIZE
+		,	IN.WHAT_TO_SHOW
+		,	IN.USE_RTH
 		);
 		return null;
 	}
@@ -85,15 +85,15 @@ public class CallReqRealTimeBars
 		return String.format
 		(	"%s[%d] { barSize=\"%d\" whatToShow=\"%s\" useRth=\"%b\" }"
 		,	super.toString()
-		,	INFO.TICKER_ID
-		,	INFO.BAR_SIZE
-		,	INFO.WHAT_TO_SHOW
-		,	INFO.USE_RTH
+		,	IN.TICKER_ID
+		,	IN.BAR_SIZE
+		,	IN.WHAT_TO_SHOW
+		,	IN.USE_RTH
 		);
 	}
 
-	public CallReqRealTimeBars(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.reqRealTimeBars);
+	public CallReqRealTimeBars(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.reqRealTimeBars);
 	}
 
 	public CallReqRealTimeBars
@@ -104,7 +104,7 @@ public class CallReqRealTimeBars
 	,	String aWhatToShow
 	,	boolean aUseRTH
 	) {
-		this(aContext, new Info
+		this(aContext, new In
 		(	aTickerId
 		,	aContract
 		,	aBarSize

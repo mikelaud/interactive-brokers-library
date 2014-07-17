@@ -4,7 +4,6 @@ import java.util.concurrent.TimeUnit;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
-import com.blogspot.mikelaud.ibl.task.call.other.CallSleep;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
 import com.blogspot.mikelaud.ibl.task.event.EventType;
 
@@ -31,10 +30,6 @@ public class OnSleepDone
 			TIME_UNIT = aTimeUnit;
 		}
 		
-		public Info(CallSleep.Info aTimeInfo) {
-			this(aTimeInfo.TIME, aTimeInfo.TIME_UNIT);
-		}
-
 	}
 	//------------------------------------------------------------------------
 
@@ -55,10 +50,6 @@ public class OnSleepDone
 
 	public OnSleepDone(ConnectionContext aContext, Info aInfo) {
 		super(aContext, aInfo, EventType.sleepDone);
-	}
-
-	public OnSleepDone(ConnectionContext aContext, CallSleep.Info aInfo) {
-		this(aContext, new Info(aInfo));
 	}
 
 }

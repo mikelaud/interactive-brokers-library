@@ -9,17 +9,17 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  * Cancels the request for Account Window Summary tab data.
  */
 public class CallCancelAccountSummary
-	extends CallTaskEx<CallCancelAccountSummary.Info>
+	extends CallTaskEx<CallCancelAccountSummary.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * The ID of the data request being canceled.
 		 */
 		public final int REQ_ID;
 		
-		public Info(int aReqId) {
+		public In(int aReqId) {
 			REQ_ID = aReqId;
 		}
 		
@@ -28,7 +28,7 @@ public class CallCancelAccountSummary
 	
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().cancelAccountSummary(INFO.REQ_ID);
+		getClientSocket().cancelAccountSummary(IN.REQ_ID);
 		return null;
 	}
 
@@ -37,19 +37,19 @@ public class CallCancelAccountSummary
 		return String.format
 		(	"%s[%d]"
 		,	super.toString()
-		,	INFO.REQ_ID
+		,	IN.REQ_ID
 		);
 	}
 
-	public CallCancelAccountSummary(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.cancelAccountSummary);
+	public CallCancelAccountSummary(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.cancelAccountSummary);
 	}
 
 	public CallCancelAccountSummary
 	(	ConnectionContext aContext
 	,	int aReqId
 	) {
-		this(aContext, new Info(aReqId));
+		this(aContext, new In(aReqId));
 	}
 
 }

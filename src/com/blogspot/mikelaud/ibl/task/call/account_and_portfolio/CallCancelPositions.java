@@ -9,12 +9,12 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  * Cancels real-time position updates.
  */
 public class CallCancelPositions
-	extends CallTaskEx<CallCancelPositions.Info>
+	extends CallTaskEx<CallCancelPositions.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
-		public Info() {
+		public In() {
 			// void
 		}
 		
@@ -35,12 +35,12 @@ public class CallCancelPositions
 		);
 	}
 
-	private CallCancelPositions(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.cancelPositions);
+	private CallCancelPositions(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.cancelPositions);
 	}
 
 	public CallCancelPositions(ConnectionContext aContext) {
-		this(aContext, new Info());
+		this(aContext, new In());
 	}
 
 }

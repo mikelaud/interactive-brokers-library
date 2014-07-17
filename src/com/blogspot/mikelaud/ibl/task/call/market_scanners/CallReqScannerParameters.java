@@ -1,27 +1,33 @@
 package com.blogspot.mikelaud.ibl.task.call.market_scanners;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.call.CallType;
+import com.blogspot.mikelaud.ibl.task.event.market_scanners.OnScannerParameters;
 
 /**
  * Call the CallReqScannerParameters call to receive an XML document
  * that describes the valid parameters that a scanner subscription can have.
  */
 public class CallReqScannerParameters
-	extends CallTaskEx<CallReqScannerParameters.Info>
+	extends CallTaskEx<CallReqScannerParameters.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
-		public Info() {
+		public In() {
 			// void
 		}
 		
 	}
 	//------------------------------------------------------------------------
 
+	public final OutTerminator<OnScannerParameters> OUT_SCANNER_PARAMETERS;
+	
+	//------------------------------------------------------------------------
+	
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqScannerParameters();
@@ -36,12 +42,13 @@ public class CallReqScannerParameters
 		);
 	}
 
-	private CallReqScannerParameters(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.reqScannerParameters);
+	private CallReqScannerParameters(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.reqScannerParameters);
+		OUT_SCANNER_PARAMETERS = new OutTerminator<OnScannerParameters>(getRouter());
 	}
 
 	public CallReqScannerParameters(ConnectionContext aContext) {
-		this(aContext, new Info());
+		this(aContext, new In());
 	}
 
 }

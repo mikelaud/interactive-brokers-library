@@ -1,9 +1,11 @@
 package com.blogspot.mikelaud.ibl.task.call.financial_advisors;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.call.CallType;
+import com.blogspot.mikelaud.ibl.task.event.financial_advisors.OnManagedAccounts;
 
 /**
  * Call this call to request the list of managed accounts.
@@ -13,18 +15,22 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  *       to a Financial Advisor (FA) account.
  */
 public class CallReqManagedAccts
-	extends CallTaskEx<CallReqManagedAccts.Info>
+	extends CallTaskEx<CallReqManagedAccts.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
-		public Info() {
+		public In() {
 			// void
 		}
 		
 	}
 	//------------------------------------------------------------------------
 
+	public final OutTerminator<OnManagedAccounts> OUT_MANAGED_ACCOUNTS;
+	
+	//------------------------------------------------------------------------
+	
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqManagedAccts();
@@ -39,12 +45,13 @@ public class CallReqManagedAccts
 		);
 	}
 
-	private CallReqManagedAccts(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.reqManagedAccts);
+	private CallReqManagedAccts(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.reqManagedAccts);
+		OUT_MANAGED_ACCOUNTS = new OutTerminator<OnManagedAccounts>(getRouter());
 	}
 
 	public CallReqManagedAccts(ConnectionContext aContext) {
-		this(aContext, new Info());
+		this(aContext, new In());
 	}
 
 }

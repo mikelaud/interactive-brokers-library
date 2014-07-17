@@ -10,10 +10,10 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  * receiving market scanner results.
  */
 public class CallCancelScannerSubscription
-	extends CallTaskEx<CallCancelScannerSubscription.Info>
+	extends CallTaskEx<CallCancelScannerSubscription.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * The Id that was specified
@@ -21,7 +21,7 @@ public class CallCancelScannerSubscription
 		 */
 		public final int TICKER_ID;
 		
-		public Info(int aTickerId) {
+		public In(int aTickerId) {
 			TICKER_ID = aTickerId;
 		}
 		
@@ -30,7 +30,7 @@ public class CallCancelScannerSubscription
 
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().cancelScannerSubscription(INFO.TICKER_ID);
+		getClientSocket().cancelScannerSubscription(IN.TICKER_ID);
 		return null;
 	}
 
@@ -42,12 +42,12 @@ public class CallCancelScannerSubscription
 		);
 	}
 
-	public CallCancelScannerSubscription(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.cancelScannerSubscription);
+	public CallCancelScannerSubscription(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.cancelScannerSubscription);
 	}
 
 	public CallCancelScannerSubscription(ConnectionContext aContext, int aTickerId) {
-		this(aContext, new Info(aTickerId));
+		this(aContext, new In(aTickerId));
 	}
 
 }

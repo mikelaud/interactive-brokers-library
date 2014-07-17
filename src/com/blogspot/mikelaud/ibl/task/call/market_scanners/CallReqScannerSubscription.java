@@ -1,9 +1,13 @@
 package com.blogspot.mikelaud.ibl.task.call.market_scanners;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.out.OutEvents;
+import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.call.CallType;
+import com.blogspot.mikelaud.ibl.task.event.market_scanners.OnScannerData;
+import com.blogspot.mikelaud.ibl.task.event.market_scanners.OnScannerDataEnd;
 import com.ib.client.ScannerSubscription;
 
 /**
@@ -11,10 +15,10 @@ import com.ib.client.ScannerSubscription;
  * market scanner results through the OnScannerData EWrapper event.
  */
 public class CallReqScannerSubscription
-	extends CallTaskEx<CallReqScannerSubscription.Info>
+	extends CallTaskEx<CallReqScannerSubscription.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * The Id for the subscription. Must be a unique value. When the
@@ -27,7 +31,7 @@ public class CallReqScannerSubscription
 		 */
 		public final ScannerSubscription SUBSCRIPTION;
 		
-		public Info(int aTickerId, ScannerSubscription aSubscription) {
+		public In(int aTickerId, ScannerSubscription aSubscription) {
 			TICKER_ID = aTickerId;
 			SUBSCRIPTION = aSubscription;
 		}
@@ -35,11 +39,16 @@ public class CallReqScannerSubscription
 	}
 	//------------------------------------------------------------------------
 
+	public final OutEvents<OnScannerData> OUT_SCANNER_DATA;
+	public final OutTerminator<OnScannerDataEnd> OUT_SCANNER_DATA_END;
+	
+	//------------------------------------------------------------------------
+	
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqScannerSubscription
-		(	INFO.TICKER_ID
-		,	INFO.SUBSCRIPTION
+		(	IN.TICKER_ID
+		,	IN.SUBSCRIPTION
 		);
 		return null;
 	}
@@ -49,12 +58,14 @@ public class CallReqScannerSubscription
 		return String.format
 		(	"%s[%d]"
 		,	super.toString()
-		,	INFO.TICKER_ID
+		,	IN.TICKER_ID
 		);
 	}
 
-	public CallReqScannerSubscription(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.reqScannerSubscription);
+	public CallReqScannerSubscription(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.reqScannerSubscription);
+		OUT_SCANNER_DATA = new OutEvents<OnScannerData>(getRouter());
+		OUT_SCANNER_DATA_END = new OutTerminator<OnScannerDataEnd>(getRouter());
 	}
 
 	public CallReqScannerSubscription
@@ -62,7 +73,7 @@ public class CallReqScannerSubscription
 	,	int aTickerId
 	,	ScannerSubscription aSubscription
 	) {
-		this(aContext, new Info
+		this(aContext, new In
 		(	aTickerId
 		,	aSubscription
 		));

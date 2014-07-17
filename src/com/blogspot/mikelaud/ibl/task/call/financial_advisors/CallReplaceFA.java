@@ -1,19 +1,21 @@
 package com.blogspot.mikelaud.ibl.task.call.financial_advisors;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.call.CallType;
+import com.blogspot.mikelaud.ibl.task.event.financial_advisors.OnReceiveFA;
 
 /**
  * Call this call to request new FA configuration information from TWS.
  * The data returns in an XML string via a OnReceiveFA event.
  */
 public class CallReplaceFA
-	extends CallTaskEx<CallReplaceFA.Info>
+	extends CallTaskEx<CallReplaceFA.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * Specifies the type of Financial Advisor configuration data
@@ -28,7 +30,7 @@ public class CallReplaceFA
 		 */
 		public final String XML;
 		
-		public Info(int aFaDataType, String aXml) {
+		public In(int aFaDataType, String aXml) {
 			FA_DATA_TYPE = aFaDataType;
 			XML = aXml;
 		}
@@ -36,11 +38,15 @@ public class CallReplaceFA
 	}
 	//------------------------------------------------------------------------
 
+	public final OutTerminator<OnReceiveFA> OUT_RECEIVE_FA;
+	
+	//------------------------------------------------------------------------
+	
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().replaceFA
-		(	INFO.FA_DATA_TYPE
-		,	INFO.XML
+		(	IN.FA_DATA_TYPE
+		,	IN.XML
 		);
 		return null;
 	}
@@ -50,13 +56,14 @@ public class CallReplaceFA
 		return String.format
 		(	"%s { faDataType=\"%d\" xml=\"%s\" }"
 		,	super.toString()
-		,	INFO.FA_DATA_TYPE
-		,	INFO.XML
+		,	IN.FA_DATA_TYPE
+		,	IN.XML
 		);
 	}
 
-	public CallReplaceFA(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.replaceFA);
+	public CallReplaceFA(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.replaceFA);
+		OUT_RECEIVE_FA = new OutTerminator<OnReceiveFA>(getRouter());
 	}
 
 	public CallReplaceFA
@@ -64,7 +71,7 @@ public class CallReplaceFA
 	,	int aFaDataType
 	,	String aXml
 	) {
-		this(aContext, new Info
+		this(aContext, new In
 		(	aFaDataType
 		,	aXml
 		));

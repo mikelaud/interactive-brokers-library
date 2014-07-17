@@ -9,17 +9,17 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  * Call this call to stop receiving real time bar results.
  */
 public class CallCancelRealTimeBars
-	extends CallTaskEx<CallCancelRealTimeBars.Info>
+	extends CallTaskEx<CallCancelRealTimeBars.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * The Id that was specified in the call to CallReqRealTimeBars.
 		 */
 		public final int TICKER_ID;
 		
-		public Info(int aTickerId) {
+		public In(int aTickerId) {
 			TICKER_ID = aTickerId;
 		}
 		
@@ -28,7 +28,7 @@ public class CallCancelRealTimeBars
 
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().cancelRealTimeBars(INFO.TICKER_ID);
+		getClientSocket().cancelRealTimeBars(IN.TICKER_ID);
 		return null;
 	}
 
@@ -37,16 +37,16 @@ public class CallCancelRealTimeBars
 		return String.format
 		(	"%s[%d]"
 		,	super.toString()
-		,	INFO.TICKER_ID
+		,	IN.TICKER_ID
 		);
 	}
 
-	public CallCancelRealTimeBars(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.cancelRealTimeBars);
+	public CallCancelRealTimeBars(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.cancelRealTimeBars);
 	}
 
 	public CallCancelRealTimeBars(ConnectionContext aContext, int aTickerId) {
-		this(aContext, new Info(aTickerId));
+		this(aContext, new In(aTickerId));
 	}
 
 }

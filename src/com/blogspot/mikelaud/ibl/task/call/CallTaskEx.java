@@ -7,13 +7,13 @@ import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
  */
 public abstract class CallTaskEx<T> extends CallTask {
 
-	protected final T INFO;
+	protected final T IN;
 
-	public T getInfo() { return INFO;  }
+	public T getInfo() { return IN;  }
 		
-	public CallTaskEx(ConnectionContext aContext, T aInfo, CallType aCallType) {
+	public CallTaskEx(ConnectionContext aContext, T aIn, CallType aCallType) {
 		super(aContext, aCallType);
-		INFO = aInfo;
+		IN = aIn;
 	}
 
 }

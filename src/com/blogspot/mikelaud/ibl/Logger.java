@@ -53,7 +53,7 @@ public class Logger {
 	}
 	
 	public static void logInfo(final String aMessage) {
-		System.out.println(String.format("INFO: %s", aMessage));
+		System.out.println(String.format("IN: %s", aMessage));
 	}
 	
 	public static void logDebug(final String aMessage) {

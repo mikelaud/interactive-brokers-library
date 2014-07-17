@@ -1,8 +1,8 @@
 package com.blogspot.mikelaud.ibl.task.call;
 
 import com.blogspot.mikelaud.ibl.task.TaskGroup;
-import com.blogspot.mikelaud.ibl.task.command.MulticastContext;
-import com.blogspot.mikelaud.ibl.task.command.UnicastContext;
+import com.blogspot.mikelaud.ibl.test_command.MulticastContext;
+import com.blogspot.mikelaud.ibl.test_command.UnicastContext;
 
 /**
  * EClientSocket calls enum.

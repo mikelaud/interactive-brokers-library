@@ -10,12 +10,12 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  * Calling this call does not cancel orders that have already been sent.
  */
 public class CallDisconnect
-	extends CallTaskEx<CallDisconnect.Info>
+	extends CallTaskEx<CallDisconnect.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
-		public Info() {
+		public In() {
 			// void
 		}
 		
@@ -36,12 +36,12 @@ public class CallDisconnect
 		);
 	}
 
-	private CallDisconnect(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.disconnect);
+	private CallDisconnect(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.disconnect);
 	}
 	
 	public CallDisconnect(ConnectionContext aContext) {
-		this(aContext, new Info());
+		this(aContext, new In());
 	}
 
 }

@@ -17,17 +17,17 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  * market data will automatically switch back to real-time market data.
  */
 public class CallReqMarketDataType
-	extends CallTaskEx<CallReqMarketDataType.Info>
+	extends CallTaskEx<CallReqMarketDataType.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * 1 for real-time streaming market data or 2 for frozen market data.
 		 */
 		public final int TYPE;
 		
-		public Info(int aType) {
+		public In(int aType) {
 			TYPE = aType;
 		}
 		
@@ -36,7 +36,7 @@ public class CallReqMarketDataType
 
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().reqMarketDataType(INFO.TYPE);
+		getClientSocket().reqMarketDataType(IN.TYPE);
 		return null;
 	}
 
@@ -45,16 +45,16 @@ public class CallReqMarketDataType
 		return String.format
 		(	"%s(%d)"
 		,	super.toString()
-		,	INFO.TYPE
+		,	IN.TYPE
 		);
 	}
 
-	public CallReqMarketDataType(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.reqMarketDataType);
+	public CallReqMarketDataType(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.reqMarketDataType);
 	}
 
 	public CallReqMarketDataType(ConnectionContext aContext, int aType) {
-		this(aContext, new Info(aType));
+		this(aContext, new In(aType));
 	}
 
 }

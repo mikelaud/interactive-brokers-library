@@ -1,9 +1,11 @@
 package com.blogspot.mikelaud.ibl.task.call.historical_data;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.out.OutEvents;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.call.CallType;
+import com.blogspot.mikelaud.ibl.task.event.historical_data.OnHistoricalData;
 import com.ib.client.Contract;
 
 /**
@@ -15,10 +17,10 @@ import com.ib.client.Contract;
  * https://www.interactivebrokers.com/en/software/api/apiguide/tables/historical_data_limitations.htm
  */
 public class CallReqHistoricalData
-	extends CallTaskEx<CallReqHistoricalData.Info>
+	extends CallTaskEx<CallReqHistoricalData.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * The Id for the request. Must be a unique value. When the data is
@@ -98,7 +100,7 @@ public class CallReqHistoricalData
 		 */
 		public final int FORMAT_DATE;
 				
-		public Info
+		public In
 		(	int aTickerId
 		,	Contract aContract
 		,	String aEndDateTime
@@ -121,17 +123,21 @@ public class CallReqHistoricalData
 	}
 	//------------------------------------------------------------------------
 
+	public final OutEvents<OnHistoricalData> OUT_HISTORICAL_DATA;
+	
+	//------------------------------------------------------------------------
+	
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqHistoricalData
-		(	INFO.TICKER_ID
-		,	INFO.CONTRACT
-		,	INFO.END_DATE_TIME
-		,	INFO.DURATION_STR
-		,	INFO.BAR_SIZE_SETTING
-		,	INFO.WHAT_TO_SHOW
-		,	INFO.USE_RTH
-		,	INFO.FORMAT_DATE
+		(	IN.TICKER_ID
+		,	IN.CONTRACT
+		,	IN.END_DATE_TIME
+		,	IN.DURATION_STR
+		,	IN.BAR_SIZE_SETTING
+		,	IN.WHAT_TO_SHOW
+		,	IN.USE_RTH
+		,	IN.FORMAT_DATE
 		);
 		return null;
 	}
@@ -141,18 +147,19 @@ public class CallReqHistoricalData
 		return String.format
 		(	"%s[%d] { endDateTime=\"%s\" durationStr=\"%s\" barSizeSetting=\"%s\" whatToShow=\"%s\" useRth=\"%d\" formatDate=\"%d\" }"
 		,	super.toString()
-		,	INFO.TICKER_ID
-		,	INFO.END_DATE_TIME
-		,	INFO.DURATION_STR
-		,	INFO.BAR_SIZE_SETTING
-		,	INFO.WHAT_TO_SHOW
-		,	INFO.USE_RTH
-		,	INFO.FORMAT_DATE
+		,	IN.TICKER_ID
+		,	IN.END_DATE_TIME
+		,	IN.DURATION_STR
+		,	IN.BAR_SIZE_SETTING
+		,	IN.WHAT_TO_SHOW
+		,	IN.USE_RTH
+		,	IN.FORMAT_DATE
 		);
 	}
 
-	public CallReqHistoricalData(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.reqHistoricalData);
+	public CallReqHistoricalData(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.reqHistoricalData);
+		OUT_HISTORICAL_DATA = new OutEvents<OnHistoricalData>(getRouter());
 	}
 
 	public CallReqHistoricalData
@@ -166,7 +173,7 @@ public class CallReqHistoricalData
 	,	int aUseRTH
 	,	int aFormatDate
 	) {
-		this(aContext, new Info
+		this(aContext, new In
 		(	aTickerId
 		,	aContract
 		,	aEndDateTime

@@ -10,10 +10,10 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  * Each bulletin will be returned by the OnUpdateNewsBulletin method.
  */
 public class CallReqNewsBulletins
-	extends CallTaskEx<CallReqNewsBulletins.Info>
+	extends CallTaskEx<CallReqNewsBulletins.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * If set to TRUE, returns all the existing bulletins
@@ -22,7 +22,7 @@ public class CallReqNewsBulletins
 		 */
 		public final boolean ALL_MSGS;
 		
-		public Info(boolean aAllMsgs) {
+		public In(boolean aAllMsgs) {
 			ALL_MSGS = aAllMsgs;
 		}
 		
@@ -31,7 +31,7 @@ public class CallReqNewsBulletins
 
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().reqNewsBulletins(INFO.ALL_MSGS);
+		getClientSocket().reqNewsBulletins(IN.ALL_MSGS);
 		return null;
 	}
 
@@ -40,16 +40,16 @@ public class CallReqNewsBulletins
 		return String.format
 		(	"%s { allMsgs=\"%b\" }"
 		,	super.toString()
-		,	INFO.ALL_MSGS
+		,	IN.ALL_MSGS
 		);
 	}
 
-	public CallReqNewsBulletins(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.reqNewsBulletins);
+	public CallReqNewsBulletins(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.reqNewsBulletins);
 	}
 
 	public CallReqNewsBulletins(ConnectionContext aContext, boolean aAllMsgs) {
-		this(aContext, new Info(aAllMsgs));
+		this(aContext, new In(aAllMsgs));
 	}
 
 }

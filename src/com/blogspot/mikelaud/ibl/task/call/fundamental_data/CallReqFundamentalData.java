@@ -16,10 +16,10 @@ import com.ib.client.Contract;
  * is used only for stocks and stocks do not have a multiplier and trading class.
  */
 public class CallReqFundamentalData
-	extends CallTaskEx<CallReqFundamentalData.Info>
+	extends CallTaskEx<CallReqFundamentalData.In>
 {
 	//------------------------------------------------------------------------
-	public static class Info {
+	public static class In {
 	
 		/**
 		 * The ID of the data request. Ensures that responses are matched
@@ -42,7 +42,7 @@ public class CallReqFundamentalData
 		 */
 		public final String REPORT_TYPE;
 				
-		public Info
+		public In
 		(	int aReqId
 		,	Contract aContract
 		,	String aReportType
@@ -58,9 +58,9 @@ public class CallReqFundamentalData
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqFundamentalData
-		(	INFO.REQ_ID
-		,	INFO.CONTRACT
-		,	INFO.REPORT_TYPE
+		(	IN.REQ_ID
+		,	IN.CONTRACT
+		,	IN.REPORT_TYPE
 		);
 		return null;
 	}
@@ -70,13 +70,13 @@ public class CallReqFundamentalData
 		return String.format
 		(	"%s[%d] { reportType=\"%s\" }"
 		,	super.toString()
-		,	INFO.REQ_ID
-		,	INFO.REPORT_TYPE
+		,	IN.REQ_ID
+		,	IN.REPORT_TYPE
 		);
 	}
 
-	public CallReqFundamentalData(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, CallType.reqFundamentalData);
+	public CallReqFundamentalData(ConnectionContext aContext, In aIn) {
+		super(aContext, aIn, CallType.reqFundamentalData);
 	}
 
 	public CallReqFundamentalData
@@ -85,7 +85,7 @@ public class CallReqFundamentalData
 	,	Contract aContract
 	,	String aReportType
 	) {
-		this(aContext, new Info
+		this(aContext, new In
 		(	aReqId
 		,	aContract
 		,	aReportType
