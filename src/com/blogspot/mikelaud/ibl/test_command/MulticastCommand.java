@@ -8,12 +8,12 @@ public class MulticastCommand extends Command {
 
 	@Override
 	protected void addToContext() {
-		mCall.getCallType().getMulticastContext().addCommand(this);
+		mCall.getCallType().getContext().addCommand(this);
 	}
 
 	@Override
 	protected void removeFromContext() {
-		mCall.getCallType().getMulticastContext().removeCommand(this);
+		mCall.getCallType().getContext().removeCommand(this);
 	}
 
 	@Override

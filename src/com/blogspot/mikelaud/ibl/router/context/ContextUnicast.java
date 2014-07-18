@@ -1,18 +1,19 @@
-package com.blogspot.mikelaud.ibl.test_command;
+package com.blogspot.mikelaud.ibl.router.context;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import com.blogspot.mikelaud.ibl.task.event.EventTask;
+import com.blogspot.mikelaud.ibl.test_command.Command;
 
-public class UnicastContext {
+public class ContextUnicast extends ContextAbstract {
 
-	private Object mLock = new Object();
-	private Map<Long,UnicastCommand> mCommands = new HashMap<Long,UnicastCommand>();
+	private Map<Long,Command> mCommands = new HashMap<Long,Command>();
 	
+	@Override
 	public void addEvent(EventTask aEvent) {
 		long requestId = aEvent.getRequestId();
-		UnicastCommand command;
+		Command command;
 		synchronized (mLock) {
 			command = mCommands.remove(requestId);
 		}
@@ -21,14 +22,16 @@ public class UnicastContext {
 		}
 	}
 	
-	public void addCommand(UnicastCommand aCommand) {
+	@Override
+	public void addCommand(Command aCommand) {
 		long requestId = aCommand.getCall().getRequestId();
 		synchronized (mLock) {
 			mCommands.put(requestId, aCommand);
 		}
 	}
 	
-	public void removeCommand(UnicastCommand aCommand) {
+	@Override
+	public void removeCommand(Command aCommand) {
 		long requestId = aCommand.getCall().getRequestId();
 		synchronized (mLock) {
 			mCommands.remove(requestId);

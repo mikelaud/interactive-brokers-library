@@ -8,12 +8,12 @@ public class UnicastCommand extends Command {
 
 	@Override
 	protected void addToContext() {
-		mCall.getCallType().getUnicastContext().addCommand(this);
+		mCall.getCallType().getContext().addCommand(this);
 	}
 
 	@Override
 	protected void removeFromContext() {
-		mCall.getCallType().getUnicastContext().removeCommand(this);
+		mCall.getCallType().getContext().removeCommand(this);
 	}
 
 	@Override

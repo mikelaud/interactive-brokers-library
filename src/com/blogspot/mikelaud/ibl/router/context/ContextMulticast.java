@@ -1,40 +1,43 @@
-package com.blogspot.mikelaud.ibl.test_command;
+package com.blogspot.mikelaud.ibl.router.context;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import com.blogspot.mikelaud.ibl.task.event.EventTask;
+import com.blogspot.mikelaud.ibl.test_command.Command;
 
-public class MulticastContext {
+public class ContextMulticast extends ContextAbstract {
 
-	private Object mLock = new Object();
-	private Set<MulticastCommand> mCommands = new HashSet<MulticastCommand>();
+	private Set<Command> mCommands = new HashSet<Command>();
 	
+	@Override
 	public void addEvent(EventTask aEvent) {
-		Set<MulticastCommand> commandsCopy = null;
+		Set<Command> commandsCopy = null;
 		synchronized (mLock) {
 			int commandsCount = mCommands.size();
 			if (commandsCount > 0) {
-				commandsCopy = new HashSet<MulticastCommand>(commandsCount);
+				commandsCopy = new HashSet<Command>(commandsCount);
 				commandsCopy.addAll(mCommands);
 				mCommands.clear();
 			}
 		}
 		if (null != commandsCopy) {
-			for (MulticastCommand command : commandsCopy) {
+			for (Command command : commandsCopy) {
 				command.notifyMe(aEvent);
 			}
 			commandsCopy.clear();
 		}
 	}
 	
-	public void addCommand(MulticastCommand aCommand) {
+	@Override
+	public void addCommand(Command aCommand) {
 		synchronized (mLock) {
 			mCommands.add(aCommand);
 		}
 	}
 	
-	public void removeCommand(MulticastCommand aCommand) {
+	@Override
+	public void removeCommand(Command aCommand) {
 		synchronized (mLock) {
 			mCommands.remove(aCommand);
 		}

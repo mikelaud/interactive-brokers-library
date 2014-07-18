@@ -21,10 +21,10 @@ public abstract class EventTask extends Task {
 			CallKind callKind = targetCallType.getKind();
 			switch (callKind) {
 				case MULTICAST:
-					targetCallType.getMulticastContext().addEvent(this);
+					targetCallType.getContext().addEvent(this);
 					break;
 				case UNICAST:
-					targetCallType.getUnicastContext().addEvent(this);
+					targetCallType.getContext().addEvent(this);
 					break;
 				default:
 					break;

@@ -2,9 +2,6 @@ package com.blogspot.mikelaud.ibl.task.call;
 
 public enum CallKind {
 
-	NOP
-	(	"NOP"
-	),
 	NOCAST
 	(	"NOCAST"
 	),
