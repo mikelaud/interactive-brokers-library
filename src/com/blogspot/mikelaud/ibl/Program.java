@@ -6,10 +6,8 @@ import java.util.concurrent.TimeUnit;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.call.connection_and_server.CallConnect;
-import com.blogspot.mikelaud.ibl.task.call.connection_and_server.CallDisconnect;
 import com.blogspot.mikelaud.ibl.task.call.connection_and_server.CallReqCurrentTime;
 import com.blogspot.mikelaud.ibl.task.call.contract_details.CallReqContractDetails;
-import com.blogspot.mikelaud.ibl.task.call.other.CallSleep;
 import com.ib.client.Contract;
 
 public class Program implements Callable<Object> {
@@ -37,22 +35,6 @@ public class Program implements Callable<Object> {
 		//
 		mContext.onTask(new CallReqCurrentTime(mContext).getCommand(10, TimeUnit.SECONDS));
 		//
-		//new CallDisconnect(mContext).callCommand();
-		//new CallDisconnect(mContext).callCommand();
-
-		/*
-		new CallSleep(mContext, new CallSleep.In(3, TimeUnit.SECONDS)).call();
-		mContext.onTask(new CallServerVersion(mContext));
-		//
-		new CallSleep(mContext, new CallSleep.In(1, TimeUnit.SECONDS)).call();
-		mContext.onTask(new CallTwsConnectionTime(mContext));
-		//
-		new CallSleep(mContext, new CallSleep.In(1, TimeUnit.SECONDS)).call();
-		mContext.onTask(new CallReqCurrentTime(mContext));
-		//
-		TestCommand testCommand = new TestCommand(mContext, 1);
-		mContext.onTask(testCommand);
-		*/
 		for (;;) {
 			Task task = mContext.nextTask();
 			if (null != task) {
