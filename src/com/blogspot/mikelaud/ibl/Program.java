@@ -1,6 +1,7 @@
 package com.blogspot.mikelaud.ibl;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
@@ -19,6 +20,7 @@ public class Program implements Callable<Object> {
 		,	Config.getPort()
 		,	Config.getClientId()
 		);
+		callConnect.getCommand().setTimeout(2, TimeUnit.SECONDS);
 		mContext.onTask(callConnect);
 		//
 		for (;;) {

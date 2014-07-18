@@ -3,7 +3,6 @@ package com.blogspot.mikelaud.ibl.task.event;
 import com.blogspot.mikelaud.ibl.Logger;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
-import com.blogspot.mikelaud.ibl.task.call.CallKind;
 import com.blogspot.mikelaud.ibl.task.call.CallType;
 
 /**
@@ -18,17 +17,7 @@ public abstract class EventTask extends Task {
 	private void addEvent() {
 		CallType targetCallType = EVENT_TYPE.getTargetCallType();
 		if (null != targetCallType) {
-			CallKind callKind = targetCallType.getKind();
-			switch (callKind) {
-				case MULTICAST:
-					targetCallType.getContext().addEvent(this);
-					break;
-				case UNICAST:
-					targetCallType.getContext().addEvent(this);
-					break;
-				default:
-					break;
-			}
+			targetCallType.getContext().addEvent(this);
 		}
 	}
 	

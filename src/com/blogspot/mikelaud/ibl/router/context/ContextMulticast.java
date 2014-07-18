@@ -14,9 +14,9 @@ public class ContextMulticast extends ContextAbstract {
 	public void addEvent(EventTask aEvent) {
 		Set<CallTask> callsCopy = null;
 		synchronized (mLock) {
-			int commandsCount = mCalls.size();
-			if (commandsCount > 0) {
-				callsCopy = new HashSet<CallTask>(commandsCount);
+			int callsCount = mCalls.size();
+			if (callsCount > 0) {
+				callsCopy = new HashSet<CallTask>(callsCount);
 				callsCopy.addAll(mCalls);
 				mCalls.clear();
 			}

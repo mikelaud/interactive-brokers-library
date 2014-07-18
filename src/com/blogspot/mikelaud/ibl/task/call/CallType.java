@@ -23,7 +23,7 @@ public enum CallType {
 	connect
 	(	"connect"
 	,	TaskGroup.ConnectionAndServer
-	,	CallKind.NOCAST
+	,	CallKind.MULTICAST
 	,	"Establish the connection with TWS."
 	),
 	disconnect

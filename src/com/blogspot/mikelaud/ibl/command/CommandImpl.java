@@ -40,23 +40,25 @@ public class CommandImpl implements Command {
 
 	@Override
 	public void callBefore(CallTask aCall) throws Exception {
-		if (CallKind.NOCAST == aCall.getCallType().getKind()) return;
 		Logger.logCommandBegin(toString(aCall));
-		aCall.getCallType().getContext().addCommand(aCall);
+		if (CallKind.NOCAST != aCall.getCallType().getKind()) {
+			aCall.getCallType().getContext().addCommand(aCall);
+		}
 	}
 	
 	@Override
 	public void callAfter(CallTask aCall) throws Exception {
-		if (CallKind.NOCAST == aCall.getCallType().getKind()) return;
-		resetTimeout();
-		for (;;) {
-			if (reachTimeout()) {
-				aCall.getCallType().getContext().removeCommand(aCall);
-				break;
-			}
-			synchronized (mTimeoutLock) {
-				if (null != mEvent) break;
-				mTimeoutLock.wait(mWaitTimeMs);
+		if (CallKind.NOCAST != aCall.getCallType().getKind()) {
+			resetTimeout();
+			for (;;) {
+				if (reachTimeout()) {
+					aCall.getCallType().getContext().removeCommand(aCall);
+					break;
+				}
+				synchronized (mTimeoutLock) {
+					if (null != mEvent) break;
+					mTimeoutLock.wait(mWaitTimeMs);
+				}
 			}
 		}
 		Logger.logCommandEnd(toString(aCall));
