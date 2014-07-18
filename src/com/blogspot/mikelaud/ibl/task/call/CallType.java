@@ -1,9 +1,6 @@
 package com.blogspot.mikelaud.ibl.task.call;
 
 import com.blogspot.mikelaud.ibl.router.context.Context;
-import com.blogspot.mikelaud.ibl.router.context.ContextMulticast;
-import com.blogspot.mikelaud.ibl.router.context.ContextNocast;
-import com.blogspot.mikelaud.ibl.router.context.ContextUnicast;
 import com.blogspot.mikelaud.ibl.task.TaskGroup;
 
 /**
@@ -363,32 +360,13 @@ public enum CallType {
 	private final CallKind KIND;
 	private final String DESCRIPTION;
 	private final Context CONTEXT;
-
-	private Context createContext(CallKind aKind) {
-		Context context;
-		switch (aKind) {
-		case NOCAST:
-			context = new ContextNocast();
-			break;
-		case UNICAST:
-			context = new ContextUnicast();
-			break;
-		case MULTICAST:
-			context = new ContextMulticast();
-			break;
-		default:
-			context = new ContextNocast();
-			break;
-		}
-		return context;
-	}
 	
 	private CallType(String aName, TaskGroup aGroup, CallKind aKind, String aDescription) {
 		NAME = aName;
 		GROUP = aGroup;
 		KIND = aKind;
 		DESCRIPTION = aDescription;
-		CONTEXT = createContext(aKind);
+		CONTEXT = CallKind.createContext(aKind);
 	}
 	
 	public String getName() { return NAME; }

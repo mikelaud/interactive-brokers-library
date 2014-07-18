@@ -3,38 +3,38 @@ package com.blogspot.mikelaud.ibl.router.context;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.blogspot.mikelaud.ibl.task.call.CallTask;
 import com.blogspot.mikelaud.ibl.task.event.EventTask;
-import com.blogspot.mikelaud.ibl.test_command.Command;
 
 public class ContextUnicast extends ContextAbstract {
 
-	private Map<Long,Command> mCommands = new HashMap<Long,Command>();
+	private Map<Long,CallTask> mCalls = new HashMap<Long,CallTask>();
 	
 	@Override
 	public void addEvent(EventTask aEvent) {
 		long requestId = aEvent.getRequestId();
-		Command command;
+		CallTask call;
 		synchronized (mLock) {
-			command = mCommands.remove(requestId);
+			call = mCalls.remove(requestId);
 		}
-		if (null != command) {
-			command.notifyMe(aEvent);	
-		}
-	}
-	
-	@Override
-	public void addCommand(Command aCommand) {
-		long requestId = aCommand.getCall().getRequestId();
-		synchronized (mLock) {
-			mCommands.put(requestId, aCommand);
+		if (null != call) {
+			call.getCommand().notifyMe(aEvent);	
 		}
 	}
 	
 	@Override
-	public void removeCommand(Command aCommand) {
-		long requestId = aCommand.getCall().getRequestId();
+	public void addCommand(CallTask aCall) {
+		long requestId = aCall.getRequestId();
 		synchronized (mLock) {
-			mCommands.remove(requestId);
+			mCalls.put(requestId, aCall);
+		}
+	}
+	
+	@Override
+	public void removeCommand(CallTask aCall) {
+		long requestId = aCall.getRequestId();
+		synchronized (mLock) {
+			mCalls.remove(requestId);
 		}
 	}
 	

@@ -3,43 +3,43 @@ package com.blogspot.mikelaud.ibl.router.context;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.blogspot.mikelaud.ibl.task.call.CallTask;
 import com.blogspot.mikelaud.ibl.task.event.EventTask;
-import com.blogspot.mikelaud.ibl.test_command.Command;
 
 public class ContextMulticast extends ContextAbstract {
 
-	private Set<Command> mCommands = new HashSet<Command>();
+	private Set<CallTask> mCalls = new HashSet<CallTask>();
 	
 	@Override
 	public void addEvent(EventTask aEvent) {
-		Set<Command> commandsCopy = null;
+		Set<CallTask> callsCopy = null;
 		synchronized (mLock) {
-			int commandsCount = mCommands.size();
+			int commandsCount = mCalls.size();
 			if (commandsCount > 0) {
-				commandsCopy = new HashSet<Command>(commandsCount);
-				commandsCopy.addAll(mCommands);
-				mCommands.clear();
+				callsCopy = new HashSet<CallTask>(commandsCount);
+				callsCopy.addAll(mCalls);
+				mCalls.clear();
 			}
 		}
-		if (null != commandsCopy) {
-			for (Command command : commandsCopy) {
-				command.notifyMe(aEvent);
+		if (null != callsCopy) {
+			for (CallTask call : callsCopy) {
+				call.getCommand().notifyMe(aEvent);
 			}
-			commandsCopy.clear();
+			callsCopy.clear();
 		}
 	}
 	
 	@Override
-	public void addCommand(Command aCommand) {
+	public void addCommand(CallTask aCall) {
 		synchronized (mLock) {
-			mCommands.add(aCommand);
+			mCalls.add(aCall);
 		}
 	}
 	
 	@Override
-	public void removeCommand(Command aCommand) {
+	public void removeCommand(CallTask aCall) {
 		synchronized (mLock) {
-			mCommands.remove(aCommand);
+			mCalls.remove(aCall);
 		}
 	}
 	
