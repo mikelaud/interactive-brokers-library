@@ -5,8 +5,8 @@ import com.blogspot.mikelaud.ibl.out.OutEvent;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
 import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnAccountDownloadEnd;
 import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnUpdateAccountTime;
 import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnUpdateAccountValue;
@@ -97,7 +97,7 @@ public class CallReqAccountUpdates
 	}
 
 	public CallReqAccountUpdates(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.reqAccountUpdates);
+		super(aContext, aIn, new TaskInnerObject(){});
 		OUT_UPDATE_ACCOUNT_TIME = new OutEvent<OnUpdateAccountTime>(getRouter());
 		OUT_UPDATE_ACCOUNT_VALUE = new OutEvents<OnUpdateAccountValue>(getRouter());
 		OUT_UPDATE_PORTFOLIO = new OutEvents<OnUpdatePortfolio>(getRouter());

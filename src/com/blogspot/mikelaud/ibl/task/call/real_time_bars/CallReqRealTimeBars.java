@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.call.real_time_bars;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.ib.client.Contract;
 
 /**
@@ -93,7 +93,7 @@ public class CallReqRealTimeBars
 	}
 
 	public CallReqRealTimeBars(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.reqRealTimeBars);
+		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
 	public CallReqRealTimeBars

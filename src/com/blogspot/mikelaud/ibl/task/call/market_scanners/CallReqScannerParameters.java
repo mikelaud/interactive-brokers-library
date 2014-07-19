@@ -3,8 +3,8 @@ package com.blogspot.mikelaud.ibl.task.call.market_scanners;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.blogspot.mikelaud.ibl.task.event.market_scanners.OnScannerParameters;
 
 /**
@@ -43,7 +43,7 @@ public class CallReqScannerParameters
 	}
 
 	private CallReqScannerParameters(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.reqScannerParameters);
+		super(aContext, aIn, new TaskInnerObject(){});
 		OUT_SCANNER_PARAMETERS = new OutTerminator<OnScannerParameters>(getRouter());
 	}
 

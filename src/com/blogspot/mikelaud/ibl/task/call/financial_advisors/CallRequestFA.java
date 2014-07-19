@@ -3,8 +3,8 @@ package com.blogspot.mikelaud.ibl.task.call.financial_advisors;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.blogspot.mikelaud.ibl.task.event.financial_advisors.OnReceiveFA;
 
 /**
@@ -53,7 +53,7 @@ public class CallRequestFA
 	}
 
 	public CallRequestFA(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.requestFA);
+		super(aContext, aIn, new TaskInnerObject(){});
 		OUT_RECEIVE_FA = new OutTerminator<OnReceiveFA>(getRouter());
 	}
 

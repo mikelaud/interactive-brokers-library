@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.call.account_and_portfolio;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 
 /**
  * Cancels real-time position updates.
@@ -36,7 +36,7 @@ public class CallCancelPositions
 	}
 
 	private CallCancelPositions(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.cancelPositions);
+		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
 	public CallCancelPositions(ConnectionContext aContext) {

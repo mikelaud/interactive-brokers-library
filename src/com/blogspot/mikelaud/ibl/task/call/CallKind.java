@@ -7,23 +7,19 @@ import com.blogspot.mikelaud.ibl.router.context.ContextUnicast;
 
 public enum CallKind {
 
-	NOCAST
-	(	"NOCAST"
-	),
-	UNICAST
-	(	"UNICAST"
-	),
-	MULTICAST
-	(	"MULTICAST"
-	);
+	NOCAST,
+	UNICAST,
+	MULTICAST;
 	
 	private final String NAME;
 	
-	private CallKind(String aName) {
-		NAME = aName;
+	private CallKind() {
+		NAME = name();
 	}
 	
-	public String getName() { return NAME; }
+	public String getName() {
+		return NAME;
+	}
 	
 	public static Context createContext(CallKind aKind) {
 		Context context;

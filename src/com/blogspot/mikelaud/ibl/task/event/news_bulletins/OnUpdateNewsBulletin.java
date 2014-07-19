@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.news_bulletins;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * This event is triggered for each new bulletin if the client has subscribed,
@@ -68,7 +68,7 @@ public class OnUpdateNewsBulletin
 	}
 	
 	public OnUpdateNewsBulletin(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.updateNewsBulletin);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

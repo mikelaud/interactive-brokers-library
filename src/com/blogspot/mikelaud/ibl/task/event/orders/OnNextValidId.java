@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.orders;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * This event is called after a successful connection to TWS.
@@ -42,7 +42,7 @@ public class OnNextValidId
 	}
 	
 	public OnNextValidId(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.nextValidId);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

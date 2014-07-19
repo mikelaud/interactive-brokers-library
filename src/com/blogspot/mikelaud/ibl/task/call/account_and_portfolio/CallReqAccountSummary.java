@@ -4,8 +4,8 @@ import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
 import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnAccountSummary;
 import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnAccountSummaryEnd;
 
@@ -39,42 +39,42 @@ public class CallReqAccountSummary
 		 * A comma-separated list of account tags. Available tags are:
 		 *     AccountType
 		 *     NetLiquidation
-		 *     TotalCashValue — Total cash including futures pnl
-		 *     SettledCash — For cash accounts,
+		 *     TotalCashValue: Total cash including futures pnl
+		 *     SettledCash: For cash accounts,
 		 *                   this is the same as TotalCashValue
-		 *     AccruedCash — Net accrued interest
-		 *     BuyingPower — The maximum amount of marginable US stocks
+		 *     AccruedCash: Net accrued interest
+		 *     BuyingPower: The maximum amount of marginable US stocks
 		 *                   the account can buy
-		 *     EquityWithLoanValue — Cash + stocks + bonds + mutual funds
+		 *     EquityWithLoanValue: Cash + stocks + bonds + mutual funds
 		 *     PreviousEquityWithLoanValue
-		 *     GrossPositionValue — The sum of the absolute value of all
+		 *     GrossPositionValue: The sum of the absolute value of all
 		 *                          stock and equity option positions
 		 *     RegTEquity
 		 *     RegTMargin
-		 *     SMA — Special Memorandum Account
+		 *     SMA: Special Memorandum Account
 		 *     InitMarginReq
 		 *     MaintMarginReq
 		 *     AvailableFunds
 		 *     ExcessLiquidity
-		 *     Cushion — Excess liquidity as a percentage
+		 *     Cushion: Excess liquidity as a percentage
 		 *               of net liquidation value
 		 *     FullInitMarginReq
 		 *     FullMaintMarginReq
 		 *     FullAvailableFunds
 		 *     FullExcessLiquidity
-		 *     LookAheadNextChange — Time when look-ahead values
+		 *     LookAheadNextChange: Time when look-ahead values
 		 *                           take effect
 		 *     LookAheadInitMarginReq
 		 *     LookAheadMaintMarginReq
 		 *     LookAheadAvailableFunds
 		 *     LookAheadExcessLiquidity
-		 *     HighestSeverity — A measure of how close
+		 *     HighestSeverity: A measure of how close
 		 *                       the account is to liquidation
-		 *     DayTradesRemaining — The Number of Open/Close trades a user
+		 *     DayTradesRemaining: The Number of Open/Close trades a user
 		 *                          could put on before Pattern Day Trading
 		 *                          is detected. A value of "-1" means that
 		 *                          the user can put on unlimited day trades.
-		 *     Leverage — GrossPositionValue / NetLiquidation
+		 *     Leverage: GrossPositionValue / NetLiquidation
 		 */
 		public final String TAGS;		
 		
@@ -114,7 +114,7 @@ public class CallReqAccountSummary
 	}
 
 	public CallReqAccountSummary(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.reqAccountSummary);
+		super(aContext, aIn, new TaskInnerObject(){});
 		OUT_ACCOUNT_SUMMARY = new OutEvents<OnAccountSummary>(getRouter());
 		OUT_ACCOUNT_SUMMARY_END = new OutTerminator<OnAccountSummaryEnd>(getRouter());
 	}

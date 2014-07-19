@@ -4,8 +4,8 @@ import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
 import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.blogspot.mikelaud.ibl.task.event.market_scanners.OnScannerData;
 import com.blogspot.mikelaud.ibl.task.event.market_scanners.OnScannerDataEnd;
 import com.ib.client.ScannerSubscription;
@@ -63,7 +63,7 @@ public class CallReqScannerSubscription
 	}
 
 	public CallReqScannerSubscription(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.reqScannerSubscription);
+		super(aContext, aIn, new TaskInnerObject(){});
 		OUT_SCANNER_DATA = new OutEvents<OnScannerData>(getRouter());
 		OUT_SCANNER_DATA_END = new OutTerminator<OnScannerDataEnd>(getRouter());
 	}

@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.call.connection_and_server;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 
 /**
  * Call this call to terminate the connections with TWS.
@@ -37,7 +37,7 @@ public class CallDisconnect
 	}
 
 	private CallDisconnect(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.disconnect);
+		super(aContext, aIn, new TaskInnerObject(){});
 	}
 	
 	public CallDisconnect(ConnectionContext aContext) {

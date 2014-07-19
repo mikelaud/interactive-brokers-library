@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.call.market_data;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 
 /**
  * Call this call to cancel a request to calculate volatility
@@ -43,7 +43,7 @@ public class CallCancelCalculateImpliedVolatility
 	}
 
 	public CallCancelCalculateImpliedVolatility(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.cancelCalculateImpliedVolatility);
+		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
 	public CallCancelCalculateImpliedVolatility(ConnectionContext aContext, int aReqId) {

@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.call.market_data;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 
 /**
  * The API can receive frozen market data from Trader Workstation.
@@ -50,7 +50,7 @@ public class CallReqMarketDataType
 	}
 
 	public CallReqMarketDataType(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.reqMarketDataType);
+		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
 	public CallReqMarketDataType(ConnectionContext aContext, int aType) {

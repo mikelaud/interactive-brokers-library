@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.account_and_portfolio;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * Returns the data from the TWS Account Window Summary tab
@@ -26,41 +26,41 @@ public class OnAccountSummary
 		/**
 		 * The tag from the data request. Available tags are:
 		 *     AccountType
-		 *     TotalCashValue — Total cash including futures pnl
-		 *     SettledCash — For cash accounts,
+		 *     TotalCashValue: Total cash including futures pnl
+		 *     SettledCash: For cash accounts,
 		 *                   this is the same as TotalCashValue
-		 *     AccruedCash — Net accrued interest
-		 *     BuyingPower — The maximum amount of marginable US stocks
+		 *     AccruedCash: Net accrued interest
+		 *     BuyingPower: The maximum amount of marginable US stocks
 		 *                   the account can buy
-		 *     EquityWithLoanValue — Cash + stocks + bonds + mutual funds
+		 *     EquityWithLoanValue: Cash + stocks + bonds + mutual funds
 		 *     PreviousEquityWithLoanValue
-		 *     GrossPositionValue — The sum of the absolute value of all stock
+		 *     GrossPositionValue: The sum of the absolute value of all stock
 		 *                          and equity option positions
 		 *     RegTEquity
 		 *     RegTMargin
-		 *     SMA — Special Memorandum Account
+		 *     SMA: Special Memorandum Account
 		 *     InitMarginReq
 		 *     MaintMarginReq
 		 *     AvailableFunds
 		 *     ExcessLiquidity
-		 *     Cushion — Excess liquidity as a percentage
+		 *     Cushion: Excess liquidity as a percentage
 		 *               of net liquidation value
 		 *     FullInitMarginReq
 		 *     FullMaintMarginReq
 		 *     FullAvailableFunds
 		 *     FullExcessLiquidity
-		 *     LookAheadNextChange — Time when look-ahead values take effect
+		 *     LookAheadNextChange: Time when look-ahead values take effect
 		 *     LookAheadInitMarginReq
 		 *     LookAheadMaintMarginReq
 		 *     LookAheadAvailableFunds
 		 *     LookAheadExcessLiquidity
-		 *     HighestSeverity — A measure of how close
+		 *     HighestSeverity: A measure of how close
 		 *                       the account is to liquidation
-		 *     DayTradesRemaining — The Number of Open/Close trades a user
+		 *     DayTradesRemaining: The Number of Open/Close trades a user
 		 *                          could put on before Pattern Day Trading
 		 *                          is detected. A value of "-1" means
 		 *                          that the user can put on unlimited day trades.
-		 *     Leverage — GrossPositionValue / NetLiquidation
+		 *     Leverage: GrossPositionValue / NetLiquidation
 		 */
 		public final String TAG;
 		/**
@@ -108,7 +108,7 @@ public class OnAccountSummary
 	}
 
 	public OnAccountSummary(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.accountSummary);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

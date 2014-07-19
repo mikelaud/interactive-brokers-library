@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.financial_advisors;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * This event receives previously requested FA configuration information
@@ -53,7 +53,7 @@ public class OnReceiveFA
 	}
 	
 	public OnReceiveFA(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.receiveFA);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

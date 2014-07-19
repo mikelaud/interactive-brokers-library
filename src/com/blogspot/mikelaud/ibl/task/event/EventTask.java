@@ -3,6 +3,7 @@ package com.blogspot.mikelaud.ibl.task.event;
 import com.blogspot.mikelaud.ibl.Logger;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallType;
 
 /**
@@ -10,9 +11,9 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  */
 public abstract class EventTask extends Task {
 
-	protected final EventType EVENT_TYPE;
-		
-	public EventType getEventType() { return EVENT_TYPE; }
+	private final static EventTypes EVENT_TYPES = new EventTypes();
+	
+	private final EventType EVENT_TYPE;
 
 	private void addEvent() {
 		CallType targetCallType = EVENT_TYPE.getTargetCallType();
@@ -20,8 +21,15 @@ public abstract class EventTask extends Task {
 			targetCallType.getContext().addEvent(this);
 		}
 	}
+
+	public EventType getEventType() {
+		return EVENT_TYPE;
+	}
 	
-	public int getRequestId() { return 0; } // TODO
+	public int getRequestId() { // TODO
+		return 0;
+	}
+	
 	protected abstract Task onEvent() throws Exception;
 
 	@Override
@@ -37,9 +45,12 @@ public abstract class EventTask extends Task {
 		return EVENT_TYPE.toString();
 	}
 	
-	public EventTask(ConnectionContext aContext, EventType aEventType) {
+	public EventTask
+	(	ConnectionContext aContext
+	,	TaskInnerObject aTaskInnerObject
+	) {
 		super(aContext);
-		EVENT_TYPE = aEventType;
+		EVENT_TYPE = EVENT_TYPES.toType(aTaskInnerObject);
 	}
 
 }

@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.fundamental_data;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * This event is called to receive Reuters global fundamental market data.
@@ -55,7 +55,7 @@ public class OnFundamentalData
 	}
 	
 	public OnFundamentalData(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.fundamentalData);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

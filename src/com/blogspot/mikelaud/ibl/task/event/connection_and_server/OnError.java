@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.connection_and_server;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * This event is called when there is an error with the communication or
@@ -55,7 +55,7 @@ public class OnError
 	}
 	
 	public OnError(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.error);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

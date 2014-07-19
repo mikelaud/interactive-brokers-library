@@ -4,8 +4,8 @@ import java.util.concurrent.TimeUnit;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * Artificial event for sync call CallSleep.
@@ -49,7 +49,7 @@ public class OnSleepDone
 	}
 
 	public OnSleepDone(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.sleepDone);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

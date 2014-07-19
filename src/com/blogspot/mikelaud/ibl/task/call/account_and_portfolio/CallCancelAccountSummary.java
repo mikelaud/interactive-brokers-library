@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.call.account_and_portfolio;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 
 /**
  * Cancels the request for Account Window Summary tab data.
@@ -42,7 +42,7 @@ public class CallCancelAccountSummary
 	}
 
 	public CallCancelAccountSummary(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.cancelAccountSummary);
+		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
 	public CallCancelAccountSummary

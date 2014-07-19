@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.contract_details;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 import com.ib.client.ContractDetails;
 
 /**
@@ -49,7 +49,7 @@ public class OnBondContractDetails
 	}
 	
 	public OnBondContractDetails(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.bondContractDetails);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

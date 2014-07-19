@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.market_data;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * TWS sends a OnMarketDataType event to the API,
@@ -54,7 +54,7 @@ public class OnMarketDataType
 	}
 	
 	public OnMarketDataType(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.marketDataType);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

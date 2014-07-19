@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.call.connection_and_server;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.blogspot.mikelaud.ibl.task.event.connection_and_server.OnTwsConnectionTime;
 
 /**
@@ -50,7 +50,7 @@ public class CallTwsConnectionTime
 	}
 
 	private CallTwsConnectionTime(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.twsConnectionTime);
+		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
 	public CallTwsConnectionTime(ConnectionContext aContext) {

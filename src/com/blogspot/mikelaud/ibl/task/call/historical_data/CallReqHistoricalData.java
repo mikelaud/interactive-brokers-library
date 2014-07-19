@@ -3,8 +3,8 @@ package com.blogspot.mikelaud.ibl.task.call.historical_data;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.blogspot.mikelaud.ibl.task.event.historical_data.OnHistoricalData;
 import com.ib.client.Contract;
 
@@ -158,7 +158,7 @@ public class CallReqHistoricalData
 	}
 
 	public CallReqHistoricalData(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.reqHistoricalData);
+		super(aContext, aIn, new TaskInnerObject(){});
 		OUT_HISTORICAL_DATA = new OutEvents<OnHistoricalData>(getRouter());
 	}
 

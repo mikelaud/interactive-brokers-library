@@ -6,18 +6,21 @@ import com.blogspot.mikelaud.ibl.command.CommandImpl;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.router.Router;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 
 /**
  * EClientSocket calls you use when connecting to TWS.
  */
 public abstract class CallTask extends Task {
 
+	private final static CallTypes CALL_TYPES = new CallTypes();
+	
 	private final CallType CALL_TYPE;
 	private final Command COMMAND;
 	private final Router ROUTER;
 
 	private Integer mRequestId;
-	
+		
 	public CallType getCallType() {
 		return CALL_TYPE;
 	}
@@ -53,9 +56,12 @@ public abstract class CallTask extends Task {
 		return CALL_TYPE.toString();
 	}
 	
-	public CallTask(ConnectionContext aContext, CallType aCallType) {
+	public CallTask
+	(	ConnectionContext aContext
+	,	TaskInnerObject aTaskInnerObject
+	) {
 		super(aContext);
-		CALL_TYPE = aCallType;
+		CALL_TYPE = CALL_TYPES.toType(aTaskInnerObject);
 		COMMAND = new CommandImpl();
 		ROUTER = null;
 		mRequestId = null;

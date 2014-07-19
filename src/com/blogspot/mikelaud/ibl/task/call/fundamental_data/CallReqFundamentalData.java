@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.call.fundamental_data;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.ib.client.Contract;
 
 /**
@@ -76,7 +76,7 @@ public class CallReqFundamentalData
 	}
 
 	public CallReqFundamentalData(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.reqFundamentalData);
+		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
 	public CallReqFundamentalData

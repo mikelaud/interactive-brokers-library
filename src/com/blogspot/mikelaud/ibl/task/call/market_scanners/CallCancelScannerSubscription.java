@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.call.market_scanners;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 
 /**
  * Call the CallCancelScannerSubscription call to stop
@@ -43,7 +43,7 @@ public class CallCancelScannerSubscription
 	}
 
 	public CallCancelScannerSubscription(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.cancelScannerSubscription);
+		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
 	public CallCancelScannerSubscription(ConnectionContext aContext, int aTickerId) {

@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.market_data;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * This event is called when the market in an option or its underlier moves.
@@ -117,7 +117,7 @@ public class OnTickOptionComputation
 	}
 	
 	public OnTickOptionComputation(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.tickOptionComputation);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

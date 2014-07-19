@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.call.market_depth;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 
 /**
  * After calling this call,
@@ -43,7 +43,7 @@ public class CallCancelMktDepth
 	}
 
 	public CallCancelMktDepth(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.cancelMktDepth);
+		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
 	public CallCancelMktDepth(ConnectionContext aContext, int aTickerId) {

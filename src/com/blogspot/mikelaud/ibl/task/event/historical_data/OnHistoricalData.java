@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.historical_data;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * This event receives the requested historical data results.
@@ -110,7 +110,7 @@ public class OnHistoricalData
 	}
 	
 	public OnHistoricalData(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.historicalData);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

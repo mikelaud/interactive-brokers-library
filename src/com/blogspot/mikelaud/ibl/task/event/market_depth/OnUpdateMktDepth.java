@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.market_depth;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * This event is called when the market depth changes.
@@ -89,7 +89,7 @@ public class OnUpdateMktDepth
 	}
 	
 	public OnUpdateMktDepth(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.updateMktDepth);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

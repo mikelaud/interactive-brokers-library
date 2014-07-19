@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.call.orders;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.ib.client.Contract;
 
 /**
@@ -100,7 +100,7 @@ public class CallExerciseOptions
 	}
 
 	public CallExerciseOptions(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.exerciseOptions);
+		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
 	public CallExerciseOptions

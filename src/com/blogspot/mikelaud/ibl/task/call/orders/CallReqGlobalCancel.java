@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.call.orders;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 
 /**
  * Use this call to cancel all open orders globally.
@@ -40,7 +40,7 @@ public class CallReqGlobalCancel
 	}
 
 	private CallReqGlobalCancel(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.reqGlobalCancel);
+		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
 	public CallReqGlobalCancel(ConnectionContext aContext) {

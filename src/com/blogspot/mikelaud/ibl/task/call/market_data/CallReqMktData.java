@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.ib.client.Contract;
 import com.ib.client.TagValue;
 
@@ -87,7 +87,7 @@ public class CallReqMktData
 	}
 
 	public CallReqMktData(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.reqMktData);
+		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
 	public CallReqMktData

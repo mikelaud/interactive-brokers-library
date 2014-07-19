@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.real_time_bars;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * This event receives the real-time bars data results.
@@ -101,7 +101,7 @@ public class OnRealtimeBar
 	}
 	
 	public OnRealtimeBar(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.realtimeBar);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

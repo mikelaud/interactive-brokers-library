@@ -4,8 +4,8 @@ import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
 import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.blogspot.mikelaud.ibl.task.event.contract_details.OnBondContractDetails;
 import com.blogspot.mikelaud.ibl.task.event.contract_details.OnContractDetails;
 import com.blogspot.mikelaud.ibl.task.event.contract_details.OnContractDetailsEnd;
@@ -68,7 +68,7 @@ public class CallReqContractDetails
 	}
 
 	public CallReqContractDetails(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.reqContractDetails);
+		super(aContext, aIn, new TaskInnerObject(){});
 		OUT_CONTRACT_DETAILS = new OutEvents<OnContractDetails>(getRouter());
 		OUT_BOND_CONTRACT_DETAILS = new OutEvents<OnBondContractDetails>(getRouter());
 		OUT_CONTRACT_DETAILS_END = new OutTerminator<OnContractDetailsEnd>(getRouter());

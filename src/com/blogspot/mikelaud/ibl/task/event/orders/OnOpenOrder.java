@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.orders;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 import com.ib.client.Contract;
 import com.ib.client.Order;
 import com.ib.client.OrderState;
@@ -65,7 +65,7 @@ public class OnOpenOrder
 	}
 	
 	public OnOpenOrder(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.openOrder);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

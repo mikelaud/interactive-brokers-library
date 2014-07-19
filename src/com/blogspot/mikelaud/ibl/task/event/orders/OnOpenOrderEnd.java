@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.orders;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * This is called at the end of a given request for open orders.
@@ -35,7 +35,7 @@ public class OnOpenOrderEnd
 	}
 	
 	public OnOpenOrderEnd(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.openOrderEnd);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

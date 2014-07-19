@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.market_data;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * This is called when a snapshot market data subscription
@@ -43,7 +43,7 @@ public class OnTickSnapshotEnd
 	}
 	
 	public OnTickSnapshotEnd(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.tickSnapshotEnd);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

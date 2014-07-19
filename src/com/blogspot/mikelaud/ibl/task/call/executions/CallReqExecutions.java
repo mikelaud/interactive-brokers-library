@@ -5,8 +5,8 @@ import com.blogspot.mikelaud.ibl.out.OutEvent;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
 import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.blogspot.mikelaud.ibl.task.event.executions.OnCommissionReport;
 import com.blogspot.mikelaud.ibl.task.event.executions.OnExecDetails;
 import com.blogspot.mikelaud.ibl.task.event.executions.OnExecDetailsEnd;
@@ -72,7 +72,7 @@ public class CallReqExecutions
 	}
 
 	public CallReqExecutions(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.reqExecutions);
+		super(aContext, aIn, new TaskInnerObject(){});
 		OUT_COMMISSION_REPORT = new OutEvent<OnCommissionReport>(getRouter());
 		OUT_EXEC_DETAILS = new OutEvents<OnExecDetails>(getRouter());
 		OUT_EXEC_DETAILS_END = new OutTerminator<OnExecDetailsEnd>(getRouter());

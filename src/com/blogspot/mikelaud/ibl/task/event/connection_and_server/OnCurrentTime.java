@@ -7,8 +7,8 @@ import java.util.concurrent.TimeUnit;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * This event receives the current system time on the server side.
@@ -54,7 +54,7 @@ public class OnCurrentTime
 	}
 
 	public OnCurrentTime(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.currentTime);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

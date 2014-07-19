@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.executions;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * This event is called once all executions have been sent to a client
@@ -42,7 +42,7 @@ public class OnExecDetailsEnd
 	}
 	
 	public OnExecDetailsEnd(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.execDetailsEnd);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.call.market_depth;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.ib.client.Contract;
 
 /**
@@ -66,7 +66,7 @@ public class CallReqMktDepth
 	}
 
 	public CallReqMktDepth(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.reqMktDepth);
+		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
 	public CallReqMktDepth

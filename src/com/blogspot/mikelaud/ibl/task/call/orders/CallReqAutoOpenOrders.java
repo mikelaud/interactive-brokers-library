@@ -4,8 +4,8 @@ import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
 import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.blogspot.mikelaud.ibl.task.event.orders.OnOpenOrder;
 import com.blogspot.mikelaud.ibl.task.event.orders.OnOpenOrderEnd;
 import com.blogspot.mikelaud.ibl.task.event.orders.OnOrderStatus;
@@ -62,7 +62,7 @@ public class CallReqAutoOpenOrders
 	}
 
 	public CallReqAutoOpenOrders(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.reqAutoOpenOrders);
+		super(aContext, aIn, new TaskInnerObject(){});
 		OUT_ORDER_STATUS = new OutEvents<OnOrderStatus>(getRouter());
 		OUT_OPEN_ORDER = new OutEvents<OnOpenOrder>(getRouter());
 		OUT_OPEN_ORDER_END = new OutTerminator<OnOpenOrderEnd>(getRouter());

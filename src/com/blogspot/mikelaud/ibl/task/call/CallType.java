@@ -2,378 +2,427 @@ package com.blogspot.mikelaud.ibl.task.call;
 
 import com.blogspot.mikelaud.ibl.router.context.Context;
 import com.blogspot.mikelaud.ibl.task.TaskGroup;
+import com.blogspot.mikelaud.ibl.task.TaskType;
+import com.blogspot.mikelaud.ibl.task.call.account_and_portfolio.CallCancelAccountSummary;
+import com.blogspot.mikelaud.ibl.task.call.account_and_portfolio.CallCancelPositions;
+import com.blogspot.mikelaud.ibl.task.call.account_and_portfolio.CallReqAccountSummary;
+import com.blogspot.mikelaud.ibl.task.call.account_and_portfolio.CallReqAccountUpdates;
+import com.blogspot.mikelaud.ibl.task.call.account_and_portfolio.CallReqPositions;
+import com.blogspot.mikelaud.ibl.task.call.connection_and_server.CallConnect;
+import com.blogspot.mikelaud.ibl.task.call.connection_and_server.CallDisconnect;
+import com.blogspot.mikelaud.ibl.task.call.connection_and_server.CallIsConnected;
+import com.blogspot.mikelaud.ibl.task.call.connection_and_server.CallReqCurrentTime;
+import com.blogspot.mikelaud.ibl.task.call.connection_and_server.CallServerVersion;
+import com.blogspot.mikelaud.ibl.task.call.connection_and_server.CallSetServerLogLevel;
+import com.blogspot.mikelaud.ibl.task.call.connection_and_server.CallTwsConnectionTime;
+import com.blogspot.mikelaud.ibl.task.call.contract_details.CallReqContractDetails;
+import com.blogspot.mikelaud.ibl.task.call.executions.CallReqExecutions;
+import com.blogspot.mikelaud.ibl.task.call.financial_advisors.CallReplaceFA;
+import com.blogspot.mikelaud.ibl.task.call.financial_advisors.CallReqManagedAccts;
+import com.blogspot.mikelaud.ibl.task.call.financial_advisors.CallRequestFA;
+import com.blogspot.mikelaud.ibl.task.call.fundamental_data.CallCancelFundamentalData;
+import com.blogspot.mikelaud.ibl.task.call.fundamental_data.CallReqFundamentalData;
+import com.blogspot.mikelaud.ibl.task.call.historical_data.CallCancelHistoricalData;
+import com.blogspot.mikelaud.ibl.task.call.historical_data.CallReqHistoricalData;
+import com.blogspot.mikelaud.ibl.task.call.market_data.CallCalculateImpliedVolatility;
+import com.blogspot.mikelaud.ibl.task.call.market_data.CallCalculateOptionPrice;
+import com.blogspot.mikelaud.ibl.task.call.market_data.CallCancelCalculateImpliedVolatility;
+import com.blogspot.mikelaud.ibl.task.call.market_data.CallCancelCalculateOptionPrice;
+import com.blogspot.mikelaud.ibl.task.call.market_data.CallCancelMktData;
+import com.blogspot.mikelaud.ibl.task.call.market_data.CallReqMarketDataType;
+import com.blogspot.mikelaud.ibl.task.call.market_data.CallReqMktData;
+import com.blogspot.mikelaud.ibl.task.call.market_depth.CallCancelMktDepth;
+import com.blogspot.mikelaud.ibl.task.call.market_depth.CallReqMktDepth;
+import com.blogspot.mikelaud.ibl.task.call.market_scanners.CallCancelScannerSubscription;
+import com.blogspot.mikelaud.ibl.task.call.market_scanners.CallReqScannerParameters;
+import com.blogspot.mikelaud.ibl.task.call.market_scanners.CallReqScannerSubscription;
+import com.blogspot.mikelaud.ibl.task.call.news_bulletins.CallCancelNewsBulletins;
+import com.blogspot.mikelaud.ibl.task.call.news_bulletins.CallReqNewsBulletins;
+import com.blogspot.mikelaud.ibl.task.call.orders.CallCancelOrder;
+import com.blogspot.mikelaud.ibl.task.call.orders.CallExerciseOptions;
+import com.blogspot.mikelaud.ibl.task.call.orders.CallPlaceOrder;
+import com.blogspot.mikelaud.ibl.task.call.orders.CallReqAllOpenOrders;
+import com.blogspot.mikelaud.ibl.task.call.orders.CallReqAutoOpenOrders;
+import com.blogspot.mikelaud.ibl.task.call.orders.CallReqGlobalCancel;
+import com.blogspot.mikelaud.ibl.task.call.orders.CallReqIDs;
+import com.blogspot.mikelaud.ibl.task.call.orders.CallReqOpenOrders;
+import com.blogspot.mikelaud.ibl.task.call.other.CallSleep;
+import com.blogspot.mikelaud.ibl.task.call.real_time_bars.CallCancelRealTimeBars;
+import com.blogspot.mikelaud.ibl.task.call.real_time_bars.CallReqRealTimeBars;
 
 /**
  * EClientSocket calls enum.
  */
-public enum CallType {
+public enum CallType implements TaskType {
 
 	//========================================================================
 	// Other
 	//------------------------------------------------------------------------
 	sleep
-	(	"sleep"
+	(	CallSleep.class
 	,	TaskGroup.Other
-	,	CallKind.NOCAST
 	,	"Create pause."
+	,	CallKind.NOCAST
 	),
 	//========================================================================
 	// Connection and Server
 	//------------------------------------------------------------------------
 	connect
-	(	"connect"
+	(	CallConnect.class
 	,	TaskGroup.ConnectionAndServer
-	,	CallKind.MULTICAST
 	,	"Establish the connection with TWS."
+	,	CallKind.MULTICAST
 	),
 	disconnect
-	(	"disconnect"
+	(	CallDisconnect.class
 	,	TaskGroup.ConnectionAndServer
-	,	CallKind.NOCAST
 	,	"Terminate the connection with TWS."
+	,	CallKind.NOCAST
 	),
 	isConnected
-	(	"isConnected"
+	(	CallIsConnected.class
 	,	TaskGroup.ConnectionAndServer
-	,	CallKind.NOCAST
 	,	"Check if there is a connection with TWS."
+	,	CallKind.NOCAST
 	),
 	setServerLogLevel
-	(	"setServerLogLevel"
+	(	CallSetServerLogLevel.class
 	,	TaskGroup.ConnectionAndServer
-	,	CallKind.NOCAST
 	,	"Set server log level."
+	,	CallKind.NOCAST
 	),
 	reqCurrentTime
-	(	"reqCurrentTime"
+	(	CallReqCurrentTime.class
 	,	TaskGroup.ConnectionAndServer
-	,	CallKind.MULTICAST
 	,	"Request current system time on the server side."
+	,	CallKind.MULTICAST
 	),
 	serverVersion
-	(	"serverVersion"
+	(	CallServerVersion.class
 	,	TaskGroup.ConnectionAndServer
-	,	CallKind.NOCAST
 	,	"Get version of the TWS instance to which the API application is connected."
+	,	CallKind.NOCAST
 	),
 	twsConnectionTime
-	(	"twsConnectionTime"
+	(	CallTwsConnectionTime.class
 	,	TaskGroup.ConnectionAndServer
-	,	CallKind.NOCAST
 	,	"Get time the API application made a connection to TWS."
+	,	CallKind.NOCAST
 	),
 	//========================================================================
 	// Market Data
 	//------------------------------------------------------------------------
 	reqMktData
-	(	"reqMktData"
+	(	CallReqMktData.class
 	,	TaskGroup.MarketData
-	,	CallKind.NOCAST
 	,	"Request market data."
+	,	CallKind.NOCAST
 	),
 	cancelMktData
-	(	"cancelMktData"
+	(	CallCancelMktData.class
 	,	TaskGroup.MarketData
-	,	CallKind.NOCAST
 	,	"Stop flowing market data for the specified Id."
+	,	CallKind.NOCAST
 	),
 	calculateImpliedVolatility
-	(	"calculateImpliedVolatility"
+	(	CallCalculateImpliedVolatility.class
 	,	TaskGroup.MarketData
-	,	CallKind.NOCAST
 	,	"Calculate volatility for a supplied option price and underlying price."
+	,	CallKind.NOCAST
 	),
 	cancelCalculateImpliedVolatility
-	(	"cancelCalculateImpliedVolatility"
+	(	CallCancelCalculateImpliedVolatility.class
 	,	TaskGroup.MarketData
-	,	CallKind.NOCAST
 	,	"Cancel a request to calculate volatility for a supplied option price and underlying price."
+	,	CallKind.NOCAST
 	),
 	calculateOptionPrice
-	(	"calculateOptionPrice"
+	(	CallCalculateOptionPrice.class
 	,	TaskGroup.MarketData
-	,	CallKind.NOCAST
 	,	"Calculate option price and greek values for a supplied volatility and underlying price."
+	,	CallKind.NOCAST
 	),
 	cancelCalculateOptionPrice
-	(	"cancelCalculateOptionPrice"
+	(	CallCancelCalculateOptionPrice.class
 	,	TaskGroup.MarketData
-	,	CallKind.NOCAST
 	,	"Cancel a request to calculate the option price and greek values for a supplied volatility and underlying price."
+	,	CallKind.NOCAST
 	),
 	reqMarketDataType
-	(	"reqMarketDataType"
+	(	CallReqMarketDataType.class
 	,	TaskGroup.MarketData
-	,	CallKind.NOCAST
 	,	"Telling TWS to automatically switch to frozen market data after the close."
+	,	CallKind.NOCAST
 	),
 	//========================================================================
 	// Orders
 	//------------------------------------------------------------------------
 	placeOrder
-	(	"placeOrder"
+	(	CallPlaceOrder.class
 	,	TaskGroup.Orders
-	,	CallKind.NOCAST
 	,	"Place an order."
+	,	CallKind.NOCAST
 	),
 	cancelOrder
-	(	"cancelOrder"
+	(	CallCancelOrder.class
 	,	TaskGroup.Orders
-	,	CallKind.NOCAST
 	,	"Cancel an order."
+	,	CallKind.NOCAST
 	),
 	reqOpenOrders
-	(	"reqOpenOrders"
+	(	CallReqOpenOrders.class
 	,	TaskGroup.Orders
-	,	CallKind.NOCAST
 	,	"Request any open orders that were placed from this API client."
+	,	CallKind.NOCAST
 	),
 	reqAllOpenOrders
-	(	"reqAllOpenOrders"
+	(	CallReqAllOpenOrders.class
 	,	TaskGroup.Orders
-	,	CallKind.NOCAST
 	,	"Request all open orders that were placed from all API clients linked to one TWS, and also from the TWS."
+	,	CallKind.NOCAST
 	),
 	reqAutoOpenOrders
-	(	"reqAutoOpenOrders"
+	(	CallReqAutoOpenOrders.class
 	,	TaskGroup.Orders
-	,	CallKind.NOCAST
 	,	"Request that newly created TWS orders be implicitly associated with the client."
+	,	CallKind.NOCAST
 	),
 	reqIDs
-	(	"reqIDs"
+	(	CallReqIDs.class
 	,	TaskGroup.Orders
-	,	CallKind.NOCAST
 	,	"Request the next valid ID that can be used when placing an order."
+	,	CallKind.NOCAST
 	),
 	exerciseOptions
-	(	"exerciseOptions"
+	(	CallExerciseOptions.class
 	,	TaskGroup.Orders
-	,	CallKind.NOCAST
 	,	"Exercise options."
+	,	CallKind.NOCAST
 	),
 	reqGlobalCancel
-	(	"reqGlobalCancel"
+	(	CallReqGlobalCancel.class
 	,	TaskGroup.Orders
-	,	CallKind.NOCAST
 	,	"Cancel all open orders globally: both API and TWS open orders."
+	,	CallKind.NOCAST
 	),
 	//========================================================================
 	// Account and Portfolio
 	//------------------------------------------------------------------------
 	reqAccountUpdates
-	(	"reqAccountUpdates"
+	(	CallReqAccountUpdates.class
 	,	TaskGroup.AccountAndPortfolio
-	,	CallKind.NOCAST
 	,	"Start getting account values, portfolio, and last update time information."
+	,	CallKind.NOCAST
 	),
 	reqAccountSummary
-	(	"reqAccountSummary"
+	(	CallReqAccountSummary.class
 	,	TaskGroup.AccountAndPortfolio
-	,	CallKind.NOCAST
 	,	"Request and keep up to date the data that appears on the TWS Account Window Summary tab."
+	,	CallKind.NOCAST
 	),
 	cancelAccountSummary
-	(	"cancelAccountSummary"
+	(	CallCancelAccountSummary.class
 	,	TaskGroup.AccountAndPortfolio
-	,	CallKind.NOCAST
 	,	"Cancels the request for Account Window Summary tab data."
+	,	CallKind.NOCAST
 	),
 	reqPositions
-	(	"reqPositions"
+	(	CallReqPositions.class
 	,	TaskGroup.AccountAndPortfolio
-	,	CallKind.NOCAST
 	,	"Requests real-time position data for all accounts."
+	,	CallKind.NOCAST
 	),
 	cancelPositions
-	(	"cancelPositions"
+	(	CallCancelPositions.class
 	,	TaskGroup.AccountAndPortfolio
-	,	CallKind.NOCAST
 	,	"Cancels real-time position updates."
+	,	CallKind.NOCAST
 	),
 	//========================================================================
 	// Contract Details
 	//------------------------------------------------------------------------
 	reqContractDetails
-	(	"reqContractDetails"
+	(	CallReqContractDetails.class
 	,	TaskGroup.ContractDetails
-	,	CallKind.UNICAST
 	,	"Download all details for a particular contract."
+	,	CallKind.UNICAST
 	),
 	//========================================================================
 	// Executions
 	//------------------------------------------------------------------------
 	reqExecutions
-	(	"reqExecutions"
+	(	CallReqExecutions.class
 	,	TaskGroup.Executions
-	,	CallKind.NOCAST
 	,	"Request execution reports from the last 24 hours that meet the filter criteria."
+	,	CallKind.NOCAST
 	),
 	//========================================================================
 	// Market Depth
 	//------------------------------------------------------------------------
 	reqMktDepth
-	(	"reqMktDepth"
+	(	CallReqMktDepth.class
 	,	TaskGroup.MarketDepth
-	,	CallKind.NOCAST
 	,	"Request market depth for a specific contract."
+	,	CallKind.NOCAST
 	),
 	cancelMktDepth
-	(	"cancelMktDepth"
+	(	CallCancelMktDepth.class
 	,	TaskGroup.MarketDepth
-	,	CallKind.NOCAST
 	,	"Stop flowing market depth data for the specified Id."
+	,	CallKind.NOCAST
 	),
 	//========================================================================
 	// News Bulletins
 	//------------------------------------------------------------------------
 	reqNewsBulletins
-	(	"reqNewsBulletins"
+	(	CallReqNewsBulletins.class
 	,	TaskGroup.NewsBulletins
-	,	CallKind.NOCAST
 	,	"Start receiving news bulletins."
+	,	CallKind.NOCAST
 	),
 	cancelNewsBulletins
-	(	"cancelNewsBulletins"
+	(	CallCancelNewsBulletins.class
 	,	TaskGroup.NewsBulletins
-	,	CallKind.NOCAST
 	,	"Stop receiving news bulletins."
+	,	CallKind.NOCAST
 	),
 	//========================================================================
 	// Financial Advisors
 	//------------------------------------------------------------------------
 	reqManagedAccts
-	(	"reqManagedAccts"
+	(	CallReqManagedAccts.class
 	,	TaskGroup.FinancialAdvisors
-	,	CallKind.NOCAST
 	,	"Request the list of managed accounts."
+	,	CallKind.NOCAST
 	),
 	requestFA
-	(	"requestFA"
+	(	CallRequestFA.class
 	,	TaskGroup.FinancialAdvisors
-	,	CallKind.NOCAST
 	,	"Request FA configuration information from TWS."
+	,	CallKind.NOCAST
 	),
 	replaceFA
-	(	"replaceFA"
+	(	CallReplaceFA.class
 	,	TaskGroup.FinancialAdvisors
-	,	CallKind.NOCAST
 	,	"Request new FA configuration information from TWS."
+	,	CallKind.NOCAST
 	),
 	//========================================================================
 	// Historical Data
 	//------------------------------------------------------------------------
 	reqHistoricalData
-	(	"reqHistoricalData"
+	(	CallReqHistoricalData.class
 	,	TaskGroup.HistoricalData
-	,	CallKind.NOCAST
 	,	"Start receiving historical data results."
+	,	CallKind.NOCAST
 	),
 	cancelHistoricalData
-	(	"cancelHistoricalData"
+	(	CallCancelHistoricalData.class
 	,	TaskGroup.HistoricalData
-	,	CallKind.NOCAST
 	,	"Stop receiving historical data results."
+	,	CallKind.NOCAST
 	),
 	//========================================================================
 	// Market Scanners
 	//------------------------------------------------------------------------
 	reqScannerParameters
-	(	"reqScannerParameters"
+	(	CallReqScannerParameters.class
 	,	TaskGroup.MarketScanners
-	,	CallKind.NOCAST
 	,	"Request an XML document that describes the valid parameters that a scanner subscription can have."
+	,	CallKind.NOCAST
 	),
 	reqScannerSubscription
-	(	"reqScannerSubscription"
+	(	CallReqScannerSubscription.class
 	,	TaskGroup.MarketScanners
-	,	CallKind.NOCAST
 	,	"Start receiving market scanner results."
+	,	CallKind.NOCAST
 	),
 	cancelScannerSubscription
-	(	"cancelScannerSubscription"
+	(	CallCancelScannerSubscription.class
 	,	TaskGroup.MarketScanners
-	,	CallKind.NOCAST
 	,	"Stop receiving market scanner results."
+	,	CallKind.NOCAST
 	),
 	//========================================================================
 	// Real Time Bars
 	//------------------------------------------------------------------------
 	reqRealTimeBars
-	(	"reqRealTimeBars"
+	(	CallReqRealTimeBars.class
 	,	TaskGroup.RealTimeBars
-	,	CallKind.NOCAST
 	,	"Start receiving real time bar results."
+	,	CallKind.NOCAST
 	),
 	cancelRealTimeBars
-	(	"cancelRealTimeBars"
+	(	CallCancelRealTimeBars.class
 	,	TaskGroup.RealTimeBars
-	,	CallKind.NOCAST
 	,	"Stop receiving real time bar results."
+	,	CallKind.NOCAST
 	),
 	//========================================================================
 	// Fundamental Data
 	//------------------------------------------------------------------------
 	reqFundamentalData
-	(	"reqFundamentalData"
+	(	CallReqFundamentalData.class
 	,	TaskGroup.FundamentalData
-	,	CallKind.NOCAST
 	,	"Start receiving Reuters global fundamental data."
+	,	CallKind.NOCAST
 	),
 	cancelFundamentalData
-	(	"cancelFundamentalData"
+	(	CallCancelFundamentalData.class
 	,	TaskGroup.FundamentalData
-	,	CallKind.NOCAST
 	,	"Stop receiving Reuters global fundamental data."
-	),
-	//========================================================================
-	// Display Groups
-	//------------------------------------------------------------------------
-	queryDisplayGroups
-	(	"queryDisplayGroups"
-	,	TaskGroup.DisplayGroups
 	,	CallKind.NOCAST
-	,	"Query display groups."
-	),
-	subscribeToGroupEvents
-	(	"subscribeToGroupEvents"
-	,	TaskGroup.DisplayGroups
-	,	CallKind.NOCAST
-	,	"Subscribe to group events."
-	),
-	updateDisplayGroup
-	(	"updateDisplayGroup"
-	,	TaskGroup.DisplayGroups
-	,	CallKind.NOCAST
-	,	"Update display group."
-	),
-	unsubscribeFromGroupEvents
-	(	"unsubscribeFromGroupEvents"
-	,	TaskGroup.DisplayGroups
-	,	CallKind.NOCAST
-	,	"Unsubscribe from group events."
 	);
 	//========================================================================
 	
-	private final String NAME;
+	private final Class<? extends CallTask> TASK_CLASS;
 	private final TaskGroup GROUP;
-	private final CallKind KIND;
+	private final String NAME;
 	private final String DESCRIPTION;
+	private final CallKind KIND;
 	private final Context CONTEXT;
-	
-	private CallType(String aName, TaskGroup aGroup, CallKind aKind, String aDescription) {
-		NAME = aName;
+
+	private CallType
+	(	Class<? extends CallTask> aTaskClass
+	,	TaskGroup aGroup
+	,	String aDescription
+	,	CallKind aKind
+	) {
+		TASK_CLASS = aTaskClass;
 		GROUP = aGroup;
-		KIND = aKind;
+		NAME = name();
 		DESCRIPTION = aDescription;
+		KIND = aKind;
 		CONTEXT = CallKind.createContext(aKind);
 	}
 	
-	public String getName() { return NAME; }
-	public TaskGroup getGroup() { return GROUP; }	
-	public CallKind getKind() { return KIND; }	
-	public String getDescription() { return DESCRIPTION; }
-	public Context getContext() { return CONTEXT; }
+	@Override
+	public Class<? extends CallTask> getTaskClass() {
+		return TASK_CLASS;
+	}
+	
+	@Override
+	public TaskGroup getGroup() {
+		return GROUP;
+	}
+	
+	@Override
+	public String getName() {
+		return NAME;
+	}
+	
+	@Override
+	public String getDescription() {
+		return DESCRIPTION;
+	}
+		
+	public CallKind getKind() {
+		return KIND;
+	}	
+	
+	public Context getContext() {
+		return CONTEXT;
+	}
 	
 	@Override
 	public String toString() {

@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.account_and_portfolio;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 import com.ib.client.Contract;
 
 /**
@@ -66,7 +66,7 @@ public class OnPosition
 	}
 
 	public OnPosition(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.position);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

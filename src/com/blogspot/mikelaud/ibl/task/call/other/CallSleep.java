@@ -4,8 +4,8 @@ import java.util.concurrent.TimeUnit;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.blogspot.mikelaud.ibl.task.event.other.OnSleepDone;
 
 /**
@@ -54,7 +54,7 @@ public class CallSleep
 	}
 
 	public CallSleep(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.sleep);
+		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
 	public CallSleep(ConnectionContext aContext, long aTime, TimeUnit aTimeUnit) {

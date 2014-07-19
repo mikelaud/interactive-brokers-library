@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.connection_and_server;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * Artificial event for sync call CallTwsConnectionTime.
@@ -41,7 +41,7 @@ public class OnTwsConnectionTime
 	}
 
 	public OnTwsConnectionTime(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.twsConnectionTime);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

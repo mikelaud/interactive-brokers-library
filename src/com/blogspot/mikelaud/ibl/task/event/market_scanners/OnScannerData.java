@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.market_scanners;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 import com.ib.client.ContractDetails;
 
 /**
@@ -86,7 +86,7 @@ public class OnScannerData
 	}
 	
 	public OnScannerData(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.scannerData);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

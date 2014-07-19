@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.account_and_portfolio;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 /**
  * This event is called after a batch OnUpdateAccountValue
@@ -42,7 +42,7 @@ public class OnAccountDownloadEnd
 	}
 
 	public OnAccountDownloadEnd(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.accountDownloadEnd);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

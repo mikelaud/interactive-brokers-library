@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.call.real_time_bars;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 
 /**
  * Call this call to stop receiving real time bar results.
@@ -42,7 +42,7 @@ public class CallCancelRealTimeBars
 	}
 
 	public CallCancelRealTimeBars(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.cancelRealTimeBars);
+		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
 	public CallCancelRealTimeBars(ConnectionContext aContext, int aTickerId) {

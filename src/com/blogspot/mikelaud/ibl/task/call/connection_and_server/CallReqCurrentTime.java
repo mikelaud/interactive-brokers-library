@@ -3,8 +3,8 @@ package com.blogspot.mikelaud.ibl.task.call.connection_and_server;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.blogspot.mikelaud.ibl.task.event.connection_and_server.OnCurrentTime;
 
 /**
@@ -43,7 +43,7 @@ public class CallReqCurrentTime
 	}
 
 	private CallReqCurrentTime(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.reqCurrentTime);
+		super(aContext, aIn, new TaskInnerObject(){});
 		OUT_CURRENT_TIME = new OutTerminator<OnCurrentTime>(getRouter()); 
 	}
 

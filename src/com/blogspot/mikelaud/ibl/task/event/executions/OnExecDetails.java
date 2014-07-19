@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.event.executions;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.task.event.EventType;
 import com.ib.client.Contract;
 import com.ib.client.Execution;
 
@@ -63,7 +63,7 @@ public class OnExecDetails
 	}
 	
 	public OnExecDetails(ConnectionContext aContext, Info aInfo) {
-		super(aContext, aInfo, EventType.execDetails);
+		super(aContext, aInfo, new TaskInnerObject(){});
 	}
 
 }

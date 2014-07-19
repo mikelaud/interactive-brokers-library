@@ -4,8 +4,8 @@ import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
 import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnPosition;
 import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnPositionEnd;
 
@@ -48,7 +48,7 @@ public class CallReqPositions
 	}
 
 	private CallReqPositions(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.reqPositions);
+		super(aContext, aIn, new TaskInnerObject(){});
 		OUT_POSITION = new OutEvents<OnPosition>(getRouter());
 		OUT_POSITION_END = new OutTerminator<OnPositionEnd>(getRouter());
 	}

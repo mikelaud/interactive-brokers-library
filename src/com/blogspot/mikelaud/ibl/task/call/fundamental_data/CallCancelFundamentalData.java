@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.call.fundamental_data;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 
 /**
  * Call this call to stop receiving Reuters global fundamental data.
@@ -42,7 +42,7 @@ public class CallCancelFundamentalData
 	}
 
 	public CallCancelFundamentalData(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.cancelFundamentalData);
+		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
 	public CallCancelFundamentalData(ConnectionContext aContext, int aReqId) {

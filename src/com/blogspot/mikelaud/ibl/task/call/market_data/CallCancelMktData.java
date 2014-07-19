@@ -2,8 +2,8 @@ package com.blogspot.mikelaud.ibl.task.call.market_data;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 
 /**
  * After calling this call,
@@ -43,7 +43,7 @@ public class CallCancelMktData
 	}
 
 	public CallCancelMktData(ConnectionContext aContext, In aIn) {
-		super(aContext, aIn, CallType.cancelMktData);
+		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
 	public CallCancelMktData(ConnectionContext aContext, int aTickerId) {
