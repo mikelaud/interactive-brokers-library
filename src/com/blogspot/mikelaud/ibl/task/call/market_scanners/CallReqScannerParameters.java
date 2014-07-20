@@ -44,7 +44,7 @@ public class CallReqScannerParameters
 
 	private CallReqScannerParameters(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_SCANNER_PARAMETERS = new OutTerminator<OnScannerParameters>(getRouter());
+		OUT_SCANNER_PARAMETERS = new OutTerminator<>(getRouter());
 	}
 
 	public CallReqScannerParameters(ConnectionContext aContext) {

@@ -26,7 +26,9 @@ public class CallIsConnected
 	 */
 	private boolean mConnected = false;
 	
-	public boolean isConnected() { return mConnected; }
+	public boolean isConnected() {
+		return mConnected;
+	}
 	
 	@Override
 	protected Task onCall() throws Exception {

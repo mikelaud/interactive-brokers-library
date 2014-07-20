@@ -29,7 +29,9 @@ public class CallServerVersion
 	 */
 	private int mServerVersion = 0;
 	
-	public int getServerVersion() { return mServerVersion; }
+	public int getServerVersion() {
+		return mServerVersion;
+	}
 	
 	@Override
 	protected Task onCall() throws Exception {

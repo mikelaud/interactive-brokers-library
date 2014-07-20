@@ -115,8 +115,8 @@ public class CallReqAccountSummary
 
 	public CallReqAccountSummary(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_ACCOUNT_SUMMARY = new OutEvents<OnAccountSummary>(getRouter());
-		OUT_ACCOUNT_SUMMARY_END = new OutTerminator<OnAccountSummaryEnd>(getRouter());
+		OUT_ACCOUNT_SUMMARY = new OutEvents<>(getRouter());
+		OUT_ACCOUNT_SUMMARY_END = new OutTerminator<>(getRouter());
 	}
 
 }

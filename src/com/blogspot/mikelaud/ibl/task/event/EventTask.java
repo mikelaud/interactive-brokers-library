@@ -1,5 +1,7 @@
 package com.blogspot.mikelaud.ibl.task.event;
 
+import java.util.List;
+
 import com.blogspot.mikelaud.ibl.Logger;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
@@ -11,13 +13,13 @@ import com.blogspot.mikelaud.ibl.task.call.CallType;
  */
 public abstract class EventTask extends Task {
 
-	private final static EventTypes EVENT_TYPES = new EventTypes();
-	
 	private final EventType EVENT_TYPE;
 
 	private void addEvent() {
-		CallType targetCallType = EVENT_TYPE.getTargetCallType();
-		if (null != targetCallType) {
+		List<CallType> targetCalls =
+			EventTargetsFactory.EVENT_TARGETS.getTargets(EVENT_TYPE);
+		//
+		for (CallType targetCallType : targetCalls) {
 			targetCallType.getContext().addEvent(this);
 		}
 	}
@@ -50,7 +52,7 @@ public abstract class EventTask extends Task {
 	,	TaskInnerObject aTaskInnerObject
 	) {
 		super(aContext);
-		EVENT_TYPE = EVENT_TYPES.toType(aTaskInnerObject);
+		EVENT_TYPE = EventTypesFactory.EVENT_TYPES.toType(aTaskInnerObject);
 	}
 
 }

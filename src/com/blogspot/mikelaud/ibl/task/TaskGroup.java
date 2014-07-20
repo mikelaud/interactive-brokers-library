@@ -17,25 +17,25 @@ public enum TaskGroup {
 	RealTimeBars,
 	FundamentalData;
 	
-	private final String mName;
-	private final String mDescription;
+	private final String NAME;
+	private final String DESCRIPTION;
 	
 	private TaskGroup() {
-		mName = name();
-		mDescription = mName;
+		NAME = name();
+		DESCRIPTION = NAME;
 	}
 	
 	public String getName() {
-		return mName;
+		return NAME;
 	}
 	
 	public String getDescription() {
-		return mDescription;
+		return DESCRIPTION;
 	}
 	
 	@Override
 	public String toString() {
-		return mName;
+		return NAME;
 	}
 
 }

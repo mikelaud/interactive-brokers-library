@@ -13,6 +13,7 @@ public class OutAbstract implements Out {
 	
 	public OutAbstract(Router aRouter) {
 		mRouter = aRouter;
+		aRouter.addOut(this);
 	}
 	
 }

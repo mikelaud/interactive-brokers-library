@@ -5,6 +5,7 @@ import com.blogspot.mikelaud.ibl.command.Command;
 import com.blogspot.mikelaud.ibl.command.CommandImpl;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.router.Router;
+import com.blogspot.mikelaud.ibl.router.RouterAbstract;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 
@@ -13,8 +14,6 @@ import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
  */
 public abstract class CallTask extends Task {
 
-	private final static CallTypes CALL_TYPES = new CallTypes();
-	
 	private final CallType CALL_TYPE;
 	private final Command COMMAND;
 	private final Router ROUTER;
@@ -61,9 +60,9 @@ public abstract class CallTask extends Task {
 	,	TaskInnerObject aTaskInnerObject
 	) {
 		super(aContext);
-		CALL_TYPE = CALL_TYPES.toType(aTaskInnerObject);
+		CALL_TYPE = CallTypesFactory.CALL_TYPES.toType(aTaskInnerObject);
 		COMMAND = new CommandImpl();
-		ROUTER = null;
+		ROUTER = new RouterAbstract();
 		mRequestId = null;
 	}
 

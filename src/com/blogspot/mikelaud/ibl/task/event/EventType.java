@@ -2,7 +2,6 @@ package com.blogspot.mikelaud.ibl.task.event;
 
 import com.blogspot.mikelaud.ibl.task.TaskGroup;
 import com.blogspot.mikelaud.ibl.task.TaskType;
-import com.blogspot.mikelaud.ibl.task.call.CallType;
 import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnAccountDownloadEnd;
 import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnAccountSummary;
 import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnAccountSummaryEnd;
@@ -71,7 +70,6 @@ public enum EventType implements TaskType {
 	(	OnCurrentTime.class
 	,	TaskGroup.ConnectionAndServer
 	,	"Current system time on the server side."
-	,	CallType.reqCurrentTime
 	),
 	error
 	(	OnError.class
@@ -229,7 +227,6 @@ public enum EventType implements TaskType {
 	(	OnContractDetails.class
 	,	TaskGroup.ContractDetails
 	,	"Response for reqContractDetails request."
-	,	CallType.reqContractDetails
 	),
 	contractDetailsEnd
 	(	OnContractDetailsEnd.class
@@ -341,27 +338,16 @@ public enum EventType implements TaskType {
 	private final String NAME;
 	private final TaskGroup GROUP;
 	private final String DECRIPTION;
-	private final CallType TARGET_CALL_TYPE;
 	
 	private EventType
 	(	Class<? extends EventTask> aEventClass
 	,	TaskGroup aGroup
 	,	String aDescription
-	,	CallType aTargetCallType
 	) {
 		TASK_CLASS = aEventClass;
 		NAME = name();
 		GROUP = aGroup;
 		DECRIPTION = aDescription;
-		TARGET_CALL_TYPE = aTargetCallType;
-	}
-	
-	private EventType
-	(	Class<? extends EventTask> aEventClass
-	,	TaskGroup aGroup
-	,	String aDescription
-	) {
-		this(aEventClass, aGroup, aDescription, null);
 	}
 	
 	@Override
@@ -382,10 +368,6 @@ public enum EventType implements TaskType {
 	@Override
 	public String getDescription() {
 		return DECRIPTION;
-	}
-		
-	public CallType getTargetCallType() {
-		return TARGET_CALL_TYPE;
 	}
 		
 	@Override

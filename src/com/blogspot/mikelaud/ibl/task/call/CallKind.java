@@ -7,35 +7,50 @@ import com.blogspot.mikelaud.ibl.router.context.ContextUnicast;
 
 public enum CallKind {
 
-	NOCAST,
-	UNICAST,
-	MULTICAST;
+	NOCAST
+	(	ContextNocast.class
+	),
+	UNICAST
+	(	ContextUnicast.class
+	),
+	MULTICAST
+	(	ContextMulticast.class
+	);
 	
 	private final String NAME;
+	private final String DESCRIPTION;
+	private final Class<? extends Context> CONTEXT_CLASS;
 	
-	private CallKind() {
+	private CallKind(Class<? extends Context> aContextClass) {
 		NAME = name();
+		DESCRIPTION = NAME;
+		CONTEXT_CLASS = aContextClass;
 	}
 	
 	public String getName() {
 		return NAME;
 	}
 	
-	public static Context createContext(CallKind aKind) {
-		Context context;
-		switch (aKind) {
-		case NOCAST:
-			context = new ContextNocast();
-			break;
-		case UNICAST:
-			context = new ContextUnicast();
-			break;
-		case MULTICAST:
-			context = new ContextMulticast();
-			break;
-		default:
-			context = new ContextNocast();
-			break;
+	public String getDescription() {
+		return DESCRIPTION;
+	}
+	
+	public Class<?> getContextClass() {
+		return CONTEXT_CLASS;
+	}
+	
+	public Context createContext() {
+		Context context = null;
+		try {
+			context = CONTEXT_CLASS.newInstance();
+		}
+		catch (Exception e) {
+			String errorMessage = String.format
+			(	"Unable to create context for %s: %s."
+			,	getName()
+			,	e.getMessage()
+			);
+			throw new Error(errorMessage);
 		}
 		return context;
 	}

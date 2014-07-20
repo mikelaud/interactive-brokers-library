@@ -27,7 +27,9 @@ public class CallTwsConnectionTime
 	 */
 	private String mTwsConnectionTime = "";
 	
-	public String getTwsConnectionTime() { return mTwsConnectionTime; }
+	public String getTwsConnectionTime() {
+		return mTwsConnectionTime;
+	}
 	
 	@Override
 	protected Task onCall() throws Exception {

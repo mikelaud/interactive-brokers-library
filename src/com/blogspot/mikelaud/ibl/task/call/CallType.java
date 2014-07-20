@@ -393,7 +393,7 @@ public enum CallType implements TaskType {
 		NAME = name();
 		DESCRIPTION = aDescription;
 		KIND = aKind;
-		CONTEXT = CallKind.createContext(aKind);
+		CONTEXT = aKind.createContext();
 	}
 	
 	@Override

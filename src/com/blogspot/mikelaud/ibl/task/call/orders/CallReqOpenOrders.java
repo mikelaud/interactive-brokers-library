@@ -58,9 +58,9 @@ public class CallReqOpenOrders
 
 	private CallReqOpenOrders(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_ORDER_STATUS = new OutEvents<OnOrderStatus>(getRouter());
-		OUT_OPEN_ORDER = new OutEvents<OnOpenOrder>(getRouter());
-		OUT_OPEN_ORDER_END = new OutTerminator<OnOpenOrderEnd>(getRouter());
+		OUT_ORDER_STATUS = new OutEvents<>(getRouter());
+		OUT_OPEN_ORDER = new OutEvents<>(getRouter());
+		OUT_OPEN_ORDER_END = new OutTerminator<>(getRouter());
 	}
 
 	public CallReqOpenOrders(ConnectionContext aContext) {

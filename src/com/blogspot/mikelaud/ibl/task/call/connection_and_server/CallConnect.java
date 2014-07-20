@@ -79,8 +79,8 @@ public class CallConnect
 	
 	public CallConnect(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_MANAGED_ACCOUNTS = new OutEvent<OnManagedAccounts>(getRouter());
-		OUT_NEXT_VALID_ID = new OutEvent<OnNextValidId>(getRouter());
+		OUT_MANAGED_ACCOUNTS = new OutEvent<>(getRouter());
+		OUT_NEXT_VALID_ID = new OutEvent<>(getRouter());
 	}
 	
 	public CallConnect
