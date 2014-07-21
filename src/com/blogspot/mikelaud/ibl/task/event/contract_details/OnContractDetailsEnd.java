@@ -34,6 +34,11 @@ public class OnContractDetailsEnd
 	}
 
 	@Override
+	public int getRequestId() {
+		return INFO.REQ_ID;
+	}
+	
+	@Override
 	public String toString() {
 		return String.format
 		(	"%s[%d]"

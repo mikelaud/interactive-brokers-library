@@ -34,17 +34,17 @@ public class OnContractDetails
 		
 	}
 	//------------------------------------------------------------------------
-
-	@Override
-	public int getRequestId() {
-		return INFO.REQ_ID;
-	}
 	
 	@Override
 	protected Task onEvent() throws Exception {
 		return null;
 	}
 
+	@Override
+	public int getRequestId() {
+		return INFO.REQ_ID;
+	}
+	
 	@Override
 	public String toString() {
 		return String.format
