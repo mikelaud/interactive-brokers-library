@@ -15,6 +15,19 @@ public abstract class OutAbstract<EVENT_TASK> implements Out {
 	private EventType mEventType;
 	private AtomicReference<EVENT_TASK> mAtomicEventTask;
 	
+	protected void addEvent(EVENT_TASK aEventTask) {
+		if (mAtomicEventTask.compareAndSet(null, aEventTask)) {
+			// void
+		}
+		else {
+			Logger.logLost(aEventTask.toString());
+		}
+	}
+	
+	public EVENT_TASK getEvent() {
+		return mAtomicEventTask.get();
+	}
+
 	@Override
 	public EventType getEventType() {
 		return mEventType;
@@ -23,14 +36,8 @@ public abstract class OutAbstract<EVENT_TASK> implements Out {
 	@Override
 	public void notifyMe(EventTask aEvent) {
 		if (aEvent.getEventType() == mEventType) {
-			@SuppressWarnings("unchecked")
-			EVENT_TASK eventTask = (EVENT_TASK) aEvent;
-			if (mAtomicEventTask.compareAndSet(null, eventTask)) {
-				// void
-			}
-			else {
-				Logger.logLost(aEvent.toString());
-			}
+			EVENT_TASK eventTask = mEventClass.cast(aEvent);
+			addEvent(eventTask);
 		}
 		else {
 			Logger.logLost(aEvent.toString());
@@ -41,11 +48,7 @@ public abstract class OutAbstract<EVENT_TASK> implements Out {
 	public boolean isDone() {
 		return (null != mAtomicEventTask.get());
 	}
-	
-	public EVENT_TASK getEvent() {
-		return mAtomicEventTask.get();
-	}
-	
+		
 	public OutAbstract(CallTask aCallTask, Class<EVENT_TASK> aEventClass) {
 		mEventClass = aEventClass;
 		mEventType = EventTypesFactory.get().toType(mEventClass);
