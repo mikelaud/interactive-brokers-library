@@ -19,7 +19,7 @@ public class OnError
 		 * This is the orderId or tickerId of the request
 		 * that generated the error.
 		 */
-		public final int ID;
+		public final int REQ_ID;
 		/**
 		 * For information on error codes, see Error Codes.
 		 */
@@ -29,14 +29,19 @@ public class OnError
 		 */
 		public final String ERROR_STRING;
 
-		public Info(int aId, int aErrorCode, String aErrorString) {
-			ID = aId;
+		public Info(int aReqId, int aErrorCode, String aErrorString) {
+			REQ_ID = aReqId;
 			ERROR_CODE = aErrorCode;
 			ERROR_STRING = aErrorString;
 		}
 		
 	}
 	//------------------------------------------------------------------------
+
+	@Override
+	public int getRequestId() {
+		return INFO.REQ_ID;
+	}
 
 	@Override
 	protected Task onEvent() throws Exception {
@@ -49,7 +54,7 @@ public class OnError
 		(	"%s(%d)[%d] { \"%s\" }"
 		,	super.toString()
 		,	INFO.ERROR_CODE
-		,	INFO.ID
+		,	INFO.REQ_ID
 		,	INFO.ERROR_STRING
 		);
 	}

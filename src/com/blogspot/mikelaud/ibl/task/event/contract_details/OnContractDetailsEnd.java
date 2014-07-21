@@ -29,13 +29,13 @@ public class OnContractDetailsEnd
 	//------------------------------------------------------------------------
 
 	@Override
-	protected Task onEvent() throws Exception {
-		return null;
+	public int getRequestId() {
+		return INFO.REQ_ID;
 	}
 
 	@Override
-	public int getRequestId() {
-		return INFO.REQ_ID;
+	protected Task onEvent() throws Exception {
+		return null;
 	}
 	
 	@Override

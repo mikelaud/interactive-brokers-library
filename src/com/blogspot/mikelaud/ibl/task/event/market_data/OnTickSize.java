@@ -18,7 +18,7 @@ public class OnTickSize
 		/**
 		 * The ticker Id that was specified previously in the CallReqMktData.
 		 */
-		public final int TICKER_ID;
+		public final int REQ_ID;
 		/**
 		 * Specifies the type of price.
 		 * Pass the field value into TickType.getField(int tickType)
@@ -36,14 +36,19 @@ public class OnTickSize
 		 */
 		public final int SIZE;
 		
-		public Info(int aTickerId, int aField, int aSize) {
-			TICKER_ID = aTickerId;
+		public Info(int aReqId, int aField, int aSize) {
+			REQ_ID = aReqId;
 			FIELD = aField;
 			SIZE = aSize;
 		}
 		
 	}
 	//------------------------------------------------------------------------
+
+	@Override
+	public int getRequestId() {
+		return INFO.REQ_ID;
+	}
 
 	@Override
 	protected Task onEvent() throws Exception {
@@ -56,7 +61,7 @@ public class OnTickSize
 		(	"%s(%d)[%d] { field=\"%d\" }"
 		,	super.toString()
 		,	INFO.SIZE
-		,	INFO.TICKER_ID
+		,	INFO.REQ_ID
 		,	INFO.FIELD
 		);
 	}

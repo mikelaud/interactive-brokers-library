@@ -19,7 +19,7 @@ public class OnTickEFP
 		 * The ticker Id that was specified previously
 		 * in the call to CallReqMktData.
 		 */
-		public final int TICKER_ID;
+		public final int REQ_ID;
 		/**
 		 * Specifies the type of price.
 		 * Pass the field value into TickType.getField(int tickType)
@@ -60,7 +60,7 @@ public class OnTickEFP
 		public final double DIVIDENTS_TO_EXPIRY;
 
 		public Info
-		(	int aTickerId
+		(	int aReqId
 		,	int aTickType
 		,	double aBasisPoints
 		,	String aFormattedBasisPoints
@@ -70,7 +70,7 @@ public class OnTickEFP
 		,	double aDividendImpact
 		,	double aDividendsToExpiry
 		) {
-			TICKER_ID = aTickerId;
+			REQ_ID = aReqId;
 			TICK_TYPE = aTickType;
 			BASIS_POINTS = aBasisPoints;
 			FORMATTED_BASIS_POINTS = aFormattedBasisPoints;
@@ -85,6 +85,11 @@ public class OnTickEFP
 	//------------------------------------------------------------------------
 
 	@Override
+	public int getRequestId() {
+		return INFO.REQ_ID;
+	}
+
+	@Override
 	protected Task onEvent() throws Exception {
 		return null;
 	}
@@ -94,7 +99,7 @@ public class OnTickEFP
 		return String.format
 		(	"%s[%d] { tickType=\"%d\" basisPoints=\"%f\" formattedBasisPoints=\"%s\" impliedFuture=\"%f\" holdDays=\"%d\" futureExpiry=\"%s\" dividendImpact=\"%f\" dividendsToExpiry=\"%f\" }"
 		,	super.toString()
-		,	INFO.TICKER_ID
+		,	INFO.REQ_ID
 		,	INFO.TICK_TYPE
 		,	INFO.BASIS_POINTS
 		,	INFO.FORMATTED_BASIS_POINTS

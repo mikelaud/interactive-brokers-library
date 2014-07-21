@@ -23,6 +23,11 @@ public class OnConnectionClosed
 	//------------------------------------------------------------------------
 
 	@Override
+	public int getRequestId() {
+		return getNoRequestId();
+	}
+
+	@Override
 	protected Task onEvent() throws Exception {
 		return null;
 	}

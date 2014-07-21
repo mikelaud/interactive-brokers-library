@@ -18,7 +18,7 @@ public class OnUpdateMktDepthL2
 		 * The ticker Id that was specified previously 
 		 * in the call to CallReqMktDepth.
 		 */
-		public final int TICKER_ID;
+		public final int REQ_ID;
 		/**
 		 * Specifies the row id of this market depth entry.
 		 */
@@ -55,7 +55,7 @@ public class OnUpdateMktDepthL2
 		public final int SIZE;
 		
 		public Info
-		(	int aTickerId
+		(	int aReqId
 		,	int aPosition
 		,	String aMarketMaker
 		,	int aOperation
@@ -63,7 +63,7 @@ public class OnUpdateMktDepthL2
 		,	double aPrice
 		,	int aSize
 		) {
-			TICKER_ID = aTickerId;
+			REQ_ID = aReqId;
 			POSITION = aPosition;
 			MARKET_MAKER = aMarketMaker;
 			OPERATION = aOperation;
@@ -76,6 +76,11 @@ public class OnUpdateMktDepthL2
 	//------------------------------------------------------------------------
 
 	@Override
+	public int getRequestId() {
+		return INFO.REQ_ID;
+	}
+
+	@Override
 	protected Task onEvent() throws Exception {
 		return null;
 	}
@@ -85,7 +90,7 @@ public class OnUpdateMktDepthL2
 		return String.format
 		(	"%s[%d] { position=\"%d\" marketMaker=\"%s\" operation=\"%d\" side=\"%d\" price=\"%f\" size=\"%d\" }"
 		,	super.toString()
-		,	INFO.TICKER_ID
+		,	INFO.REQ_ID
 		,	INFO.POSITION
 		,	INFO.MARKET_MAKER
 		,	INFO.OPERATION

@@ -21,7 +21,7 @@ public class OnTickOptionComputation
 		 * The ticker Id that was specified previously
 		 * in the call to CallReqMktData.
 		 */
-		public final int TICKER_ID;
+		public final int REQ_ID;
 		/**
 		 * Specifies the type of option computation.
 		 * Pass the field value into TickType.getField(int tickType)
@@ -67,7 +67,7 @@ public class OnTickOptionComputation
 		public final double UND_PRICE;
 		
 		public Info
-		(	int aTickerId
+		(	int aReqId
 		,	int aField
 		,	double aImpliedVol
 		,	double aDelta
@@ -78,7 +78,7 @@ public class OnTickOptionComputation
 		,	double aTheta
 		,	double aUndPrice
 		) {
-			TICKER_ID = aTickerId;
+			REQ_ID = aReqId;
 			FIELD = aField;
 			IMPLIED_VOL = aImpliedVol;
 			DELTA = aDelta;
@@ -94,6 +94,11 @@ public class OnTickOptionComputation
 	//------------------------------------------------------------------------
 
 	@Override
+	public int getRequestId() {
+		return INFO.REQ_ID;
+	}
+
+	@Override
 	protected Task onEvent() throws Exception {
 		return null;
 	}
@@ -103,7 +108,7 @@ public class OnTickOptionComputation
 		return String.format
 		(	"%s[%d] { field=\"%d\" impliedVol=\"%f\" delta=\"%f\" optPrice=\"%f\" pvDividend=\"%f\" gamma=\"%f\" vega=\"%f\" theta=\"%f\" undPrice=\"%f\" }"
 		,	super.toString()
-		,	INFO.TICKER_ID
+		,	INFO.REQ_ID
 		,	INFO.FIELD
 		,	INFO.IMPLIED_VOL
 		,	INFO.DELTA

@@ -35,6 +35,11 @@ public class OnCurrentTime
 	public static final String TIME_FORMAT = "yyyy-MM-dd HH:mm:ss z";
 
 	@Override
+	public int getRequestId() {
+		return getNoRequestId();
+	}
+
+	@Override
 	protected Task onEvent() throws Exception {
 		return null;
 	}

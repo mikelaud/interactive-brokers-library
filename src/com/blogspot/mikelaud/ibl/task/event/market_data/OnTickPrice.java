@@ -18,7 +18,7 @@ public class OnTickPrice
 		/**
 		 * The ticker Id that was specified previously in the CallReqMktData.
 		 */
-		public final int TICKER_ID;
+		public final int REQ_ID;
 		/**
 		 * Specifies the type of price.
 		 * Pass the field value into TickType.getField(int tickType)
@@ -46,12 +46,12 @@ public class OnTickPrice
 		public final int CAN_AUTO_EXECUTE;
 		
 		public Info
-		(	int aTickerId
+		(	int aReqId
 		,	int aField
 		,	double aPrice
 		,	int aCanAutoExecute
 		) {
-			TICKER_ID = aTickerId;
+			REQ_ID = aReqId;
 			FIELD = aField;
 			PRICE = aPrice;
 			CAN_AUTO_EXECUTE = aCanAutoExecute;
@@ -59,6 +59,11 @@ public class OnTickPrice
 		
 	}
 	//------------------------------------------------------------------------
+
+	@Override
+	public int getRequestId() {
+		return INFO.REQ_ID;
+	}
 
 	@Override
 	protected Task onEvent() throws Exception {
@@ -71,7 +76,7 @@ public class OnTickPrice
 		(	"%s(%f)[%d] { field=\"%d\" canAutoExecute=\"%d\" }"
 		,	super.toString()
 		,	INFO.PRICE
-		,	INFO.TICKER_ID
+		,	INFO.REQ_ID
 		,	INFO.FIELD
 		, 	INFO.CAN_AUTO_EXECUTE
 		);

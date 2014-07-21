@@ -28,9 +28,11 @@ public abstract class EventTask extends Task {
 		return EVENT_TYPE;
 	}
 	
-	public int getRequestId() { // TODO
-		return 0;
+	public int getNoRequestId() {
+		return -1;
 	}
+	
+	public abstract int getRequestId();
 	
 	protected abstract Task onEvent() throws Exception;
 

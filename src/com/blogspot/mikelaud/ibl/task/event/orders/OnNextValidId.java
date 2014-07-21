@@ -28,6 +28,11 @@ public class OnNextValidId
 	//------------------------------------------------------------------------
 
 	@Override
+	public int getRequestId() {
+		return getNoRequestId();
+	}
+
+	@Override
 	protected Task onEvent() throws Exception {
 		return null;
 	}

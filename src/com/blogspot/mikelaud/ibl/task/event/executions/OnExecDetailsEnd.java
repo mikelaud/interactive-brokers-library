@@ -28,6 +28,11 @@ public class OnExecDetailsEnd
 	//------------------------------------------------------------------------
 
 	@Override
+	public int getRequestId() {
+		return INFO.REQ_ID;
+	}
+
+	@Override
 	protected Task onEvent() throws Exception {
 		return null;
 	}

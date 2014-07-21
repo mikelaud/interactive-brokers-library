@@ -20,7 +20,7 @@ public class OnReceiveFA
 		 * being received from TWS. Valid values include:
 		 *     1 = GROUPS
 		 *     2 = PROFILE
-		 *     3 =ACCOUNT ALIASES
+		 *     3 = ACCOUNT ALIASES
 		 */
 		public final int FA_DATA_TYPE;
 		/**
@@ -36,6 +36,11 @@ public class OnReceiveFA
 		
 	}
 	//------------------------------------------------------------------------
+
+	@Override
+	public int getRequestId() {
+		return getNoRequestId();
+	}
 
 	@Override
 	protected Task onEvent() throws Exception {
