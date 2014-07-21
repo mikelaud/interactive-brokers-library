@@ -5,9 +5,10 @@ import com.blogspot.mikelaud.ibl.command.Command;
 import com.blogspot.mikelaud.ibl.command.CommandImpl;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.router.Router;
-import com.blogspot.mikelaud.ibl.router.RouterAbstract;
+import com.blogspot.mikelaud.ibl.router.RouterImpl;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
+import com.blogspot.mikelaud.ibl.task.event.EventTask;
 
 /**
  * EClientSocket calls you use when connecting to TWS.
@@ -50,6 +51,13 @@ public abstract class CallTask extends Task {
 		return task;
 	}
 
+	public void notifyMe(EventTask aEvent) {
+		ROUTER.notifyMe(aEvent);
+		if (ROUTER.isDone()) {
+			COMMAND.notifyMe();
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return CALL_TYPE.toString();
@@ -60,9 +68,9 @@ public abstract class CallTask extends Task {
 	,	TaskInnerObject aTaskInnerObject
 	) {
 		super(aContext);
-		CALL_TYPE = CallTypesFactory.CALL_TYPES.toType(aTaskInnerObject);
+		CALL_TYPE = CallTypesFactory.get().toType(aTaskInnerObject);
 		COMMAND = new CommandImpl();
-		ROUTER = new RouterAbstract();
+		ROUTER = new RouterImpl();
 		mRequestId = null;
 	}
 

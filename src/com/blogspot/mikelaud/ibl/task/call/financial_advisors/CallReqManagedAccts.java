@@ -47,7 +47,7 @@ public class CallReqManagedAccts
 
 	private CallReqManagedAccts(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_MANAGED_ACCOUNTS = new OutTerminator<>(getRouter());
+		OUT_MANAGED_ACCOUNTS = new OutTerminator<>(this, OnManagedAccounts.class);
 	}
 
 	public CallReqManagedAccts(ConnectionContext aContext) {

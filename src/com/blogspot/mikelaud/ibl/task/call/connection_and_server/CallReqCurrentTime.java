@@ -44,7 +44,7 @@ public class CallReqCurrentTime
 
 	private CallReqCurrentTime(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_CURRENT_TIME = new OutTerminator<>(getRouter()); 
+		OUT_CURRENT_TIME = new OutTerminator<>(this, OnCurrentTime.class);
 	}
 
 	public CallReqCurrentTime(ConnectionContext aContext) {

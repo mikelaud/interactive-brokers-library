@@ -17,7 +17,7 @@ public abstract class EventTask extends Task {
 
 	private void addEvent() {
 		List<CallType> targetCalls =
-			EventTargetsFactory.EVENT_TARGETS.getTargets(EVENT_TYPE);
+			EventTargetsFactory.get().getTargets(EVENT_TYPE);
 		//
 		for (CallType targetCallType : targetCalls) {
 			targetCallType.getContext().addEvent(this);
@@ -52,7 +52,7 @@ public abstract class EventTask extends Task {
 	,	TaskInnerObject aTaskInnerObject
 	) {
 		super(aContext);
-		EVENT_TYPE = EventTypesFactory.EVENT_TYPES.toType(aTaskInnerObject);
+		EVENT_TYPE = EventTypesFactory.get().toType(aTaskInnerObject);
 	}
 
 }

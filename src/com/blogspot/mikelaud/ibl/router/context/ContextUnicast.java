@@ -15,10 +15,10 @@ public class ContextUnicast extends ContextAbstract {
 		long requestId = aEvent.getRequestId();
 		CallTask call;
 		synchronized (mLock) {
-			call = mCalls.remove(requestId);
+			call = mCalls.get(requestId);
 		}
 		if (null != call) {
-			call.getCommand().notifyMe(aEvent);	
+			call.notifyMe(aEvent);	
 		}
 	}
 	

@@ -63,7 +63,7 @@ public class CallReplaceFA
 
 	public CallReplaceFA(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_RECEIVE_FA = new OutTerminator<>(getRouter());
+		OUT_RECEIVE_FA = new OutTerminator<>(this, OnReceiveFA.class);
 	}
 
 	public CallReplaceFA

@@ -56,7 +56,7 @@ public class CallReqIDs
 
 	private CallReqIDs(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_NEXT_VALID_ID = new OutTerminator<>(getRouter());
+		OUT_NEXT_VALID_ID = new OutTerminator<>(this, OnNextValidId.class);
 	}
 
 	public CallReqIDs(ConnectionContext aContext) {

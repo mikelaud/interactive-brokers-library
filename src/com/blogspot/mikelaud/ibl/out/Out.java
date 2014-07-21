@@ -1,9 +1,14 @@
 package com.blogspot.mikelaud.ibl.out;
 
-import com.blogspot.mikelaud.ibl.router.Router;
+import com.blogspot.mikelaud.ibl.task.event.EventTask;
+import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 public interface Out {
-
-	Router getRouter();
+	
+	EventType getEventType();
+	OutType getOutType();
+	//
+	void notifyMe(EventTask aEvent);
+	boolean isDone();
 	
 }

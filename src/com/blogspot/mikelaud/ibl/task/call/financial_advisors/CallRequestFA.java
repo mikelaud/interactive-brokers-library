@@ -54,7 +54,7 @@ public class CallRequestFA
 
 	public CallRequestFA(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_RECEIVE_FA = new OutTerminator<>(getRouter());
+		OUT_RECEIVE_FA = new OutTerminator<>(this, OnReceiveFA.class);
 	}
 
 	public CallRequestFA(ConnectionContext aContext, int aFaDataType) {

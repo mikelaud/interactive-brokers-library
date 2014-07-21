@@ -49,8 +49,8 @@ public class CallReqPositions
 
 	private CallReqPositions(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_POSITION = new OutEvents<>(getRouter());
-		OUT_POSITION_END = new OutTerminator<>(getRouter());
+		OUT_POSITION = new OutEvents<>(this, OnPosition.class);
+		OUT_POSITION_END = new OutTerminator<>(this, OnPositionEnd.class);
 	}
 
 	public CallReqPositions(ConnectionContext aContext) {

@@ -21,11 +21,11 @@ public class EventTargets {
 	,	Class<?> aOutClass
 	,	Class<?> aEventClass
 	) {
-		EventType eventKey = EventTypesFactory.EVENT_TYPES.toType(aEventClass);
+		EventType eventKey = EventTypesFactory.get().toType(aEventClass);
 		int eventIndex = eventKey.ordinal();
 		List<CallType> callTargets = mEvents.get(eventIndex);
 		//
-		CallType callTarget = CallTypesFactory.CALL_TYPES.toType(aCallClass);
+		CallType callTarget = CallTypesFactory.get().toType(aCallClass);
 		callTargets.add(callTarget);
 	}
 	

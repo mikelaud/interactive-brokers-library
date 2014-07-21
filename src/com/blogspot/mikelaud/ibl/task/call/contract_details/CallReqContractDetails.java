@@ -69,9 +69,9 @@ public class CallReqContractDetails
 
 	public CallReqContractDetails(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_CONTRACT_DETAILS = new OutEvents<>(getRouter());
-		OUT_BOND_CONTRACT_DETAILS = new OutEvents<>(getRouter());
-		OUT_CONTRACT_DETAILS_END = new OutTerminator<>(getRouter());
+		OUT_CONTRACT_DETAILS = new OutEvents<>(this, OnContractDetails.class);
+		OUT_BOND_CONTRACT_DETAILS = new OutEvents<>(this, OnBondContractDetails.class);
+		OUT_CONTRACT_DETAILS_END = new OutTerminator<>(this, OnContractDetailsEnd.class);
 	}
 
 }

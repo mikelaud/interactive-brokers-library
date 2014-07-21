@@ -159,7 +159,7 @@ public class CallReqHistoricalData
 
 	public CallReqHistoricalData(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_HISTORICAL_DATA = new OutEvents<>(getRouter());
+		OUT_HISTORICAL_DATA = new OutEvents<>(this, OnHistoricalData.class);
 	}
 
 	public CallReqHistoricalData

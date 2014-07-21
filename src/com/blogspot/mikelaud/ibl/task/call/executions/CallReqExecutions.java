@@ -73,9 +73,9 @@ public class CallReqExecutions
 
 	public CallReqExecutions(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_COMMISSION_REPORT = new OutEvent<>(getRouter());
-		OUT_EXEC_DETAILS = new OutEvents<>(getRouter());
-		OUT_EXEC_DETAILS_END = new OutTerminator<>(getRouter());
+		OUT_COMMISSION_REPORT = new OutEvent<>(this, OnCommissionReport.class);
+		OUT_EXEC_DETAILS = new OutEvents<>(this, OnExecDetails.class);
+		OUT_EXEC_DETAILS_END = new OutTerminator<>(this, OnExecDetailsEnd.class);
 	}
 
 }

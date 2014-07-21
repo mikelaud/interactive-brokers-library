@@ -18,12 +18,11 @@ public class ContextMulticast extends ContextAbstract {
 			if (callsCount > 0) {
 				callsCopy = new HashSet<CallTask>(callsCount);
 				callsCopy.addAll(mCalls);
-				mCalls.clear();
 			}
 		}
 		if (null != callsCopy) {
 			for (CallTask call : callsCopy) {
-				call.getCommand().notifyMe(aEvent);
+				call.notifyMe(aEvent);
 			}
 			callsCopy.clear();
 		}

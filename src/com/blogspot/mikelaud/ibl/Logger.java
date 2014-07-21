@@ -27,7 +27,7 @@ public class Logger {
 	//------------------------------------------------------------------------
 
 	public static void logEvent(final String aMessage) {
-		System.out.println(String.format("EVENT: %s", aMessage));
+		System.out.println(String.format("EVNT: %s", aMessage));
 	}
 
 	public static void logCall(final String aMessage) {
@@ -42,22 +42,22 @@ public class Logger {
 		System.out.println(String.format("CMD<: %s", aMessage));
 	}
 
+	public static void logLost(final String aMessage) {
+		System.out.println(String.format("LOST: %s", aMessage));
+	}
+
 	//------------------------------------------------------------------------
 
 	public static void logError(final String aMessage) {
-		System.out.println(String.format("ERROR: %s", aMessage));
+		System.out.println(String.format("ERRR: %s", aMessage));
 	}
 	
 	public static void logWarning(final String aMessage) {
-		System.out.println(String.format("WARNING: %s", aMessage));
+		System.out.println(String.format("WARN: %s", aMessage));
 	}
-	
-	public static void logInfo(final String aMessage) {
-		System.out.println(String.format("IN: %s", aMessage));
-	}
-	
+
 	public static void logDebug(final String aMessage) {
-		System.out.println(String.format("DEBUG: %s", aMessage));
+		System.out.println(String.format("DEBG: %s", aMessage));
 	}
 	
 }

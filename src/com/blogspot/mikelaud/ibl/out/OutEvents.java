@@ -1,11 +1,16 @@
 package com.blogspot.mikelaud.ibl.out;
 
-import com.blogspot.mikelaud.ibl.router.Router;
+import com.blogspot.mikelaud.ibl.task.call.CallTask;
 
-public class OutEvents<TASK_EVENT> extends OutAbstract {
+public class OutEvents<EVENT_TASK> extends OutAbstract<EVENT_TASK> {
 
-	public OutEvents(Router aRouter) {
-		super(aRouter);
+	@Override
+	public OutType getOutType() {
+		return OutType.EVENTS;
+	}
+
+	public OutEvents(CallTask aCallTask, Class<EVENT_TASK> aEventClass) {
+		super(aCallTask, aEventClass);
 	}
 
 }

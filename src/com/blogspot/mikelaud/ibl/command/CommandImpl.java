@@ -5,7 +5,6 @@ import java.util.concurrent.TimeUnit;
 import com.blogspot.mikelaud.ibl.Logger;
 import com.blogspot.mikelaud.ibl.task.call.CallKind;
 import com.blogspot.mikelaud.ibl.task.call.CallTask;
-import com.blogspot.mikelaud.ibl.task.event.EventTask;
 
 public class CommandImpl implements Command {
 
@@ -15,7 +14,7 @@ public class CommandImpl implements Command {
 	private long mBeginTimeMs = 0;
 	private long mWaitTimeMs = 0;
 	//
-	private EventTask mEvent = null;
+	private boolean mDone = false;
 	
 	private void resetTimeout() {
 		mBeginTimeMs = System.currentTimeMillis();
@@ -39,6 +38,21 @@ public class CommandImpl implements Command {
 	}
 
 	@Override
+	public boolean isDone() {
+		return mDone;
+	}
+	
+	@Override
+	public void notifyMe() {
+		synchronized (mTimeoutLock) {
+			if (! mDone) {
+				mDone = true;
+				mTimeoutLock.notifyAll();
+			}
+		}
+	}
+	
+	@Override
 	public void callBefore(CallTask aCall) throws Exception {
 		Logger.logCommandBegin(toString(aCall));
 		if (CallKind.NOCAST != aCall.getCallType().getKind()) {
@@ -52,28 +66,18 @@ public class CommandImpl implements Command {
 			resetTimeout();
 			for (;;) {
 				if (reachTimeout()) {
-					aCall.getCallType().getContext().removeCommand(aCall);
 					break;
 				}
 				synchronized (mTimeoutLock) {
-					if (null != mEvent) break;
+					if (mDone) break;
 					mTimeoutLock.wait(mWaitTimeMs);
 				}
 			}
+			aCall.getCallType().getContext().removeCommand(aCall);
 		}
 		Logger.logCommandEnd(toString(aCall));
 	}
-	
-	@Override
-	public void notifyMe(EventTask aEvent) {
-		synchronized (mTimeoutLock) {
-			if (null == mEvent) {
-				mEvent = aEvent;
-				mTimeoutLock.notifyAll();
-			}
-		}
-	}
-	
+		
 	@Override
 	public long getTimeout(TimeUnit aTimeoutUnit) {
 		return aTimeoutUnit.convert(mTimeoutMs, TimeUnit.MILLISECONDS);
@@ -89,7 +93,7 @@ public class CommandImpl implements Command {
 		return String.format("%s.%s", aCall.getCallType().getKind().toString(), aCall.toString());
 	}
 	
-	public CommandImpl() {
+	public CommandImpl() {		
 		resetTimeout();
 	}
 	

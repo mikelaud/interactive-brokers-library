@@ -98,10 +98,10 @@ public class CallReqAccountUpdates
 
 	public CallReqAccountUpdates(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_UPDATE_ACCOUNT_TIME = new OutEvent<>(getRouter());
-		OUT_UPDATE_ACCOUNT_VALUE = new OutEvents<>(getRouter());
-		OUT_UPDATE_PORTFOLIO = new OutEvents<>(getRouter());
-		OUT_ACCOUNT_DOWNLOAD_END = new OutTerminator<>(getRouter());
+		OUT_UPDATE_ACCOUNT_TIME = new OutEvent<>(this, OnUpdateAccountTime.class);
+		OUT_UPDATE_ACCOUNT_VALUE = new OutEvents<>(this, OnUpdateAccountValue.class);
+		OUT_UPDATE_PORTFOLIO = new OutEvents<>(this, OnUpdatePortfolio.class);
+		OUT_ACCOUNT_DOWNLOAD_END = new OutTerminator<>(this, OnAccountDownloadEnd.class);
 	}
 
 }

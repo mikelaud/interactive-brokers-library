@@ -1,11 +1,16 @@
 package com.blogspot.mikelaud.ibl.out;
 
-import com.blogspot.mikelaud.ibl.router.Router;
+import com.blogspot.mikelaud.ibl.task.call.CallTask;
 
-public class OutTerminator<TASK_EVENT> extends OutAbstract {
+public class OutTerminator<EVENT_TASK> extends OutEvent<EVENT_TASK> {
 
-	public OutTerminator(Router aRouter) {
-		super(aRouter);
+	@Override
+	public OutType getOutType() {
+		return OutType.TERMINATOR;
+	}
+	
+	public OutTerminator(CallTask aCallTask, Class<EVENT_TASK> aEventClass) {
+		super(aCallTask, aEventClass);
 	}
 
 }

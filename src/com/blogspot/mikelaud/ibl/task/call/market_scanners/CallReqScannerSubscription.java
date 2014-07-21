@@ -64,8 +64,8 @@ public class CallReqScannerSubscription
 
 	public CallReqScannerSubscription(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_SCANNER_DATA = new OutEvents<>(getRouter());
-		OUT_SCANNER_DATA_END = new OutTerminator<>(getRouter());
+		OUT_SCANNER_DATA = new OutEvents<>(this, OnScannerData.class);
+		OUT_SCANNER_DATA_END = new OutTerminator<>(this, OnScannerDataEnd.class);
 	}
 
 	public CallReqScannerSubscription
