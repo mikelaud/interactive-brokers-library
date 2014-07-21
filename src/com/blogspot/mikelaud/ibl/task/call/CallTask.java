@@ -1,5 +1,7 @@
 package com.blogspot.mikelaud.ibl.task.call;
 
+import java.util.concurrent.TimeUnit;
+
 import com.blogspot.mikelaud.ibl.Logger;
 import com.blogspot.mikelaud.ibl.command.Command;
 import com.blogspot.mikelaud.ibl.command.CommandImpl;
@@ -24,9 +26,13 @@ public abstract class CallTask extends Task {
 	public CallType getCallType() {
 		return CALL_TYPE;
 	}
+
+	public long getTimeout(TimeUnit aTimeoutUnit) {
+		return COMMAND.getTimeout(aTimeoutUnit);
+	}
 	
-	public Command getCommand() {
-		return COMMAND;
+	public void setTimeout(long aTimeout, TimeUnit aTimeoutUnit) {
+		COMMAND.setTimeout(aTimeout, aTimeoutUnit);
 	}
 	
 	public Router getRouter() {

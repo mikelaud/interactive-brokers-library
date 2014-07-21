@@ -15,16 +15,16 @@ public class Program implements Callable<Object> {
 	
 	@Override
 	public Object call() throws Exception {
-		//
+		//--------------------------------------------------------------------
 		CallConnect callConnect = new CallConnect
 		(	mContext
 		,	Config.getHost()
 		,	Config.getPort()
 		,	Config.getClientId()
 		);
-		callConnect.getCommand().setTimeout(10, TimeUnit.SECONDS);
+		callConnect.setTimeout(10, TimeUnit.SECONDS);
 		callConnect.call();
-		//
+		//--------------------------------------------------------------------
 		Contract contract = new Contract();
 		{
 			contract.m_exchange = "SMART";
@@ -40,9 +40,10 @@ public class Program implements Callable<Object> {
 		(	mContext
 		,	contractIn
 		);
-		reqContractDetails.getCommand().setTimeout(10, TimeUnit.SECONDS);
+		reqContractDetails.setTimeout(10, TimeUnit.SECONDS);
 		reqContractDetails.call();
-		//
+		//--------------------------------------------------------------------
+		//--------------------------------------------------------------------
 		//mContext.onTask(callConnect);
 		//
 		for (;;) {
