@@ -12,6 +12,10 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 public class CallDisconnect
 	extends CallTaskEx<CallDisconnect.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
@@ -19,7 +23,7 @@ public class CallDisconnect
 			// void
 		}
 		
-	}
+	}	
 	//------------------------------------------------------------------------
 
 	@Override
@@ -30,10 +34,7 @@ public class CallDisconnect
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s"
-		,	super.toString()
-		);
+		return super.toString();
 	}
 
 	private CallDisconnect(ConnectionContext aContext, In aIn) {

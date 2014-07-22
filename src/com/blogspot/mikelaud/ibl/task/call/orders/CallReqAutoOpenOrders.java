@@ -23,6 +23,10 @@ import com.blogspot.mikelaud.ibl.task.event.orders.OnOrderStatus;
 public class CallReqAutoOpenOrders
 	extends CallTaskEx<CallReqAutoOpenOrders.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	

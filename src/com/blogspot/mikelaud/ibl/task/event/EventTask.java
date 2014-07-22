@@ -27,18 +27,12 @@ public abstract class EventTask extends Task {
 	public EventType getEventType() {
 		return EVENT_TYPE;
 	}
-	
-	public int getNoRequestId() {
-		return -1;
-	}
-	
-	public abstract int getRequestId();
-	
+		
 	protected abstract Task onEvent() throws Exception;
 
 	@Override
 	public Task call() throws Exception {
-		Logger.logEvent(toString());
+		Logger.logEvent(getRequestId(), toString());
 		Task nextTask = onEvent();
 		addEvent();
 		return nextTask;

@@ -13,13 +13,16 @@ import com.ib.client.Contract;
 public class CallCalculateImpliedVolatility
 	extends CallTaskEx<CallCalculateImpliedVolatility.In>
 {
+	/**
+	 * The ticker id.
+	 */
+	@Override
+	public boolean hasRequestId() {
+		return true;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
-		/**
-		 * The ticker id.
-		 */
-		public final int REQ_ID;
 		/**
 		 * Describes the contract.
 		 */
@@ -34,12 +37,10 @@ public class CallCalculateImpliedVolatility
 		public final double UNDER_PRICE;
 		
 		public In
-		(	int aReqId
-		,	Contract aOptionContract
+		(	Contract aOptionContract
 		,	double aOptionPrice
 		,	double aUnderPrice
 		) {
-			REQ_ID = aReqId;
 			OPTION_CONTRACT = aOptionContract;
 			OPTION_PRICE = aOptionPrice;
 			UNDER_PRICE = aUnderPrice;
@@ -51,7 +52,7 @@ public class CallCalculateImpliedVolatility
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().calculateImpliedVolatility
-		(	IN.REQ_ID
+		(	getRequestId()
 		,	IN.OPTION_CONTRACT
 		,	IN.OPTION_PRICE
 		,	IN.UNDER_PRICE
@@ -62,9 +63,8 @@ public class CallCalculateImpliedVolatility
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s[%d] { optionPrice=\"%f\" underPrice=\"%f\" }"
+		(	"%s { optionPrice=\"%f\" underPrice=\"%f\" }"
 		,	super.toString()
-		,	IN.REQ_ID
 		,	IN.OPTION_PRICE
 		,	IN.UNDER_PRICE
 		);
@@ -76,14 +76,12 @@ public class CallCalculateImpliedVolatility
 
 	public CallCalculateImpliedVolatility
 	(	ConnectionContext aContext
-	,	int aReqId
 	,	Contract aOptionContract
 	,	double aOptionPrice
 	,	double aUnderPrice
 	) {
 		this(aContext, new In
-		(	aReqId
-		,	aOptionContract
+		(	aOptionContract
 		,	aOptionPrice
 		,	aUnderPrice
 		));

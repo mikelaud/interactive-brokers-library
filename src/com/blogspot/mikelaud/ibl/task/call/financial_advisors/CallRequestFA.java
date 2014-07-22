@@ -14,6 +14,10 @@ import com.blogspot.mikelaud.ibl.task.event.financial_advisors.OnReceiveFA;
 public class CallRequestFA
 	extends CallTaskEx<CallRequestFA.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	

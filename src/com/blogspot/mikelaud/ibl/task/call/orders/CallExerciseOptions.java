@@ -16,13 +16,16 @@ import com.ib.client.Contract;
 public class CallExerciseOptions
 	extends CallTaskEx<CallExerciseOptions.In>
 {
+	/**
+	 * The Id for the exercise request.
+	 */
+	@Override
+	public boolean hasRequestId() {
+		return true;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
-		/**
-		 * The Id for the exercise request.
-		 */
-		public final int TICKER_ID;
 		/**
 		 * This class contains attributes used to describe the contract.
 		 */
@@ -55,14 +58,12 @@ public class CallExerciseOptions
 		public final int OVERRIDE;
 		
 		public In
-		(	int aTickerId
-		,	Contract aContract
+		(	Contract aContract
 		,	int aExerciseAction
 		,	int aExerciseQuantity
 		,	String aAccount
 		,	int aOverride
 		) {
-			TICKER_ID = aTickerId;
 			CONTRACT = aContract;
 			EXERCISE_ACTION = aExerciseAction;
 			EXERCISE_QUANTITY = aExerciseQuantity;
@@ -76,7 +77,7 @@ public class CallExerciseOptions
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().exerciseOptions
-		(	IN.TICKER_ID
+		(	getRequestId()
 		,	IN.CONTRACT
 		,	IN.EXERCISE_ACTION
 		,	IN.EXERCISE_QUANTITY
@@ -89,9 +90,8 @@ public class CallExerciseOptions
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s[%d] { exerciseAction=\"%d\" exerciseQuantity=\"%d\" account=\"%s\" override=\"%d\" }"
+		(	"%s { exerciseAction=\"%d\" exerciseQuantity=\"%d\" account=\"%s\" override=\"%d\" }"
 		,	super.toString()
-		,	IN.TICKER_ID
 		,	IN.EXERCISE_ACTION
 		,	IN.EXERCISE_QUANTITY
 		,	IN.ACCOUNT
@@ -105,7 +105,6 @@ public class CallExerciseOptions
 
 	public CallExerciseOptions
 	(	ConnectionContext aContext
-	,	int aTickerId
 	,	Contract aContract
 	,	int aExerciseAction
 	,	int aExerciseQuantity
@@ -113,8 +112,7 @@ public class CallExerciseOptions
 	,	int aOverride
 	) {
 		this(aContext, new In
-		(	aTickerId
-		,	aContract
+		(	aContract
 		,	aExerciseAction
 		,	aExerciseQuantity
 		,	aAccount

@@ -2,6 +2,7 @@ package com.blogspot.mikelaud.ibl.task.call;
 
 import java.util.concurrent.TimeUnit;
 
+import com.blogspot.mikelaud.ibl.Config;
 import com.blogspot.mikelaud.ibl.Logger;
 import com.blogspot.mikelaud.ibl.command.Command;
 import com.blogspot.mikelaud.ibl.command.CommandImpl;
@@ -39,19 +40,28 @@ public abstract class CallTask extends Task {
 		return ROUTER;
 	}
 	
+	@Override
 	public int getRequestId() {
-		if (null == mRequestId) {
-			mRequestId = mContext.nextRequestId();
+		int requestId;
+		if (hasRequestId()) {
+			if (null == mRequestId) {
+				mRequestId = mContext.nextRequestId();
+			}
+			requestId = mRequestId.intValue();
 		}
-		return mRequestId.intValue();
+		else {
+			requestId = Config.getNoRequestId();
+		}
+		return requestId;
 	}
 	
+	public abstract boolean hasRequestId();
 	protected abstract Task onCall() throws Exception;
 
 	@Override
 	public Task call() throws Exception {
 		COMMAND.callBefore(this);
-		Logger.logCall(toString());
+		Logger.logCall(getRequestId(), toString());
 		Task task = onCall();
 		COMMAND.callAfter(this);
 		return task;

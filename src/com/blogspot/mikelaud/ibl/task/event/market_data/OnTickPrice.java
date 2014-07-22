@@ -73,10 +73,9 @@ public class OnTickPrice
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s(%f)[%d] { field=\"%d\" canAutoExecute=\"%d\" }"
+		(	"%s(%f) { field=\"%d\" canAutoExecute=\"%d\" }"
 		,	super.toString()
 		,	INFO.PRICE
-		,	INFO.REQ_ID
 		,	INFO.FIELD
 		, 	INFO.CAN_AUTO_EXECUTE
 		);

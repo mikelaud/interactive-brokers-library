@@ -11,45 +11,40 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 public class CallCancelAccountSummary
 	extends CallTaskEx<CallCancelAccountSummary.In>
 {
-	//------------------------------------------------------------------------
+	/**
+	 * The ID of the data request being canceled.
+	 */
+	@Override
+	public boolean hasRequestId() {
+		return true;
+	}
+	//------------------------------------------------------------------------	
 	public static class In {
 	
-		/**
-		 * The ID of the data request being canceled.
-		 */
-		public final int REQ_ID;
-		
-		public In(int aReqId) {
-			REQ_ID = aReqId;
+		public In() {
+			// void
 		}
 		
-	}
+	}	
 	//------------------------------------------------------------------------
 	
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().cancelAccountSummary(IN.REQ_ID);
+		getClientSocket().cancelAccountSummary(getRequestId());
 		return null;
 	}
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s[%d]"
-		,	super.toString()
-		,	IN.REQ_ID
-		);
+		return super.toString();
 	}
 
-	public CallCancelAccountSummary(ConnectionContext aContext, In aIn) {
+	private CallCancelAccountSummary(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
-	public CallCancelAccountSummary
-	(	ConnectionContext aContext
-	,	int aReqId
-	) {
-		this(aContext, new In(aReqId));
+	public CallCancelAccountSummary(ConnectionContext aContext) {
+		this(aContext, new In());
 	}
 
 }

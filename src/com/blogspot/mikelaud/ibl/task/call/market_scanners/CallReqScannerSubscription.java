@@ -17,22 +17,24 @@ import com.ib.client.ScannerSubscription;
 public class CallReqScannerSubscription
 	extends CallTaskEx<CallReqScannerSubscription.In>
 {
+	/**
+	 * The Id for the subscription. Must be a unique value. When the
+	 * subscription data is received, it will be identified by this Id.
+	 * This is also used when canceling the scanner.
+	 */
+	@Override
+	public boolean hasRequestId() {
+		return true;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
-		/**
-		 * The Id for the subscription. Must be a unique value. When the
-		 * subscription data is received, it will be identified by this Id.
-		 * This is also used when canceling the scanner.
-		 */
-		public final int TICKER_ID;
 		/**
 		 * Summary of the scanner subscription parameters including filters.
 		 */
 		public final ScannerSubscription SUBSCRIPTION;
 		
-		public In(int aTickerId, ScannerSubscription aSubscription) {
-			TICKER_ID = aTickerId;
+		public In(ScannerSubscription aSubscription) {
 			SUBSCRIPTION = aSubscription;
 		}
 		
@@ -47,7 +49,7 @@ public class CallReqScannerSubscription
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqScannerSubscription
-		(	IN.TICKER_ID
+		(	getRequestId()
 		,	IN.SUBSCRIPTION
 		);
 		return null;
@@ -55,11 +57,7 @@ public class CallReqScannerSubscription
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s[%d]"
-		,	super.toString()
-		,	IN.TICKER_ID
-		);
+		return super.toString();
 	}
 
 	public CallReqScannerSubscription(ConnectionContext aContext, In aIn) {
@@ -70,13 +68,9 @@ public class CallReqScannerSubscription
 
 	public CallReqScannerSubscription
 	(	ConnectionContext aContext
-	,	int aTickerId
 	,	ScannerSubscription aSubscription
 	) {
-		this(aContext, new In
-		(	aTickerId
-		,	aSubscription
-		));
+		this(aContext, new In(aSubscription));
 	}
 
 }

@@ -97,9 +97,8 @@ public class OnTickEFP
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s[%d] { tickType=\"%d\" basisPoints=\"%f\" formattedBasisPoints=\"%s\" impliedFuture=\"%f\" holdDays=\"%d\" futureExpiry=\"%s\" dividendImpact=\"%f\" dividendsToExpiry=\"%f\" }"
+		(	"%s { tickType=\"%d\" basisPoints=\"%f\" formattedBasisPoints=\"%s\" impliedFuture=\"%f\" holdDays=\"%d\" futureExpiry=\"%s\" dividendImpact=\"%f\" dividendsToExpiry=\"%f\" }"
 		,	super.toString()
-		,	INFO.REQ_ID
 		,	INFO.TICK_TYPE
 		,	INFO.BASIS_POINTS
 		,	INFO.FORMATTED_BASIS_POINTS

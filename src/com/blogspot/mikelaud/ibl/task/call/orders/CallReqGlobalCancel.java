@@ -15,6 +15,10 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 public class CallReqGlobalCancel
 	extends CallTaskEx<CallReqGlobalCancel.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
@@ -33,10 +37,7 @@ public class CallReqGlobalCancel
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s"
-		,	super.toString()
-		);
+		return super.toString();
 	}
 
 	private CallReqGlobalCancel(ConnectionContext aContext, In aIn) {

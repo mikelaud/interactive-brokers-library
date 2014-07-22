@@ -91,9 +91,8 @@ public class OnRealtimeBar
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s[%d] { time=\"%s\" open=\"%f\" high=\"%f\" low=\"%f\" close=\"%f\" volume=\"%d\" wap=\"%f\" count=\"%d\" }"
+		(	"%s { time=\"%s\" open=\"%f\" high=\"%f\" low=\"%f\" close=\"%f\" volume=\"%d\" wap=\"%f\" count=\"%d\" }"
 		,	super.toString()
-		,	INFO.REQ_ID
 		,	INFO.TIME
 		,	INFO.OPEN
 		,	INFO.HIGH

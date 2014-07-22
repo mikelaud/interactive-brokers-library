@@ -13,6 +13,10 @@ import com.ib.client.Order;
 public class CallPlaceOrder
 	extends CallTaskEx<CallPlaceOrder.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
@@ -21,7 +25,7 @@ public class CallPlaceOrder
 		 * When the order status returns, it will be identified by this tag.
 		 * This tag is also used when canceling the order.
 		 */
-		public final int ID;
+		public final int ORDER_ID;
 		/**
 		 * This class contains attributes used to describe the contract.
 		 */
@@ -32,8 +36,8 @@ public class CallPlaceOrder
 		 */
 		public final Order ORDER;
 		
-		public In(int aId, Contract aContract, Order aOrder) {
-			ID = aId;
+		public In(int aOrderId, Contract aContract, Order aOrder) {
+			ORDER_ID = aOrderId;
 			CONTRACT = aContract;
 			ORDER = aOrder;
 		}
@@ -44,7 +48,7 @@ public class CallPlaceOrder
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().placeOrder
-		(	IN.ID
+		(	IN.ORDER_ID
 		,	IN.CONTRACT
 		,	IN.ORDER
 		);
@@ -54,9 +58,9 @@ public class CallPlaceOrder
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s[%d]"
+		(	"%s(%d)"
 		,	super.toString()
-		,	IN.ID
+		,	IN.ORDER_ID
 		);
 	}
 
@@ -66,12 +70,12 @@ public class CallPlaceOrder
 
 	public CallPlaceOrder
 	(	ConnectionContext aContext
-	,	int aId
+	,	int aOrderId
 	,	Contract aContract
 	,	Order aOrder
 	) {
 		this(aContext, new In
-		(	aId
+		(	aOrderId
 		,	aContract
 		,	aOrder
 		));

@@ -11,16 +11,18 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 public class CallCancelFundamentalData
 	extends CallTaskEx<CallCancelFundamentalData.In>
 {
+	/**
+	 * The ID of the data request.
+	 */
+	@Override
+	public boolean hasRequestId() {
+		return true;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
-		/**
-		 * The ID of the data request.
-		 */
-		public final int REQ_ID;
-		
-		public In(int aReqId) {
-			REQ_ID = aReqId;
+		public In() {
+			// void
 		}
 		
 	}
@@ -28,25 +30,21 @@ public class CallCancelFundamentalData
 
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().cancelFundamentalData(IN.REQ_ID);
+		getClientSocket().cancelFundamentalData(getRequestId());
 		return null;
 	}
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s[%d]"
-		,	super.toString()
-		,	IN.REQ_ID
-		);
+		return super.toString();
 	}
 
-	public CallCancelFundamentalData(ConnectionContext aContext, In aIn) {
+	private CallCancelFundamentalData(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
-	public CallCancelFundamentalData(ConnectionContext aContext, int aReqId) {
-		this(aContext, new In(aReqId));
+	public CallCancelFundamentalData(ConnectionContext aContext) {
+		this(aContext, new In());
 	}
 
 }

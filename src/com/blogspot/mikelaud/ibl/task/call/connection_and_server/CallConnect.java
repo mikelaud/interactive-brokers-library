@@ -1,5 +1,7 @@
 package com.blogspot.mikelaud.ibl.task.call.connection_and_server;
 
+import com.blogspot.mikelaud.ibl.Config;
+import com.blogspot.mikelaud.ibl.Utils;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
@@ -17,6 +19,10 @@ import com.blogspot.mikelaud.ibl.task.event.orders.OnNextValidId;
 public class CallConnect
 	extends CallTaskEx<CallConnect.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
@@ -43,12 +49,12 @@ public class CallConnect
 		,	int aPort
 		,	int aClientId
 		) {
-			HOST = aHost;
+			HOST = Utils.nvl(aHost);
 			PORT = aPort;
 			CLIENT_ID = aClientId;
 		}
 
-	}
+	}	
 	//------------------------------------------------------------------------
 
 	public final OutTerminator<OnManagedAccounts> OUT_MANAGED_ACCOUNTS;
@@ -69,7 +75,7 @@ public class CallConnect
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s(%s:%d) { clientId=\"%d\" }"
+		(	"%s { host=\"%s\" port=\"%d\" clientId=\"%d\" }"
 		,	super.toString()
 		,	IN.HOST
 		,	IN.PORT
@@ -82,7 +88,15 @@ public class CallConnect
 		OUT_MANAGED_ACCOUNTS = new OutTerminator<>(this, OnManagedAccounts.class);
 		OUT_NEXT_VALID_ID = new OutTerminator<>(this, OnNextValidId.class);
 	}
-	
+
+	public CallConnect(ConnectionContext aContext) {
+		this(aContext, new In
+		(	Config.getHost()
+		,	Config.getPort()
+		,	Config.getClientId()
+		));
+	}
+
 	public CallConnect
 	(	ConnectionContext aContext
 	,	String aHost

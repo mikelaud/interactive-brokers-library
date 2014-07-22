@@ -51,9 +51,8 @@ public class OnMarketDataType
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s[%d] { marketDataType=\"%d\" }"
+		(	"%s { marketDataType=\"%d\" }"
 		,	super.toString()
-		,	INFO.REQ_ID
 		,	INFO.MARKET_DATA_TYPE
 		);
 	}

@@ -13,15 +13,18 @@ import com.ib.client.Contract;
 public class CallReqRealTimeBars
 	extends CallTaskEx<CallReqRealTimeBars.In>
 {
+	/**
+	 * The Id for the request. Must be a unique value. When the data is
+	 * received, it will be identified by this Id. This is also used when
+	 * canceling the historical data request.
+	 */
+	@Override
+	public boolean hasRequestId() {
+		return true;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
-		/**
-		 * The Id for the request. Must be a unique value. When the data is
-		 * received, it will be identified by this Id. This is also used when
-		 * canceling the historical data request.
-		 */
-		public final int TICKER_ID;
 		/**
 		 * This class contains attributes used to describe the contract.
 		 */
@@ -52,13 +55,11 @@ public class CallReqRealTimeBars
 		public final boolean USE_RTH;
 				
 		public In
-		(	int aTickerId
-		,	Contract aContract
+		(	Contract aContract
 		,	int aBarSize
 		,	String aWhatToShow
 		,	boolean aUseRTH
 		) {
-			TICKER_ID = aTickerId;
 			CONTRACT = aContract;
 			BAR_SIZE = aBarSize;
 			WHAT_TO_SHOW = aWhatToShow;
@@ -71,7 +72,7 @@ public class CallReqRealTimeBars
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqRealTimeBars
-		(	IN.TICKER_ID
+		(	getRequestId()
 		,	IN.CONTRACT
 		,	IN.BAR_SIZE
 		,	IN.WHAT_TO_SHOW
@@ -83,9 +84,8 @@ public class CallReqRealTimeBars
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s[%d] { barSize=\"%d\" whatToShow=\"%s\" useRth=\"%b\" }"
+		(	"%s { barSize=\"%d\" whatToShow=\"%s\" useRth=\"%b\" }"
 		,	super.toString()
-		,	IN.TICKER_ID
 		,	IN.BAR_SIZE
 		,	IN.WHAT_TO_SHOW
 		,	IN.USE_RTH
@@ -98,15 +98,13 @@ public class CallReqRealTimeBars
 
 	public CallReqRealTimeBars
 	(	ConnectionContext aContext
-	,	int aTickerId
 	,	Contract aContract
 	,	int aBarSize
 	,	String aWhatToShow
 	,	boolean aUseRTH
 	) {
 		this(aContext, new In
-		(	aTickerId
-		,	aContract
+		(	aContract
 		,	aBarSize
 		,	aWhatToShow
 		,	aUseRTH

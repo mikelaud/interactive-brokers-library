@@ -99,9 +99,8 @@ public class OnHistoricalData
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s[%d] { date=\"%s\" open=\"%f\" high=\"%f\" low=\"%f\" close=\"%f\" volume=\"%d\" count=\"%d\" wap=\"%f\" hasGaps=\"%b\" }"
+		(	"%s { date=\"%s\" open=\"%f\" high=\"%f\" low=\"%f\" close=\"%f\" volume=\"%d\" count=\"%d\" wap=\"%f\" hasGaps=\"%b\" }"
 		,	super.toString()
-		,	INFO.REQ_ID
 		,	INFO.DATE
 		,	INFO.OPEN
 		,	INFO.HIGH

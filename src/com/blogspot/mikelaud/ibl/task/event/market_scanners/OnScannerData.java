@@ -79,9 +79,8 @@ public class OnScannerData
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s[%d] { rank=\"%d\" distance=\"%s\" benchmark=\"%s\" projection=\"%s\" legsStr=\"%s\" }"
+		(	"%s { rank=\"%d\" distance=\"%s\" benchmark=\"%s\" projection=\"%s\" legsStr=\"%s\" }"
 		,	super.toString()
-		,	INFO.REQ_ID
 		,	INFO.RANK
 		,	INFO.DISTANCE
 		,	INFO.BENCHMARK

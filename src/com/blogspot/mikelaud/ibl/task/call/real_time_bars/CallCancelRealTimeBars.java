@@ -11,16 +11,18 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 public class CallCancelRealTimeBars
 	extends CallTaskEx<CallCancelRealTimeBars.In>
 {
+	/**
+	 * The Id that was specified in the call to CallReqRealTimeBars.
+	 */
+	@Override
+	public boolean hasRequestId() {
+		return true;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
-		/**
-		 * The Id that was specified in the call to CallReqRealTimeBars.
-		 */
-		public final int TICKER_ID;
-		
-		public In(int aTickerId) {
-			TICKER_ID = aTickerId;
+		public In() {
+			// void
 		}
 		
 	}
@@ -28,25 +30,21 @@ public class CallCancelRealTimeBars
 
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().cancelRealTimeBars(IN.TICKER_ID);
+		getClientSocket().cancelRealTimeBars(getRequestId());
 		return null;
 	}
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s[%d]"
-		,	super.toString()
-		,	IN.TICKER_ID
-		);
+		return super.toString();
 	}
 
-	public CallCancelRealTimeBars(ConnectionContext aContext, In aIn) {
+	private CallCancelRealTimeBars(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
-	public CallCancelRealTimeBars(ConnectionContext aContext, int aTickerId) {
-		this(aContext, new In(aTickerId));
+	public CallCancelRealTimeBars(ConnectionContext aContext) {
+		this(aContext, new In());
 	}
 
 }

@@ -44,6 +44,10 @@ import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnUpdatePortfo
 public class CallReqAccountUpdates
 	extends CallTaskEx<CallReqAccountUpdates.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	

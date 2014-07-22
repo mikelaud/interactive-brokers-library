@@ -18,6 +18,10 @@ import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnPositionEnd;
 public class CallReqPositions
 	extends CallTaskEx<CallReqPositions.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
@@ -25,7 +29,7 @@ public class CallReqPositions
 			// void
 		}
 		
-	}
+	}	
 	//------------------------------------------------------------------------
 	
 	public final OutEvents<OnPosition> OUT_POSITION;
@@ -41,10 +45,7 @@ public class CallReqPositions
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s"
-		,	super.toString()
-		);
+		return super.toString();
 	}
 
 	private CallReqPositions(ConnectionContext aContext, In aIn) {

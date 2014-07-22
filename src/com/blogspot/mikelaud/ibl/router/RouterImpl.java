@@ -30,7 +30,7 @@ public class RouterImpl implements Router {
 		EventType eventType = aEvent.getEventType();
 		Out out = mOutMap.get(eventType);
 		if (null == out) {
-			Logger.logLost(aEvent.toString());
+			Logger.logLost(aEvent.getRequestId(), aEvent.toString());
 		}
 		else {
 			out.notifyMe(aEvent);

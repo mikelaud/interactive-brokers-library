@@ -12,16 +12,18 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 public class CallCancelCalculateImpliedVolatility
 	extends CallTaskEx<CallCancelCalculateImpliedVolatility.In>
 {
+	/**
+	 * The ticker id.
+	 */
+	@Override
+	public boolean hasRequestId() {
+		return true;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
-		/**
-		 * The ticker id.
-		 */
-		public final int REQ_ID;
-		
-		public In(int aReqId) {
-			REQ_ID = aReqId;
+		public In() {
+			// void
 		}
 		
 	}
@@ -29,25 +31,21 @@ public class CallCancelCalculateImpliedVolatility
 
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().cancelCalculateImpliedVolatility(IN.REQ_ID);
+		getClientSocket().cancelCalculateImpliedVolatility(getRequestId());
 		return null;
 	}
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s[%d]"
-		,	super.toString()
-		,	IN.REQ_ID
-		);
+		return super.toString();
 	}
 
-	public CallCancelCalculateImpliedVolatility(ConnectionContext aContext, In aIn) {
+	private CallCancelCalculateImpliedVolatility(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
-	public CallCancelCalculateImpliedVolatility(ConnectionContext aContext, int aReqId) {
-		this(aContext, new In(aReqId));
+	public CallCancelCalculateImpliedVolatility(ConnectionContext aContext) {
+		this(aContext, new In());
 	}
 
 }

@@ -106,9 +106,8 @@ public class OnTickOptionComputation
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s[%d] { field=\"%d\" impliedVol=\"%f\" delta=\"%f\" optPrice=\"%f\" pvDividend=\"%f\" gamma=\"%f\" vega=\"%f\" theta=\"%f\" undPrice=\"%f\" }"
+		(	"%s { field=\"%d\" impliedVol=\"%f\" delta=\"%f\" optPrice=\"%f\" pvDividend=\"%f\" gamma=\"%f\" vega=\"%f\" theta=\"%f\" undPrice=\"%f\" }"
 		,	super.toString()
-		,	INFO.REQ_ID
 		,	INFO.FIELD
 		,	INFO.IMPLIED_VOL
 		,	INFO.DELTA

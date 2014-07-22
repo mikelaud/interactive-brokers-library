@@ -19,6 +19,10 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 public class CallReqMarketDataType
 	extends CallTaskEx<CallReqMarketDataType.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	

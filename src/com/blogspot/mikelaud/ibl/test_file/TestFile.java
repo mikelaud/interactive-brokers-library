@@ -11,12 +11,15 @@ import java.nio.file.StandardOpenOption;
 import java.util.EnumSet;
 
 import com.blogspot.mikelaud.ibl.Config;
-import com.blogspot.mikelaud.ibl.Const;
 import com.blogspot.mikelaud.ibl.Logger;
 
 // add truncate & exact file resize
 public class TestFile {
 
+	private final String MESSAGE_OK = "OK.";
+	private final String MESSAGE_FAIL = "FAIL.";
+	private final String MESSAGE_PROGRESS = "...";
+	//
 	private final String FILE_NAME = "2014_01." + Config.getFileExtension();
 	private final String FILE_DIRECTORY = Config.getFilesDirectory();
 	private final long FILE_TARGET_SIZE_B = Day.getBufferSizeB();
@@ -31,7 +34,7 @@ public class TestFile {
 		if (Files.notExists(aPath)) {
 			final String message = "Create file: %s (0 bytes) %s";
 			// create:
-			Logger.println(String.format(message, aPath, Const.MESSAGE_PROGRESS));
+			Logger.println(String.format(message, aPath, MESSAGE_PROGRESS));
 			Path dirPath = aPath.getParent();
 			if (null != dirPath) {
 				Files.createDirectories(dirPath);
@@ -39,10 +42,10 @@ public class TestFile {
 			Files.createFile(aPath);
 			// check:
 			if (Files.exists(aPath)) {
-				Logger.println(String.format(message, aPath, Const.MESSAGE_OK));
+				Logger.println(String.format(message, aPath, MESSAGE_OK));
 			}
 			else {
-				Logger.logError(String.format(message, aPath, Const.MESSAGE_FAIL));
+				Logger.logError(String.format(message, aPath, MESSAGE_FAIL));
 			}
 		}
 	}
@@ -52,17 +55,17 @@ public class TestFile {
 		if (fileSizeB < FILE_TARGET_SIZE_B) {
 			final String message = "Resize file: %s (%d => %d bytes) %s";
 			// resize:
-			Logger.println(String.format(message, aPath, fileSizeB, FILE_TARGET_SIZE_B, Const.MESSAGE_PROGRESS));
+			Logger.println(String.format(message, aPath, fileSizeB, FILE_TARGET_SIZE_B, MESSAGE_PROGRESS));
 			RandomAccessFile file = new RandomAccessFile(aPath.toFile(), FILE_RESIZE_MODE);
 			file.setLength(FILE_TARGET_SIZE_B);
 			file.close();
 			// check:
 			long newFileSizeB = Files.size(aPath);
 			if (newFileSizeB >= FILE_TARGET_SIZE_B) {
-				Logger.println(String.format(message, aPath, fileSizeB, FILE_TARGET_SIZE_B, Const.MESSAGE_OK));
+				Logger.println(String.format(message, aPath, fileSizeB, FILE_TARGET_SIZE_B, MESSAGE_OK));
 			}
 			else {
-				Logger.logError(String.format(message, aPath, fileSizeB, FILE_TARGET_SIZE_B, Const.MESSAGE_FAIL));
+				Logger.logError(String.format(message, aPath, fileSizeB, FILE_TARGET_SIZE_B, MESSAGE_FAIL));
 				Logger.logError(String.format("Current file size: %d bytes (%s).", newFileSizeB, aPath));
 			}
 		}
@@ -71,12 +74,12 @@ public class TestFile {
 	private void mapFile(Path aPath) throws IOException {
 		final String message = "Map file: %s %s";
 		// map:
-		Logger.println(String.format(message, aPath, Const.MESSAGE_PROGRESS));
+		Logger.println(String.format(message, aPath, MESSAGE_PROGRESS));
 		FileChannel fileChannel = FileChannel.open(aPath, CHANNEL_OPEN_OPTIONS);
 		MappedByteBuffer buffer = fileChannel.map(MapMode.READ_WRITE, 0, FILE_TARGET_SIZE_B);
 		buffer.force();
 		fileChannel.close();
-		Logger.println(String.format(message, aPath, Const.MESSAGE_OK));
+		Logger.println(String.format(message, aPath, MESSAGE_OK));
 	}
 	
 	public void run() throws IOException {

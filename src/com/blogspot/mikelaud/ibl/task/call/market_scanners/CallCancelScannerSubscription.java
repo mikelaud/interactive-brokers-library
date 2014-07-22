@@ -12,17 +12,19 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 public class CallCancelScannerSubscription
 	extends CallTaskEx<CallCancelScannerSubscription.In>
 {
+	/**
+	 * The Id that was specified
+	 * in the call to CallReqScannerSubscription.
+	 */
+	@Override
+	public boolean hasRequestId() {
+		return true;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
-		/**
-		 * The Id that was specified
-		 * in the call to CallReqScannerSubscription.
-		 */
-		public final int TICKER_ID;
-		
-		public In(int aTickerId) {
-			TICKER_ID = aTickerId;
+		public In() {
+			// void
 		}
 		
 	}
@@ -30,24 +32,21 @@ public class CallCancelScannerSubscription
 
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().cancelScannerSubscription(IN.TICKER_ID);
+		getClientSocket().cancelScannerSubscription(getRequestId());
 		return null;
 	}
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s[%d]"
-		,	super.toString()
-		);
+		return super.toString();
 	}
 
-	public CallCancelScannerSubscription(ConnectionContext aContext, In aIn) {
+	private CallCancelScannerSubscription(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
-	public CallCancelScannerSubscription(ConnectionContext aContext, int aTickerId) {
-		this(aContext, new In(aTickerId));
+	public CallCancelScannerSubscription(ConnectionContext aContext) {
+		this(aContext, new In());
 	}
 
 }

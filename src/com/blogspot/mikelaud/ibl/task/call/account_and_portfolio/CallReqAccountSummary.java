@@ -20,15 +20,18 @@ import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnAccountSumma
 public class CallReqAccountSummary
 	extends CallTaskEx<CallReqAccountSummary.In>
 {
+	/**
+	 * The ID of the data request.
+	 * Ensures that responses are matched to requests
+	 * if several requests are in process.
+	 */
+	@Override
+	public boolean hasRequestId() {
+		return true;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
-		/**
-		 * The ID of the data request.
-		 * Ensures that responses are matched to requests
-		 * if several requests are in process.
-		 */
-		public final int REQ_ID;
 		/**
 		 * Set to All to return account summary data for all accounts,
 		 * or set to a specific Advisor Account Group name
@@ -78,8 +81,7 @@ public class CallReqAccountSummary
 		 */
 		public final String TAGS;		
 		
-		public In(int aReqId, String aGroup, String aTags) {
-			REQ_ID = aReqId;
+		public In(String aGroup, String aTags) {
 			GROUP = aGroup;
 			TAGS = aTags;
 		}
@@ -95,7 +97,7 @@ public class CallReqAccountSummary
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqAccountSummary
-		(	IN.REQ_ID
+		(	getRequestId()
 		,	IN.GROUP
 		,	IN.TAGS
 		);
@@ -105,10 +107,9 @@ public class CallReqAccountSummary
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s(\"%s\")[%d] { group=\"%s\" }"
+		(	"%s(\"%s\") { group=\"%s\" }"
 		,	super.toString()
 		,	IN.TAGS
-		,	IN.REQ_ID
 		,	IN.GROUP
 		);
 	}

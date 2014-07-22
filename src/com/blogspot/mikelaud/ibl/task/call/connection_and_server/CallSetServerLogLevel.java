@@ -13,6 +13,10 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 public class CallSetServerLogLevel
 	extends CallTaskEx<CallSetServerLogLevel.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	

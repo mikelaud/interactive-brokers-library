@@ -18,14 +18,17 @@ import com.ib.client.Contract;
 public class CallReqFundamentalData
 	extends CallTaskEx<CallReqFundamentalData.In>
 {
+	/**
+	 * The ID of the data request. Ensures that responses are matched
+	 * to requests if several requests are in process.
+	 */
+	@Override
+	public boolean hasRequestId() {
+		return true;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
-		/**
-		 * The ID of the data request. Ensures that responses are matched
-		 * to requests if several requests are in process.
-		 */
-		public final int REQ_ID;
 		/**
 		 * This structure contains a description of the contract for which
 		 * Reuters Fundamental data is being requested.
@@ -43,11 +46,9 @@ public class CallReqFundamentalData
 		public final String REPORT_TYPE;
 				
 		public In
-		(	int aReqId
-		,	Contract aContract
+		(	Contract aContract
 		,	String aReportType
 		) {
-			REQ_ID = aReqId;
 			CONTRACT = aContract;
 			REPORT_TYPE = aReportType;
 		}
@@ -58,7 +59,7 @@ public class CallReqFundamentalData
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqFundamentalData
-		(	IN.REQ_ID
+		(	getRequestId()
 		,	IN.CONTRACT
 		,	IN.REPORT_TYPE
 		);
@@ -68,9 +69,8 @@ public class CallReqFundamentalData
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s[%d] { reportType=\"%s\" }"
+		(	"%s { reportType=\"%s\" }"
 		,	super.toString()
-		,	IN.REQ_ID
 		,	IN.REPORT_TYPE
 		);
 	}
@@ -81,13 +81,11 @@ public class CallReqFundamentalData
 
 	public CallReqFundamentalData
 	(	ConnectionContext aContext
-	,	int aReqId
 	,	Contract aContract
 	,	String aReportType
 	) {
 		this(aContext, new In
-		(	aReqId
-		,	aContract
+		(	aContract
 		,	aReportType
 		));
 	}

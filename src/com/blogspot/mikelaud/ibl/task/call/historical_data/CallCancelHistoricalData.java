@@ -12,16 +12,18 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 public class CallCancelHistoricalData
 	extends CallTaskEx<CallCancelHistoricalData.In>
 {
+	/**
+	 * The Id that was specified in the call to CallReqHistoricalData.
+	 */
+	@Override
+	public boolean hasRequestId() {
+		return true;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
-		/**
-		 * The Id that was specified in the call to CallReqHistoricalData.
-		 */
-		public final int TICKER_ID;
-		
-		public In(int aTickerId) {
-			TICKER_ID = aTickerId;
+		public In() {
+			// void
 		}
 		
 	}
@@ -29,25 +31,21 @@ public class CallCancelHistoricalData
 
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().cancelHistoricalData(IN.TICKER_ID);
+		getClientSocket().cancelHistoricalData(getRequestId());
 		return null;
 	}
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s[%d]"
-		,	super.toString()
-		,	IN.TICKER_ID
-		);
+		return super.toString();
 	}
 
-	public CallCancelHistoricalData(ConnectionContext aContext, In aIn) {
+	private CallCancelHistoricalData(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
-	public CallCancelHistoricalData(ConnectionContext aContext, int aTickerId) {
-		this(aContext, new In(aTickerId));
+	public CallCancelHistoricalData(ConnectionContext aContext) {
+		this(aContext, new In());
 	}
 
 }

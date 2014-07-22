@@ -14,6 +14,10 @@ import com.blogspot.mikelaud.ibl.task.event.market_scanners.OnScannerParameters;
 public class CallReqScannerParameters
 	extends CallTaskEx<CallReqScannerParameters.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
@@ -36,10 +40,7 @@ public class CallReqScannerParameters
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s"
-		,	super.toString()
-		);
+		return super.toString();
 	}
 
 	private CallReqScannerParameters(ConnectionContext aContext, In aIn) {

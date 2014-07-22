@@ -1,8 +1,9 @@
 package com.blogspot.mikelaud.ibl.out;
 
 import com.blogspot.mikelaud.ibl.task.call.CallTask;
+import com.blogspot.mikelaud.ibl.task.event.EventTask;
 
-public class OutEvent<EVENT_TASK> extends OutAbstract<EVENT_TASK> {
+public class OutEvent<EVENT_TASK extends EventTask> extends OutAbstract<EVENT_TASK> {
 	
 	@Override
 	public OutType getOutType() {

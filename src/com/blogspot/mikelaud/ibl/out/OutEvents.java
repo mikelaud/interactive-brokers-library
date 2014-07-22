@@ -4,8 +4,9 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import com.blogspot.mikelaud.ibl.task.call.CallTask;
+import com.blogspot.mikelaud.ibl.task.event.EventTask;
 
-public class OutEvents<EVENT_TASK> extends OutAbstract<EVENT_TASK> {
+public class OutEvents<EVENT_TASK extends EventTask> extends OutAbstract<EVENT_TASK> {
 
 	private ConcurrentLinkedQueue<EVENT_TASK> mEventTasks = new ConcurrentLinkedQueue<>(); 
 	

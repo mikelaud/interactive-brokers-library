@@ -82,9 +82,8 @@ public class OnUpdateMktDepth
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s[%d] { position=\"%d\" operation=\"%d\" side=\"%d\" price=\"%f\" size=\"%d\" }"
+		(	"%s { position=\"%d\" operation=\"%d\" side=\"%d\" price=\"%f\" size=\"%d\" }"
 		,	super.toString()
-		,	INFO.REQ_ID
 		,	INFO.POSITION
 		,	INFO.OPERATION
 		,	INFO.SIDE

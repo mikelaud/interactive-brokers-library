@@ -20,6 +20,10 @@ import com.blogspot.mikelaud.ibl.task.event.orders.OnNextValidId;
 public class CallReqIDs
 	extends CallTaskEx<CallReqIDs.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	

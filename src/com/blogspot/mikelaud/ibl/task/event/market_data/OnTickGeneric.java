@@ -54,9 +54,8 @@ public class OnTickGeneric
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s[%d](%f) { tickType=\"%d\" }"
+		(	"%s(%f) { tickType=\"%d\" }"
 		,	super.toString()
-		,	INFO.REQ_ID
 		,	INFO.VALUE
 		,	INFO.TICK_TYPE
 		);

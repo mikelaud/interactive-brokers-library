@@ -12,6 +12,10 @@ import com.blogspot.mikelaud.ibl.task.event.connection_and_server.OnTwsConnectio
 public class CallTwsConnectionTime
 	extends CallTaskEx<CallTwsConnectionTime.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
@@ -45,10 +49,7 @@ public class CallTwsConnectionTime
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s"
-		,	super.toString()
-		);
+		return super.toString();
 	}
 
 	private CallTwsConnectionTime(ConnectionContext aContext, In aIn) {

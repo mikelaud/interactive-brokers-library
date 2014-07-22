@@ -14,6 +14,10 @@ import com.blogspot.mikelaud.ibl.task.event.other.OnSleepDone;
 public class CallSleep
 	extends CallTaskEx<CallSleep.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	

@@ -18,15 +18,18 @@ import com.ib.client.TagValue;
 public class CallReqMktData
 	extends CallTaskEx<CallReqMktData.In>
 {
+	/**
+	 * The ticker id. Must be a unique value.
+	 * When the market data returns, it will be identified by this tag.
+	 * This is also used when canceling the market data.
+	 */
+	@Override
+	public boolean hasRequestId() {
+		return true;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
-		/**
-		 * The ticker id. Must be a unique value.
-		 * When the market data returns, it will be identified by this tag.
-		 * This is also used when canceling the market data.
-		 */
-		public final int TICKER_ID;
 		/**
 		 * This class contains attributes used to describe the contract.
 		 */
@@ -48,13 +51,11 @@ public class CallReqMktData
 		public final List<TagValue> MKT_DATA_OPTIONS;
 		
 		public In
-		(	int aTickerId
-		,	Contract aContract
+		(	Contract aContract
 		,	String aGenericTicklist
 		,	boolean aSnapshot
 		,	List<TagValue> aMktDataOptions
 		) {
-			TICKER_ID = aTickerId;
 			CONTRACT = aContract;
 			GENERIC_TICKLIST = aGenericTicklist;
 			SNAPSHOT = aSnapshot;
@@ -67,7 +68,7 @@ public class CallReqMktData
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqMktData
-		(	IN.TICKER_ID
+		(	getRequestId()
 		,	IN.CONTRACT
 		,	IN.GENERIC_TICKLIST
 		,	IN.SNAPSHOT
@@ -78,9 +79,8 @@ public class CallReqMktData
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s[%d] { genericTicklist=\"%s\" snapshot=\"%b\" }"
+		(	"%s { genericTicklist=\"%s\" snapshot=\"%b\" }"
 		,	super.toString()
-		,	IN.TICKER_ID
 		,	IN.GENERIC_TICKLIST
 		,	IN.SNAPSHOT
 		);
@@ -92,15 +92,13 @@ public class CallReqMktData
 
 	public CallReqMktData
 	(	ConnectionContext aContext
-	,	int aTickerId
 	,	Contract aContract
 	,	String aGenericTicklist
 	,	boolean aSnapshot
 	,	List<TagValue> aMktDataOptions
 	) {
 		this(aContext, new In
-		(	aTickerId
-		,	aContract
+		(	aContract
 		,	aGenericTicklist
 		,	aSnapshot
 		,	aMktDataOptions

@@ -19,15 +19,18 @@ import com.ib.client.Contract;
 public class CallReqHistoricalData
 	extends CallTaskEx<CallReqHistoricalData.In>
 {
+	/**
+	 * The Id for the request. Must be a unique value. When the data is
+	 * received, it will be identified by this Id. This is also used when
+	 * canceling the historical data request.
+	 */
+	@Override
+	public boolean hasRequestId() {
+		return true;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
-		/**
-		 * The Id for the request. Must be a unique value. When the data is
-		 * received, it will be identified by this Id. This is also used when
-		 * canceling the historical data request.
-		 */
-		public final int TICKER_ID;
 		/**
 		 * This class contains attributes used to describe the contract.
 		 */
@@ -101,8 +104,7 @@ public class CallReqHistoricalData
 		public final int FORMAT_DATE;
 				
 		public In
-		(	int aTickerId
-		,	Contract aContract
+		(	Contract aContract
 		,	String aEndDateTime
 		,	String aDurationStr
 		,	String aBarSizeSetting
@@ -110,7 +112,6 @@ public class CallReqHistoricalData
 		,	int aUseRTH
 		,	int aFormatDate
 		) {
-			TICKER_ID = aTickerId;
 			CONTRACT = aContract;
 			END_DATE_TIME = aEndDateTime;
 			DURATION_STR = aDurationStr;
@@ -130,7 +131,7 @@ public class CallReqHistoricalData
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqHistoricalData
-		(	IN.TICKER_ID
+		(	getRequestId()
 		,	IN.CONTRACT
 		,	IN.END_DATE_TIME
 		,	IN.DURATION_STR
@@ -145,9 +146,8 @@ public class CallReqHistoricalData
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s[%d] { endDateTime=\"%s\" durationStr=\"%s\" barSizeSetting=\"%s\" whatToShow=\"%s\" useRth=\"%d\" formatDate=\"%d\" }"
+		(	"%s { endDateTime=\"%s\" durationStr=\"%s\" barSizeSetting=\"%s\" whatToShow=\"%s\" useRth=\"%d\" formatDate=\"%d\" }"
 		,	super.toString()
-		,	IN.TICKER_ID
 		,	IN.END_DATE_TIME
 		,	IN.DURATION_STR
 		,	IN.BAR_SIZE_SETTING
@@ -164,7 +164,6 @@ public class CallReqHistoricalData
 
 	public CallReqHistoricalData
 	(	ConnectionContext aContext
-	,	int aTickerId
 	,	Contract aContract
 	,	String aEndDateTime
 	,	String aDurationStr
@@ -174,8 +173,7 @@ public class CallReqHistoricalData
 	,	int aFormatDate
 	) {
 		this(aContext, new In
-		(	aTickerId
-		,	aContract
+		(	aContract
 		,	aEndDateTime
 		,	aDurationStr
 		,	aBarSizeSetting

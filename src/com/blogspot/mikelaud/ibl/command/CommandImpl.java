@@ -2,6 +2,7 @@ package com.blogspot.mikelaud.ibl.command;
 
 import java.util.concurrent.TimeUnit;
 
+import com.blogspot.mikelaud.ibl.Config;
 import com.blogspot.mikelaud.ibl.Logger;
 import com.blogspot.mikelaud.ibl.task.call.CallKind;
 import com.blogspot.mikelaud.ibl.task.call.CallTask;
@@ -9,7 +10,7 @@ import com.blogspot.mikelaud.ibl.task.call.CallTask;
 public class CommandImpl implements Command {
 
 	private Object mTimeoutLock = new Object();
-	private long mTimeoutMs = 0;
+	private long mTimeoutMs;
 	//
 	private long mBeginTimeMs = 0;
 	private long mWaitTimeMs = 0;
@@ -54,7 +55,7 @@ public class CommandImpl implements Command {
 	
 	@Override
 	public void callBefore(CallTask aCall) throws Exception {
-		Logger.logCommandBegin(toString(aCall));
+		Logger.logCommandBegin(aCall.getRequestId(), toString(aCall));
 		if (CallKind.NOCAST != aCall.getCallType().getKind()) {
 			aCall.getCallType().getContext().addCommand(aCall);
 		}
@@ -75,7 +76,7 @@ public class CommandImpl implements Command {
 			}
 			aCall.getCallType().getContext().removeCommand(aCall);
 		}
-		Logger.logCommandEnd(toString(aCall));
+		Logger.logCommandEnd(aCall.getRequestId(), toString(aCall));
 	}
 		
 	@Override
@@ -90,10 +91,16 @@ public class CommandImpl implements Command {
 
 	@Override
 	public String toString(CallTask aCall) {
-		return String.format("%s.%s", aCall.getCallType().getKind().toString(), aCall.toString());
+		return String.format
+		(	"%s.%s"
+		,	aCall.getCallType().getKind().toString()
+		,	aCall.toString()
+		);
 	}
 	
-	public CommandImpl() {		
+	public CommandImpl() {
+		int timeoutSec = Config.getCallTimeoutSec();
+		mTimeoutMs = TimeUnit.MILLISECONDS.convert(timeoutSec, TimeUnit.SECONDS);
 		resetTimeout();
 	}
 	

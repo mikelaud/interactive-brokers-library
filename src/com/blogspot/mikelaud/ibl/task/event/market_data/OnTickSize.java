@@ -58,10 +58,9 @@ public class OnTickSize
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s(%d)[%d] { field=\"%d\" }"
+		(	"%s(%d) { field=\"%d\" }"
 		,	super.toString()
 		,	INFO.SIZE
-		,	INFO.REQ_ID
 		,	INFO.FIELD
 		);
 	}

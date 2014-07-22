@@ -1,5 +1,7 @@
 package com.blogspot.mikelaud.ibl.task.event.financial_advisors;
 
+import com.blogspot.mikelaud.ibl.Config;
+import com.blogspot.mikelaud.ibl.Utils;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
@@ -21,7 +23,7 @@ public class OnManagedAccounts
 		public final String ACCOUNTS_LIST;
 
 		public Info(String aAccountsList) {
-			ACCOUNTS_LIST = aAccountsList;
+			ACCOUNTS_LIST = Utils.nvl(aAccountsList);
 		}
 		
 	}
@@ -29,7 +31,7 @@ public class OnManagedAccounts
 
 	@Override
 	public int getRequestId() {
-		return getNoRequestId();
+		return Config.getNoRequestId();
 	}
 
 	@Override
@@ -40,7 +42,7 @@ public class OnManagedAccounts
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s(%s)"
+		(	"%s { accountsList=\"%s\" }"
 		,	super.toString()
 		,	INFO.ACCOUNTS_LIST
 		);

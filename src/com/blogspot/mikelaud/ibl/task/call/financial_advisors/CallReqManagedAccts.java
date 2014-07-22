@@ -17,6 +17,10 @@ import com.blogspot.mikelaud.ibl.task.event.financial_advisors.OnManagedAccounts
 public class CallReqManagedAccts
 	extends CallTaskEx<CallReqManagedAccts.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
@@ -39,10 +43,7 @@ public class CallReqManagedAccts
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s"
-		,	super.toString()
-		);
+		return super.toString();
 	}
 
 	private CallReqManagedAccts(ConnectionContext aContext, In aIn) {

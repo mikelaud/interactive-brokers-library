@@ -51,10 +51,9 @@ public class OnError
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s(%d)[%d] { \"%s\" }"
+		(	"%s(%d) { \"%s\" }"
 		,	super.toString()
 		,	INFO.ERROR_CODE
-		,	INFO.REQ_ID
 		,	INFO.ERROR_STRING
 		);
 	}

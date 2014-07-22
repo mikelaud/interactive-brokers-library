@@ -26,24 +26,24 @@ public class Logger {
 	
 	//------------------------------------------------------------------------
 
-	public static void logEvent(final String aMessage) {
-		System.out.println(String.format("EVNT: %s", aMessage));
+	public static void logEvent(final int aRequestId, final String aMessage) {
+		System.out.println(String.format("EVNT: [%d]%s", aRequestId, aMessage));
 	}
 
-	public static void logCall(final String aMessage) {
-		System.out.println(String.format("CALL: %s", aMessage));
+	public static void logCall(final int aRequestId, final String aMessage) {
+		System.out.println(String.format("CALL: [%d]%s", aRequestId, aMessage));
 	}
 
-	public static void logCommandBegin(final String aMessage) {
-		System.out.println(String.format("CMD>: %s", aMessage));
+	public static void logCommandBegin(final int aRequestId, final String aMessage) {
+		System.out.println(String.format("CMD>: [%d]%s", aRequestId, aMessage));
 	}
 
-	public static void logCommandEnd(final String aMessage) {
-		System.out.println(String.format("CMD<: %s", aMessage));
+	public static void logCommandEnd(final int aRequestId, final String aMessage) {
+		System.out.println(String.format("CMD<: [%d]%s", aRequestId, aMessage));
 	}
 
-	public static void logLost(final String aMessage) {
-		System.out.println(String.format("LOST: %s", aMessage));
+	public static void logLost(final int aRequestId, final String aMessage) {
+		System.out.println(String.format("LOST: [%d]%s", aRequestId, aMessage));
 	}
 
 	//------------------------------------------------------------------------

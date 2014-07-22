@@ -26,6 +26,10 @@ import com.blogspot.mikelaud.ibl.task.event.orders.OnOrderStatus;
 public class CallReqOpenOrders
 	extends CallTaskEx<CallReqOpenOrders.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
@@ -50,10 +54,7 @@ public class CallReqOpenOrders
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s"
-		,	super.toString()
-		);
+		return super.toString();
 	}
 
 	private CallReqOpenOrders(ConnectionContext aContext, In aIn) {

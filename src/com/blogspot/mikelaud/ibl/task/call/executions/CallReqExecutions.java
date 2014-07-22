@@ -23,24 +23,23 @@ import com.ib.client.ExecutionFilter;
 public class CallReqExecutions
 	extends CallTaskEx<CallReqExecutions.In>
 {
+	/**
+	 * Request Id.
+	 */
+	@Override
+	public boolean hasRequestId() {
+		return true;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
-		/**
-		 * Request Id.
-		 */
-		public final int REQ_ID;
 		/**
 		 * The filter criteria used to determine
 		 * which execution reports are returned.
 		 */
 		public final ExecutionFilter FILTER;
 		
-		public In
-		(	int aReqId
-		,	ExecutionFilter aFilter
-		) {
-			REQ_ID = aReqId;
+		public In(ExecutionFilter aFilter) {
 			FILTER = aFilter;
 		}
 		
@@ -56,7 +55,7 @@ public class CallReqExecutions
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqExecutions
-		(	IN.REQ_ID
+		(	getRequestId()
 		,	IN.FILTER
 		);
 		return null;
@@ -64,11 +63,7 @@ public class CallReqExecutions
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s[%d]"
-		,	super.toString()
-		,	IN.REQ_ID
-		);
+		return super.toString();
 	}
 
 	public CallReqExecutions(ConnectionContext aContext, In aIn) {

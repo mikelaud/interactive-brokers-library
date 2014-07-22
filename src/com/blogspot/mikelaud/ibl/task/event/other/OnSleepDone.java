@@ -2,6 +2,7 @@ package com.blogspot.mikelaud.ibl.task.event.other;
 
 import java.util.concurrent.TimeUnit;
 
+import com.blogspot.mikelaud.ibl.Config;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
@@ -35,7 +36,7 @@ public class OnSleepDone
 
 	@Override
 	public int getRequestId() {
-		return getNoRequestId();
+		return Config.getNoRequestId();
 	}
 
 	@Override

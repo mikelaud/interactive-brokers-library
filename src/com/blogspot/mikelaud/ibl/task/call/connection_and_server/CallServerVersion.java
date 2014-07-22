@@ -13,6 +13,10 @@ import com.blogspot.mikelaud.ibl.task.event.connection_and_server.OnServerVersio
 public class CallServerVersion
 	extends CallTaskEx<CallServerVersion.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
@@ -46,10 +50,7 @@ public class CallServerVersion
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s"
-		,	super.toString()
-		);
+		return super.toString();
 	}
 
 	private CallServerVersion(ConnectionContext aContext, In aIn) {

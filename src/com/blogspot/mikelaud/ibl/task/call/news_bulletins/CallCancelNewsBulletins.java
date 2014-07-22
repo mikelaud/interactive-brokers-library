@@ -11,6 +11,10 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 public class CallCancelNewsBulletins
 	extends CallTaskEx<CallCancelNewsBulletins.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
@@ -29,10 +33,7 @@ public class CallCancelNewsBulletins
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s"
-		,	super.toString()
-		);
+		return super.toString();
 	}
 
 	private CallCancelNewsBulletins(ConnectionContext aContext, In aIn) {

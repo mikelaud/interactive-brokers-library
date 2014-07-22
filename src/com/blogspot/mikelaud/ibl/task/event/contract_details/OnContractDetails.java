@@ -1,5 +1,6 @@
 package com.blogspot.mikelaud.ibl.task.event.contract_details;
 
+import com.blogspot.mikelaud.ibl.Utils;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
@@ -32,6 +33,80 @@ public class OnContractDetails
 			CONTRACT_DETAILS = aContractDetails;
 		}
 		
+		public String getSymbol() {
+			String str = "";
+			if (null != CONTRACT_DETAILS) {
+				if (null != CONTRACT_DETAILS.m_summary) {
+					str = CONTRACT_DETAILS.m_summary.m_symbol;
+				}
+			}
+			return Utils.nvl(str);
+		}
+		
+		public String getSecurityType() {
+			String str = "";
+			if (null != CONTRACT_DETAILS) {
+				if (null != CONTRACT_DETAILS.m_summary) {
+					str = CONTRACT_DETAILS.m_summary.m_secType;
+				}
+			}
+			return Utils.nvl(str);
+		}
+		
+		public String getCurrency() {
+			String str = "";
+			if (null != CONTRACT_DETAILS) {
+				if (null != CONTRACT_DETAILS.m_summary) {
+					str = CONTRACT_DETAILS.m_summary.m_currency;
+				}
+			}
+			return Utils.nvl(str);
+		}
+		
+		public String getExchange() {
+			String str = "";
+			if (null != CONTRACT_DETAILS) {
+				if (null != CONTRACT_DETAILS.m_summary) {
+					str = CONTRACT_DETAILS.m_summary.m_exchange;
+				}
+			}
+			return Utils.nvl(str);
+		}
+		
+		public String getPrimaryExchange() {
+			String str = "";
+			if (null != CONTRACT_DETAILS) {
+				if (null != CONTRACT_DETAILS.m_summary) {
+					str = CONTRACT_DETAILS.m_summary.m_primaryExch;
+				}
+			}
+			return Utils.nvl(str);
+		}
+		
+		public String getSector() { // yes: Sector == m_industry
+			String str = "";
+			if (null != CONTRACT_DETAILS) {
+				str = CONTRACT_DETAILS.m_industry;  
+			}
+			return Utils.nvl(str);
+		}
+		
+		public String getIndustry() { // yes: Industry == m_category
+			String str = "";
+			if (null != CONTRACT_DETAILS) {
+				str = CONTRACT_DETAILS.m_category;  
+			}
+			return Utils.nvl(str);
+		}
+		
+		public String getCategory() { // yes: Category == m_subcategory
+			String str = "";
+			if (null != CONTRACT_DETAILS) {
+				str = CONTRACT_DETAILS.m_subcategory;  
+			}
+			return Utils.nvl(str);
+		}
+		
 	}
 	//------------------------------------------------------------------------
 
@@ -44,14 +119,20 @@ public class OnContractDetails
 	protected Task onEvent() throws Exception {
 		return null;
 	}
-	
+		
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s[%d] { \"%s\" }"
+		(	"%s(\"%s/%s/%s/%s/%s\") { sector=\"%s\" industry=\"%s\" category=\"%s\" }"
 		,	super.toString()
-		,	INFO.REQ_ID
-		,	INFO.CONTRACT_DETAILS.m_longName
+		,	INFO.getSymbol()
+		,	INFO.getSecurityType()
+		,	INFO.getCurrency()
+		,	INFO.getExchange()
+		,	INFO.getPrimaryExchange()
+		,	INFO.getSector()
+		,	INFO.getIndustry()
+		,	INFO.getCategory()
 		);
 	}
 	

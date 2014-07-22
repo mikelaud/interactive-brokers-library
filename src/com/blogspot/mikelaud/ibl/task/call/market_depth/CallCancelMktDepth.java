@@ -12,16 +12,18 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 public class CallCancelMktDepth
 	extends CallTaskEx<CallCancelMktDepth.In>
 {
+	/**
+	 * The Id that was specified in the call to CallReqMktDepth.
+	 */
+	@Override
+	public boolean hasRequestId() {
+		return true;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
-		/**
-		 * The Id that was specified in the call to CallReqMktDepth.
-		 */
-		public final int TICKER_ID;
-		
-		public In(int aTickerId) {
-			TICKER_ID = aTickerId;
+		public In() {
+			// void
 		}
 		
 	}
@@ -29,25 +31,21 @@ public class CallCancelMktDepth
 
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().cancelMktDepth(IN.TICKER_ID);
+		getClientSocket().cancelMktDepth(getRequestId());
 		return null;
 	}
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s[%d]"
-		,	super.toString()
-		,	IN.TICKER_ID
-		);
+		return super.toString();
 	}
 
-	public CallCancelMktDepth(ConnectionContext aContext, In aIn) {
+	private CallCancelMktDepth(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
-	public CallCancelMktDepth(ConnectionContext aContext, int aTickerId) {
-		this(aContext, new In(aTickerId));
+	public CallCancelMktDepth(ConnectionContext aContext) {
+		this(aContext, new In());
 	}
 
 }

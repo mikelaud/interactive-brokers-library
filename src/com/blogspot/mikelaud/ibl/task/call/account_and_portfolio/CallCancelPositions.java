@@ -11,6 +11,10 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 public class CallCancelPositions
 	extends CallTaskEx<CallCancelPositions.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
@@ -29,10 +33,7 @@ public class CallCancelPositions
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s"
-		,	super.toString()
-		);
+		return super.toString();
 	}
 
 	private CallCancelPositions(ConnectionContext aContext, In aIn) {

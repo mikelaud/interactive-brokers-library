@@ -14,6 +14,10 @@ import com.blogspot.mikelaud.ibl.task.event.connection_and_server.OnCurrentTime;
 public class CallReqCurrentTime
 	extends CallTaskEx<CallReqCurrentTime.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
@@ -36,10 +40,7 @@ public class CallReqCurrentTime
 
 	@Override
 	public String toString() {
-		return String.format
-		(	"%s"
-		,	super.toString()
-		);
+		return super.toString();
 	}
 
 	private CallReqCurrentTime(ConnectionContext aContext, In aIn) {

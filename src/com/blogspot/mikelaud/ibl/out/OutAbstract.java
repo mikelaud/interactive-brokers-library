@@ -9,7 +9,7 @@ import com.blogspot.mikelaud.ibl.task.event.EventTask;
 import com.blogspot.mikelaud.ibl.task.event.EventType;
 import com.blogspot.mikelaud.ibl.task.event.EventTypesFactory;
 
-public abstract class OutAbstract<EVENT_TASK> implements Out {
+public abstract class OutAbstract<EVENT_TASK extends EventTask> implements Out {
 	
 	private Class<EVENT_TASK> mEventClass;
 	private EventType mEventType;
@@ -20,7 +20,7 @@ public abstract class OutAbstract<EVENT_TASK> implements Out {
 			// void
 		}
 		else {
-			Logger.logLost(aEventTask.toString());
+			Logger.logLost(aEventTask.getRequestId(), aEventTask.toString());
 		}
 	}
 	
@@ -40,7 +40,7 @@ public abstract class OutAbstract<EVENT_TASK> implements Out {
 			addEvent(eventTask);
 		}
 		else {
-			Logger.logLost(aEvent.toString());
+			Logger.logLost(aEvent.getRequestId(), aEvent.toString());
 		}
 	}
 	

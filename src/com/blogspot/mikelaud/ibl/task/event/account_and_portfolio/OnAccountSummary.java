@@ -102,10 +102,9 @@ public class OnAccountSummary
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s(%s)[%d] { tag=\"%s\" value=\"%s\" currency=\"%s\" }"
+		(	"%s(%s) { tag=\"%s\" value=\"%s\" currency=\"%s\" }"
 		,	super.toString()
 		,	INFO.ACCOUNT
-		,	INFO.REQ_ID
 		,	INFO.TAG
 		,	INFO.VALUE
 		,	INFO.CURRENCY

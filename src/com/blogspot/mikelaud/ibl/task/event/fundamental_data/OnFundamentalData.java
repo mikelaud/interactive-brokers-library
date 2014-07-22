@@ -52,9 +52,8 @@ public class OnFundamentalData
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s[%d] { data=\"%s\" }"
+		(	"%s { data=\"%s\" }"
 		,	super.toString()
-		,	INFO.REQ_ID
 		,	INFO.DATA
 		);
 	}

@@ -1,5 +1,6 @@
 package com.blogspot.mikelaud.ibl.task.event.account_and_portfolio;
 
+import com.blogspot.mikelaud.ibl.Config;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
@@ -85,7 +86,7 @@ public class OnUpdatePortfolio
 
 	@Override
 	public int getRequestId() {
-		return getNoRequestId();
+		return Config.getNoRequestId();
 	}
 
 	@Override

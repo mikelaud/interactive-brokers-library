@@ -11,6 +11,10 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 public class CallCancelOrder
 	extends CallTaskEx<CallCancelOrder.In>
 {
+	@Override
+	public boolean hasRequestId() {
+		return false;
+	}
 	//------------------------------------------------------------------------
 	public static class In {
 	
@@ -18,10 +22,10 @@ public class CallCancelOrder
 		 * The order Id that was specified previously
 		 * in the call to CallPlaceOrder.
 		 */
-		public final int ID;
+		public final int ORDER_ID;
 		
 		public In(int aId) {
-			ID = aId;
+			ORDER_ID = aId;
 		}
 		
 	}
@@ -29,16 +33,16 @@ public class CallCancelOrder
 
 	@Override
 	protected Task onCall() throws Exception {
-		getClientSocket().cancelOrder(IN.ID);
+		getClientSocket().cancelOrder(IN.ORDER_ID);
 		return null;
 	}
 
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s[%d]"
+		(	"%s(%d)"
 		,	super.toString()
-		,	IN.ID
+		,	IN.ORDER_ID
 		);
 	}
 
@@ -46,8 +50,8 @@ public class CallCancelOrder
 		super(aContext, aIn, new TaskInnerObject(){});
 	}
 
-	public CallCancelOrder(ConnectionContext aContext, int aId) {
-		this(aContext, new In(aId));
+	public CallCancelOrder(ConnectionContext aContext, int aOrderId) {
+		this(aContext, new In(aOrderId));
 	}
 
 }
