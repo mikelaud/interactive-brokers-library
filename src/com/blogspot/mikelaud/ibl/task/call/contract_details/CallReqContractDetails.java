@@ -1,7 +1,5 @@
 package com.blogspot.mikelaud.ibl.task.call.contract_details;
 
-import com.blogspot.mikelaud.ibl.Config;
-import com.blogspot.mikelaud.ibl.Utils;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
 import com.blogspot.mikelaud.ibl.out.OutTerminator;
@@ -11,6 +9,8 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.event.contract_details.OnBondContractDetails;
 import com.blogspot.mikelaud.ibl.task.event.contract_details.OnContractDetails;
 import com.blogspot.mikelaud.ibl.task.event.contract_details.OnContractDetailsEnd;
+import com.blogspot.mikelaud.ibl.util.IblCurrency;
+import com.blogspot.mikelaud.ibl.util.IblString;
 import com.ib.client.Contract;
 
 /**
@@ -64,11 +64,11 @@ public class CallReqContractDetails
 		return String.format
 		(	"%s { \"%s/%s/%s/%s/%s\" }"
 		,	super.toString()
-		,	Utils.nvl(IN.CONTRACT.m_symbol)
-		,	Utils.nvl(IN.CONTRACT.m_secType)
-		,	Utils.nvl(IN.CONTRACT.m_currency)
-		,	Utils.nvl(IN.CONTRACT.m_exchange)
-		,	Utils.nvl(IN.CONTRACT.m_primaryExch)
+		,	IblString.nvl(IN.CONTRACT.m_symbol)
+		,	IblString.nvl(IN.CONTRACT.m_secType)
+		,	IblString.nvl(IN.CONTRACT.m_currency)
+		,	IblString.nvl(IN.CONTRACT.m_exchange)
+		,	IblString.nvl(IN.CONTRACT.m_primaryExch)
 		);
 	}
 
@@ -94,11 +94,11 @@ public class CallReqContractDetails
 	,	String aPrimaryExchange
 	) {
 		this(aContext, new Contract());
-		IN.CONTRACT.m_symbol = Utils.nvl(aSymbol);
-		IN.CONTRACT.m_secType = Utils.nvl(aSecurityType);
-		IN.CONTRACT.m_currency = Utils.nvl(Config.getDefaultCurrency());
-		IN.CONTRACT.m_exchange = Utils.nvl(aExchange);
-		IN.CONTRACT.m_primaryExch = Utils.nvl(aPrimaryExchange);
+		IN.CONTRACT.m_symbol = IblString.nvl(aSymbol);
+		IN.CONTRACT.m_secType = IblString.nvl(aSecurityType);
+		IN.CONTRACT.m_currency = IblCurrency.USD.toString();
+		IN.CONTRACT.m_exchange = IblString.nvl(aExchange);
+		IN.CONTRACT.m_primaryExch = IblString.nvl(aPrimaryExchange);
 	}
 
 }

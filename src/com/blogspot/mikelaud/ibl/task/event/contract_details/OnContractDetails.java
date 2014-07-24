@@ -1,10 +1,10 @@
 package com.blogspot.mikelaud.ibl.task.event.contract_details;
 
-import com.blogspot.mikelaud.ibl.Utils;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
+import com.blogspot.mikelaud.ibl.util.IblString;
 import com.ib.client.ContractDetails;
 
 /**
@@ -40,7 +40,7 @@ public class OnContractDetails
 					str = CONTRACT_DETAILS.m_summary.m_symbol;
 				}
 			}
-			return Utils.nvl(str);
+			return IblString.nvl(str);
 		}
 		
 		public String getSecurityType() {
@@ -50,7 +50,7 @@ public class OnContractDetails
 					str = CONTRACT_DETAILS.m_summary.m_secType;
 				}
 			}
-			return Utils.nvl(str);
+			return IblString.nvl(str);
 		}
 		
 		public String getCurrency() {
@@ -60,7 +60,7 @@ public class OnContractDetails
 					str = CONTRACT_DETAILS.m_summary.m_currency;
 				}
 			}
-			return Utils.nvl(str);
+			return IblString.nvl(str);
 		}
 		
 		public String getExchange() {
@@ -70,7 +70,7 @@ public class OnContractDetails
 					str = CONTRACT_DETAILS.m_summary.m_exchange;
 				}
 			}
-			return Utils.nvl(str);
+			return IblString.nvl(str);
 		}
 		
 		public String getPrimaryExchange() {
@@ -80,7 +80,7 @@ public class OnContractDetails
 					str = CONTRACT_DETAILS.m_summary.m_primaryExch;
 				}
 			}
-			return Utils.nvl(str);
+			return IblString.nvl(str);
 		}
 		
 		public String getSector() { // yes: Sector == m_industry
@@ -88,7 +88,7 @@ public class OnContractDetails
 			if (null != CONTRACT_DETAILS) {
 				str = CONTRACT_DETAILS.m_industry;  
 			}
-			return Utils.nvl(str);
+			return IblString.nvl(str);
 		}
 		
 		public String getIndustry() { // yes: Industry == m_category
@@ -96,7 +96,7 @@ public class OnContractDetails
 			if (null != CONTRACT_DETAILS) {
 				str = CONTRACT_DETAILS.m_category;  
 			}
-			return Utils.nvl(str);
+			return IblString.nvl(str);
 		}
 		
 		public String getCategory() { // yes: Category == m_subcategory
@@ -104,7 +104,7 @@ public class OnContractDetails
 			if (null != CONTRACT_DETAILS) {
 				str = CONTRACT_DETAILS.m_subcategory;  
 			}
-			return Utils.nvl(str);
+			return IblString.nvl(str);
 		}
 		
 	}

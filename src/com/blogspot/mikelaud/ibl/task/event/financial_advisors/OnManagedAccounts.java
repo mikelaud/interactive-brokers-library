@@ -1,11 +1,11 @@
 package com.blogspot.mikelaud.ibl.task.event.financial_advisors;
 
 import com.blogspot.mikelaud.ibl.Config;
-import com.blogspot.mikelaud.ibl.Utils;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
+import com.blogspot.mikelaud.ibl.util.IblString;
 
 /**
  * This event is called when a successful connection is made to an account.
@@ -23,7 +23,7 @@ public class OnManagedAccounts
 		public final String ACCOUNTS_LIST;
 
 		public Info(String aAccountsList) {
-			ACCOUNTS_LIST = Utils.nvl(aAccountsList);
+			ACCOUNTS_LIST = IblString.nvl(aAccountsList);
 		}
 		
 	}

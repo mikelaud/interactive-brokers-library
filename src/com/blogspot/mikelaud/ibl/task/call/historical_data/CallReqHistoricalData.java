@@ -1,13 +1,13 @@
 package com.blogspot.mikelaud.ibl.task.call.historical_data;
 
-import com.blogspot.mikelaud.ibl.Config;
-import com.blogspot.mikelaud.ibl.Utils;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.event.historical_data.OnHistoricalData;
+import com.blogspot.mikelaud.ibl.util.IblCurrency;
+import com.blogspot.mikelaud.ibl.util.IblString;
 import com.ib.client.Contract;
 
 /**
@@ -202,11 +202,11 @@ public class CallReqHistoricalData
 		,	1
 		,	1
 		);
-		IN.CONTRACT.m_symbol = Utils.nvl(aSymbol);
-		IN.CONTRACT.m_secType = Utils.nvl(aSecurityType);
-		IN.CONTRACT.m_currency = Utils.nvl(Config.getDefaultCurrency());
-		IN.CONTRACT.m_exchange = Utils.nvl(aExchange);
-		IN.CONTRACT.m_primaryExch = Utils.nvl(aPrimaryExchange);
+		IN.CONTRACT.m_symbol = IblString.nvl(aSymbol);
+		IN.CONTRACT.m_secType = IblString.nvl(aSecurityType);
+		IN.CONTRACT.m_currency = IblString.nvl(IblCurrency.USD.toString());
+		IN.CONTRACT.m_exchange = IblString.nvl(aExchange);
+		IN.CONTRACT.m_primaryExch = IblString.nvl(aPrimaryExchange);
 	}
 
 }

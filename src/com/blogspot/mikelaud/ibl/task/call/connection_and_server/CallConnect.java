@@ -1,7 +1,6 @@
 package com.blogspot.mikelaud.ibl.task.call.connection_and_server;
 
 import com.blogspot.mikelaud.ibl.Config;
-import com.blogspot.mikelaud.ibl.Utils;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
@@ -9,6 +8,7 @@ import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.event.financial_advisors.OnManagedAccounts;
 import com.blogspot.mikelaud.ibl.task.event.orders.OnNextValidId;
+import com.blogspot.mikelaud.ibl.util.IblString;
 
 /**
  * This call must be called before any other.
@@ -49,7 +49,7 @@ public class CallConnect
 		,	int aPort
 		,	int aClientId
 		) {
-			HOST = Utils.nvl(aHost);
+			HOST = IblString.nvl(aHost);
 			PORT = aPort;
 			CLIENT_ID = aClientId;
 		}

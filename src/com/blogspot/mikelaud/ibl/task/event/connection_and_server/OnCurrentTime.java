@@ -1,11 +1,11 @@
 package com.blogspot.mikelaud.ibl.task.event.connection_and_server;
 
 import com.blogspot.mikelaud.ibl.Config;
-import com.blogspot.mikelaud.ibl.Utils;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
+import com.blogspot.mikelaud.ibl.util.IblTimeZone;
 
 /**
  * This event receives the current system time on the server side.
@@ -40,7 +40,7 @@ public class OnCurrentTime
 
 	@Override
 	public String toString() {
-		String dateString = Utils.toNewYorkTime(INFO.UNIX_TIME_SEC);
+		String dateString = IblTimeZone.NEW_YORK.toDate(INFO.UNIX_TIME_SEC);
 		return String.format
 		(	"%s(%d sec) { \"%s\" }"
 		,	super.toString()

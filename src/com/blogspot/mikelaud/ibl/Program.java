@@ -23,7 +23,7 @@ public class Program implements Callable<Object> {
 		reqContractDetails.call();
 		//--------------------------------------------------------------------
 		CallReqHistoricalData reqHistoricalData =
-			new CallReqHistoricalData(mContext, "JPM", "STK", "NYSE", "NYSE", "20140722  23:59:59 EST");
+			new CallReqHistoricalData(mContext, "JPM", "STK", "NYSE", "NYSE", "20140722  23:59:59");
 		reqHistoricalData.call();
 		//--------------------------------------------------------------------
 		//mContext.onTask(callConnect);
