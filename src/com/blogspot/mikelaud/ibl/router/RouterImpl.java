@@ -51,10 +51,7 @@ public class RouterImpl implements Router {
 	public boolean isDone() {
 		boolean done = true;
 		for (Out terminator: mTerminators) {
-			if (terminator.isDone()) {
-				continue;
-			}
-			else {
+			if (! terminator.isDone()) {
 				done = false;
 				break;
 			}

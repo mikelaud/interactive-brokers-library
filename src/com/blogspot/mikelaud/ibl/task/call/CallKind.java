@@ -4,6 +4,7 @@ import com.blogspot.mikelaud.ibl.router.context.Context;
 import com.blogspot.mikelaud.ibl.router.context.ContextMulticast;
 import com.blogspot.mikelaud.ibl.router.context.ContextNocast;
 import com.blogspot.mikelaud.ibl.router.context.ContextUnicast;
+import com.blogspot.mikelaud.ibl.util.IblString;
 
 public enum CallKind {
 
@@ -48,7 +49,7 @@ public enum CallKind {
 			String errorMessage = String.format
 			(	"Unable to create context for %s: %s."
 			,	getName()
-			,	e.getMessage()
+			,	IblString.nvl(e.getMessage())
 			);
 			throw new Error(errorMessage);
 		}

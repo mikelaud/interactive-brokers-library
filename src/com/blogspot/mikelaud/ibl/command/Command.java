@@ -2,12 +2,14 @@ package com.blogspot.mikelaud.ibl.command;
 
 import java.util.concurrent.TimeUnit;
 
+import com.blogspot.mikelaud.ibl.router.Router;
 import com.blogspot.mikelaud.ibl.task.call.CallTask;
+import com.blogspot.mikelaud.ibl.task.event.EventTask;
 
 public interface Command {
 
-	boolean isDone();
-	void notifyMe();
+	Router getRouter();
+	void notifyMe(EventTask aEvent);
 	//
 	void callBefore(CallTask aCall) throws Exception;
 	void callAfter(CallTask aCall) throws Exception;

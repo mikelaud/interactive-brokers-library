@@ -8,7 +8,6 @@ import com.blogspot.mikelaud.ibl.command.Command;
 import com.blogspot.mikelaud.ibl.command.CommandImpl;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.router.Router;
-import com.blogspot.mikelaud.ibl.router.RouterImpl;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTask;
@@ -19,7 +18,6 @@ import com.blogspot.mikelaud.ibl.task.event.EventTask;
 public abstract class CallTask extends Task {
 
 	private final Command COMMAND;
-	private final Router ROUTER;
 	private final CallType CALL_TYPE;
 	//
 	private CallKind mCallKind;
@@ -27,7 +25,7 @@ public abstract class CallTask extends Task {
 	
 	private CallKind createCallKind() {
 		CallKind callKind = CallKind.NOCAST;
-		if (ROUTER.hasOut()) {
+		if (COMMAND.getRouter().hasOut()) {
 			if (hasRequestId()) {
 				callKind = CallKind.UNICAST;
 			}
@@ -41,6 +39,18 @@ public abstract class CallTask extends Task {
 		return callKind;
 	}
 	
+	public long getTimeout(TimeUnit aTimeoutUnit) {
+		return COMMAND.getTimeout(aTimeoutUnit);
+	}
+	
+	public void setTimeout(long aTimeout, TimeUnit aTimeoutUnit) {
+		COMMAND.setTimeout(aTimeout, aTimeoutUnit);
+	}
+
+	public Router getRouter() {
+		return COMMAND.getRouter();
+	}
+
 	public CallType getCallType() {
 		return CALL_TYPE;
 	}
@@ -51,19 +61,7 @@ public abstract class CallTask extends Task {
 		}
 		return mCallKind;
 	}	
-	
-	public long getTimeout(TimeUnit aTimeoutUnit) {
-		return COMMAND.getTimeout(aTimeoutUnit);
-	}
-	
-	public void setTimeout(long aTimeout, TimeUnit aTimeoutUnit) {
-		COMMAND.setTimeout(aTimeout, aTimeoutUnit);
-	}
-	
-	public Router getRouter() {
-		return ROUTER;
-	}
-	
+			
 	@Override
 	public int getRequestId() {
 		int requestId;
@@ -84,7 +82,11 @@ public abstract class CallTask extends Task {
 	public boolean hasNoRequestId() {
 		return ! hasRequestId();
 	}
-	
+
+	public void notifyMe(EventTask aEvent) {
+		COMMAND.notifyMe(aEvent);
+	}
+
 	protected abstract Task onCall() throws Exception;
 
 	@Override
@@ -94,13 +96,6 @@ public abstract class CallTask extends Task {
 		Task task = onCall();
 		COMMAND.callAfter(this);
 		return task;
-	}
-
-	public void notifyMe(EventTask aEvent) {
-		ROUTER.notifyMe(aEvent);
-		if (ROUTER.isDone()) {
-			COMMAND.notifyMe();
-		}
 	}
 	
 	@Override
@@ -114,7 +109,6 @@ public abstract class CallTask extends Task {
 	) {
 		super(aContext);
 		COMMAND = new CommandImpl();
-		ROUTER = new RouterImpl();
 		CALL_TYPE = CallTypesFactory.get().toType(aTaskInnerObject);
 		mCallKind = null;
 		mRequestId = null;

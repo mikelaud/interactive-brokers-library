@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.blogspot.mikelaud.ibl.task.Task;
+import com.blogspot.mikelaud.ibl.task.event.EventTask;
 
 public class ConnectionContext {
 
@@ -34,6 +35,12 @@ public class ConnectionContext {
 	public void onTask(Task aTask) {
 		if (null != aTask) {
 			mService.submit(aTask);
+		}
+	}
+
+	public void onEventTask(EventTask aEventTask) {
+		if (null != aEventTask) {
+			onTask(aEventTask.tryCall());
 		}
 	}
 

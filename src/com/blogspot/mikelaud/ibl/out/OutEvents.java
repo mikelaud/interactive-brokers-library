@@ -8,7 +8,7 @@ import com.blogspot.mikelaud.ibl.task.event.EventTask;
 
 public class OutEvents<EVENT_TASK extends EventTask> extends OutAbstract<EVENT_TASK> {
 
-	private ConcurrentLinkedQueue<EVENT_TASK> mEventTasks = new ConcurrentLinkedQueue<>(); 
+	private Queue<EVENT_TASK> mEventTasks = new ConcurrentLinkedQueue<EVENT_TASK>(); 
 	
 	@Override
 	protected void addEvent(EVENT_TASK aEventTask) {

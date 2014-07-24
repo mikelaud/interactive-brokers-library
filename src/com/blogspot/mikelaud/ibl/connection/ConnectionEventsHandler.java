@@ -68,7 +68,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	
 	@Override
 	public void currentTime(long aUnixTimeSec) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnCurrentTime(mContext
 		,	new OnCurrentTime.Info
 		(	aUnixTimeSec
@@ -77,7 +77,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void error(int aId, int aErrorCode, String aErrorString) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnError(mContext
 		,	new OnError.Info
 		(	aId
@@ -88,7 +88,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void error(Exception aException) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnErrorException(mContext
 		,	new OnErrorException.Info
 		(	aException
@@ -97,7 +97,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void error(String aString) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnErrorString(mContext
 		,	new OnErrorString.Info
 		(	aString
@@ -106,7 +106,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	
 	@Override
 	public void connectionClosed() {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnConnectionClosed(mContext
 		,	new OnConnectionClosed.Info
 		(
@@ -124,7 +124,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	,	double aPrice
 	,	int aCanAutoExecute
 	) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnTickPrice(mContext
 		,	new OnTickPrice.Info
 		(	aTickerId
@@ -136,7 +136,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void tickSize(int aTickerId, int aField, int aSize) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnTickSize(mContext
 		,	new OnTickSize.Info
 		(	aTickerId
@@ -158,7 +158,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	,	double aTheta
 	,	double aUndPrice
 	) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnTickOptionComputation(mContext
 		,	new OnTickOptionComputation.Info
 		(	aTickerId
@@ -176,7 +176,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void tickGeneric(int aTickerId, int aTickType, double aValue) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnTickGeneric(mContext
 		,	new OnTickGeneric.Info
 		(	aTickerId
@@ -187,7 +187,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void tickString(int aTickerId, int aTickType, String aValue) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnTickString(mContext
 		,	new OnTickString.Info
 		(	aTickerId
@@ -208,7 +208,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	,	double aDividendImpact
 	,	double aDividendsToExpiry
 	) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnTickEFP(mContext
 		,	new OnTickEFP.Info
 		(	aTickerId
@@ -225,7 +225,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void tickSnapshotEnd(int aReqId) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnTickSnapshotEnd(mContext
 		,	new OnTickSnapshotEnd.Info
 		(	aReqId
@@ -234,7 +234,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void marketDataType(int aReqId, int aMarketDataType) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnMarketDataType(mContext
 		,	new OnMarketDataType.Info
 		(	aReqId
@@ -259,7 +259,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	,	int aClientId
 	,	String aWhyHeld
 	) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnOrderStatus(mContext
 		,	new OnOrderStatus.Info
 		(	aOrderId
@@ -282,7 +282,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	,	Order aOrder
 	,	OrderState aOrderState
 	) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnOpenOrder(mContext
 		,	new OnOpenOrder.Info
 		(	aOrderId
@@ -294,7 +294,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void openOrderEnd() {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnOpenOrderEnd(mContext
 		,	new OnOpenOrderEnd.Info
 		(
@@ -303,7 +303,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void nextValidId(int aOrderId) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnNextValidId(mContext
 		,	new OnNextValidId.Info
 		(	aOrderId
@@ -312,7 +312,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void deltaNeutralValidation(int aReqId, UnderComp aUnderComp) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnDeltaNeutralValidation(mContext
 		,	new OnDeltaNeutralValidation.Info
 		(	aReqId
@@ -331,7 +331,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	,	String aCurrency
 	,	String aAccountName
 	) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnUpdateAccountValue(mContext
 		,	new OnUpdateAccountValue.Info
 		(	aKey
@@ -352,7 +352,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	,	double aRealizedPNL
 	,	String aAccountName
 	) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnUpdatePortfolio(mContext
 		,	new OnUpdatePortfolio.Info
 		(	aContract
@@ -368,7 +368,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void updateAccountTime(String aTimeStamp) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnUpdateAccountTime(mContext
 		,	new OnUpdateAccountTime.Info
 		(	aTimeStamp
@@ -377,7 +377,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void accountDownloadEnd(String aAccountName) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnAccountDownloadEnd(mContext
 		,	new OnAccountDownloadEnd.Info
 		(	aAccountName
@@ -392,7 +392,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	,	String aValue
 	,	String aCurrency
 	) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnAccountSummary(mContext
 		,	new OnAccountSummary.Info
 		(	aReqId
@@ -405,7 +405,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void accountSummaryEnd(int aReqId) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnAccountSummaryEnd(mContext
 		,	new OnAccountSummaryEnd.Info
 		(	aReqId
@@ -419,7 +419,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	,	int aPos
 	,	double aAvgCost
 	) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnPosition(mContext
 		,	new OnPosition.Info
 		(	aAccount
@@ -431,7 +431,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void positionEnd() {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnPositionEnd(mContext
 		,	new OnPositionEnd.Info
 		(
@@ -447,7 +447,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	(	int aReqId
 	,	ContractDetails aContractDetails
 	) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnContractDetails(mContext
 		,	new OnContractDetails.Info
 		(	aReqId
@@ -457,7 +457,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void contractDetailsEnd(int aReqId) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnContractDetailsEnd(mContext
 		,	new OnContractDetailsEnd.Info
 		(	aReqId
@@ -469,7 +469,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	(	int aReqId
 	,	ContractDetails aContractDetails
 	) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnBondContractDetails(mContext
 		,	new OnBondContractDetails.Info
 		(	aReqId
@@ -487,7 +487,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	,	Contract aContract
 	,	Execution aExecution
 	) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnExecDetails(mContext
 		,	new OnExecDetails.Info
 		(	aReqId
@@ -498,7 +498,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void execDetailsEnd(int aReqId) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnExecDetailsEnd(mContext
 		,	new OnExecDetailsEnd.Info
 		(	aReqId
@@ -507,7 +507,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void commissionReport(CommissionReport aCommissionReport) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnCommissionReport(mContext
 		,	new OnCommissionReport.Info
 		(	aCommissionReport
@@ -527,7 +527,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	,	double aPrice
 	,	int aSize
 	) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnUpdateMktDepth(mContext
 		,	new OnUpdateMktDepth.Info
 		(	aTickerId
@@ -549,7 +549,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	,	double aPrice
 	,	int aSize
 	) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnUpdateMktDepthL2(mContext
 		,	new OnUpdateMktDepthL2.Info
 		(	aTickerId
@@ -573,7 +573,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	,	String aMessage
 	,	String aOrigExchange
 	) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnUpdateNewsBulletin(mContext
 		,	new OnUpdateNewsBulletin.Info
 		(	aMsgId
@@ -589,7 +589,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	
 	@Override
 	public void managedAccounts(String aAccountsList) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnManagedAccounts(mContext
 		,	new OnManagedAccounts.Info
 		(	aAccountsList
@@ -598,7 +598,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void receiveFA(int aFaDataType, String aXml) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnReceiveFA(mContext
 		,	new OnReceiveFA.Info
 		(	aFaDataType
@@ -625,42 +625,27 @@ public class ConnectionEventsHandler implements EWrapper {
 	) {
 		String historicalDataEndPrefix = Config.getHistoricalDataEndPrefix();
 		if (aDate.startsWith(historicalDataEndPrefix)) {
-			/*
-			mContext.onTask
+			mContext.onEventTask
 			(	new OnHistoricalDataEnd(mContext
 			,	new OnHistoricalDataEnd.Info
 			(	aReqId
 			)));
-			*/
-			try {
-				new OnHistoricalDataEnd(mContext
-				,	new OnHistoricalDataEnd.Info
-				(	aReqId
-				)).call();
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 		else {
-			try {
-				new OnHistoricalData(mContext
-				,	new OnHistoricalData.Info
-				(	aReqId
-				,	aDate
-				,	aOpen
-				,	aHigh
-				,	aLow
-				,	aClose
-				,	aVolume
-				,	aCount
-				,	aWAP
-				,	aHasGaps
-				)).call();
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
+			mContext.onEventTask
+			(	new OnHistoricalData(mContext
+			,	new OnHistoricalData.Info
+			(	aReqId
+			,	aDate
+			,	aOpen
+			,	aHigh
+			,	aLow
+			,	aClose
+			,	aVolume
+			,	aCount
+			,	aWAP
+			,	aHasGaps
+			)));
 		}
 	}
 
@@ -670,7 +655,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void scannerParameters(String aXml) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnScannerParameters(mContext
 		,	new OnScannerParameters.Info
 		(	aXml
@@ -687,7 +672,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	,	String aProjection
 	,	String aLegsStr
 	) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnScannerData(mContext
 		,	new OnScannerData.Info
 		(	aReqId
@@ -702,7 +687,7 @@ public class ConnectionEventsHandler implements EWrapper {
 
 	@Override
 	public void scannerDataEnd(int aReqId) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnScannerDataEnd(mContext
 		,	new OnScannerDataEnd.Info
 		(	aReqId
@@ -725,7 +710,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	,	double aWAP
 	,	int aCount
 	) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnRealtimeBar(mContext
 		,	new OnRealtimeBar.Info
 		(	aReqId
@@ -746,7 +731,7 @@ public class ConnectionEventsHandler implements EWrapper {
 	
 	@Override
 	public void fundamentalData(int aReqId, String aData) {
-		mContext.onTask
+		mContext.onEventTask
 		(	new OnFundamentalData(mContext
 		,	new OnFundamentalData.Info
 		(	aReqId

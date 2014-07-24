@@ -1,21 +1,26 @@
 package com.blogspot.mikelaud.ibl.command;
 
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 import com.blogspot.mikelaud.ibl.Config;
 import com.blogspot.mikelaud.ibl.Logger;
+import com.blogspot.mikelaud.ibl.router.Router;
+import com.blogspot.mikelaud.ibl.router.RouterImpl;
 import com.blogspot.mikelaud.ibl.task.call.CallKind;
 import com.blogspot.mikelaud.ibl.task.call.CallTask;
+import com.blogspot.mikelaud.ibl.task.event.EventTask;
 
 public class CommandImpl implements Command {
 
-	private Object mTimeoutLock = new Object();
-	private long mTimeoutMs;
+	private final BlockingQueue<EventTask> QUEUE = new LinkedBlockingQueue<EventTask>();
+	private final Router ROUTER = new RouterImpl();
+	//
+	private long mTimeoutMs = 0;
 	//
 	private long mBeginTimeMs = 0;
 	private long mWaitTimeMs = 0;
-	//
-	private boolean mDone = false;
 	
 	private void resetTimeout() {
 		mBeginTimeMs = System.currentTimeMillis();
@@ -39,20 +44,17 @@ public class CommandImpl implements Command {
 	}
 	
 	@Override
-	public boolean isDone() {
-		return mDone;
+	public Router getRouter() {
+		return ROUTER;
 	}
 	
 	@Override
-	public void notifyMe() {
-		synchronized (mTimeoutLock) {
-			if (! mDone) {
-				mDone = true;
-				mTimeoutLock.notifyAll();
-			}
+	public void notifyMe(EventTask aEvent) {
+		if (! QUEUE.offer(aEvent)) {
+			Logger.logLost(aEvent.getRequestId(), aEvent.toString());
 		}
 	}
-	
+
 	@Override
 	public void callBefore(CallTask aCall) throws Exception {
 		Logger.logCommandBegin(aCall.getRequestId(), toString(aCall));
@@ -68,12 +70,15 @@ public class CommandImpl implements Command {
 		if (CallKind.NOCAST != callKind) {
 			resetTimeout();
 			for (;;) {
+				EventTask eventTask = QUEUE.poll(mWaitTimeMs, TimeUnit.MILLISECONDS);
+				if (null != eventTask) {
+					ROUTER.notifyMe(eventTask);
+					if (ROUTER.isDone()) {
+						break;
+					}
+				}
 				if (reachTimeout()) {
 					break;
-				}
-				synchronized (mTimeoutLock) {
-					if (mDone) break;
-					mTimeoutLock.wait(mWaitTimeMs);
 				}
 			}
 			aCall.getCallType().getContext(callKind).removeCommand(aCall);
@@ -101,8 +106,10 @@ public class CommandImpl implements Command {
 	}
 	
 	public CommandImpl() {
-		int timeoutSec = Config.getDefaultTimeoutSec();
-		mTimeoutMs = TimeUnit.MILLISECONDS.convert(timeoutSec, TimeUnit.SECONDS);
+		mTimeoutMs = TimeUnit.MILLISECONDS.convert
+		(	Config.getDefaultTimeoutSec()
+		,	TimeUnit.SECONDS
+		);
 		resetTimeout();
 	}
 	
