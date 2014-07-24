@@ -1,5 +1,6 @@
 package com.blogspot.mikelaud.ibl;
 
+import com.blogspot.mikelaud.ibl.util.IblString;
 
 public class Main {
 
@@ -9,7 +10,7 @@ public class Main {
 			program.call();
 		}
 		catch (Throwable t) {
-			t.printStackTrace(Logger.getStream());
+			Logger.logError(IblString.nvl(t.getMessage()));
 		}
 		finally {
 			Logger.println("Done.");

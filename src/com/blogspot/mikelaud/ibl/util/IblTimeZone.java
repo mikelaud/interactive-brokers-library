@@ -44,7 +44,7 @@ public enum IblTimeZone {
 			date = toDate(unixTimeSec);
 		}
 		catch (Exception e) {
-			e.printStackTrace(Logger.getErrorStream());
+			Logger.logError(IblString.nvl(e.getMessage()));
 			date = toDate(0);
 		}
 		return date;
