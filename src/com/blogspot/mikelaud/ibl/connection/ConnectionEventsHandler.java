@@ -625,27 +625,42 @@ public class ConnectionEventsHandler implements EWrapper {
 	) {
 		String historicalDataEndPrefix = Config.getHistoricalDataEndPrefix();
 		if (aDate.startsWith(historicalDataEndPrefix)) {
+			/*
 			mContext.onTask
 			(	new OnHistoricalDataEnd(mContext
 			,	new OnHistoricalDataEnd.Info
 			(	aReqId
 			)));
+			*/
+			try {
+				new OnHistoricalDataEnd(mContext
+				,	new OnHistoricalDataEnd.Info
+				(	aReqId
+				)).call();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		else {
-			mContext.onTask
-			(	new OnHistoricalData(mContext
-			,	new OnHistoricalData.Info
-			(	aReqId
-			,	aDate
-			,	aOpen
-			,	aHigh
-			,	aLow
-			,	aClose
-			,	aVolume
-			,	aCount
-			,	aWAP
-			,	aHasGaps
-			)));
+			try {
+				new OnHistoricalData(mContext
+				,	new OnHistoricalData.Info
+				(	aReqId
+				,	aDate
+				,	aOpen
+				,	aHigh
+				,	aLow
+				,	aClose
+				,	aVolume
+				,	aCount
+				,	aWAP
+				,	aHasGaps
+				)).call();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

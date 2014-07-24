@@ -12,7 +12,7 @@ public class OutEvents<EVENT_TASK extends EventTask> extends OutAbstract<EVENT_T
 	
 	@Override
 	protected void addEvent(EVENT_TASK aEventTask) {
-		super.addEvent(aEventTask);
+		super.setEvent(aEventTask);
 		mEventTasks.add(aEventTask);
 	}
 	

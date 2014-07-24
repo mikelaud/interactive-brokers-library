@@ -15,8 +15,12 @@ public abstract class OutAbstract<EVENT_TASK extends EventTask> implements Out {
 	private EventType mEventType;
 	private AtomicReference<EVENT_TASK> mAtomicEventTask;
 	
+	protected boolean setEvent(EVENT_TASK aEventTask) {
+		return mAtomicEventTask.compareAndSet(null, aEventTask);
+	}
+	
 	protected void addEvent(EVENT_TASK aEventTask) {
-		if (mAtomicEventTask.compareAndSet(null, aEventTask)) {
+		if (setEvent(aEventTask)) {
 			// void
 		}
 		else {

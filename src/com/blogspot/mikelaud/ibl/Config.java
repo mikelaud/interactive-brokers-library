@@ -11,7 +11,7 @@ public class Config {
 	//------------------------------------------------------------------------
 	private static final int NO_REQUEST_ID = -1;
 	private static final String HISTORICAL_DATA_END_PREFIX = "finished-";
-	private static final int DEFAULT_TIMEOUT_SEC = 11;
+	private static final int DEFAULT_TIMEOUT_SEC = 11000;
 	private static final IblTimeZone LOCAL_TIME_ZONE = IblTimeZone.MOSCOW;
 	//------------------------------------------------------------------------
 	private static final int HISTORICAL_PERIOD_SEC = 11;
