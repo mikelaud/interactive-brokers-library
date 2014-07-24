@@ -1,5 +1,7 @@
 package com.blogspot.mikelaud.ibl.task.call.historical_data;
 
+import com.blogspot.mikelaud.ibl.Config;
+import com.blogspot.mikelaud.ibl.Utils;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
 import com.blogspot.mikelaud.ibl.task.Task;
@@ -181,6 +183,30 @@ public class CallReqHistoricalData
 		,	aUseRTH
 		,	aFormatDate
 		));
+	}
+
+	public CallReqHistoricalData
+	(	ConnectionContext aContext
+	,	String aSymbol
+	,	String aSecurityType
+	,	String aExchange
+	,	String aPrimaryExchange
+	,	String aEndDateTime
+	) {
+		this(aContext
+		,	new Contract()
+		,	aEndDateTime // (yyyymmdd{space}{space}hh:mm:dd) 20140404  23:59:59
+		,	"2 D"
+		,	"1 min"
+		,	"TRADES"
+		,	1
+		,	1
+		);
+		IN.CONTRACT.m_symbol = Utils.nvl(aSymbol);
+		IN.CONTRACT.m_secType = Utils.nvl(aSecurityType);
+		IN.CONTRACT.m_currency = Utils.nvl(Config.getDefaultCurrency());
+		IN.CONTRACT.m_exchange = Utils.nvl(aExchange);
+		IN.CONTRACT.m_primaryExch = Utils.nvl(aPrimaryExchange);
 	}
 
 }

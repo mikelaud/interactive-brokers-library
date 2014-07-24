@@ -99,7 +99,7 @@ public class CommandImpl implements Command {
 	}
 	
 	public CommandImpl() {
-		int timeoutSec = Config.getCallTimeoutSec();
+		int timeoutSec = Config.getDefaultTimeoutSec();
 		mTimeoutMs = TimeUnit.MILLISECONDS.convert(timeoutSec, TimeUnit.SECONDS);
 		resetTimeout();
 	}

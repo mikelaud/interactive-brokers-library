@@ -1,11 +1,7 @@
 package com.blogspot.mikelaud.ibl.task.event.connection_and_server;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
-
 import com.blogspot.mikelaud.ibl.Config;
+import com.blogspot.mikelaud.ibl.Utils;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
@@ -32,9 +28,6 @@ public class OnCurrentTime
 	}
 	//------------------------------------------------------------------------
 
-	public static final String TIME_ZONE = "America/New_York";
-	public static final String TIME_FORMAT = "yyyy-MM-dd HH:mm:ss z";
-
 	@Override
 	public int getRequestId() {
 		return Config.getNoRequestId();
@@ -47,10 +40,7 @@ public class OnCurrentTime
 
 	@Override
 	public String toString() {
-		Date date = new Date(TimeUnit.SECONDS.toMillis(INFO.UNIX_TIME_SEC));
-		SimpleDateFormat dateFormat = new SimpleDateFormat(TIME_FORMAT);
-		dateFormat.setTimeZone(TimeZone.getTimeZone(TIME_ZONE));
-		String dateString = dateFormat.format(date);
+		String dateString = Utils.toNewYorkTime(INFO.UNIX_TIME_SEC);
 		return String.format
 		(	"%s(%d sec) { \"%s\" }"
 		,	super.toString()

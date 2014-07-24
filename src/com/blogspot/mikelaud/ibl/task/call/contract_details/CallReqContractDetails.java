@@ -1,5 +1,6 @@
 package com.blogspot.mikelaud.ibl.task.call.contract_details;
 
+import com.blogspot.mikelaud.ibl.Config;
 import com.blogspot.mikelaud.ibl.Utils;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
@@ -89,14 +90,13 @@ public class CallReqContractDetails
 	(	ConnectionContext aContext
 	,	String aSymbol
 	,	String aSecurityType
-	,	String aCurrency
 	,	String aExchange
 	,	String aPrimaryExchange
 	) {
 		this(aContext, new Contract());
 		IN.CONTRACT.m_symbol = Utils.nvl(aSymbol);
 		IN.CONTRACT.m_secType = Utils.nvl(aSecurityType);
-		IN.CONTRACT.m_currency = Utils.nvl(aCurrency);
+		IN.CONTRACT.m_currency = Utils.nvl(Config.getDefaultCurrency());
 		IN.CONTRACT.m_exchange = Utils.nvl(aExchange);
 		IN.CONTRACT.m_primaryExch = Utils.nvl(aPrimaryExchange);
 	}
