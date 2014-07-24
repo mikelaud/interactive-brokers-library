@@ -62,7 +62,7 @@ public class CallReqContractDetails
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s { \"%s/%s/%s/%s/%s\" }"
+		(	"%s { contract=\"%s/%s/%s/%s/%s\" }"
 		,	super.toString()
 		,	IblString.nvl(IN.CONTRACT.m_symbol)
 		,	IblString.nvl(IN.CONTRACT.m_secType)

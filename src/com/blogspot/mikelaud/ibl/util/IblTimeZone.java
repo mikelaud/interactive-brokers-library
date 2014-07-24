@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import com.blogspot.mikelaud.ibl.Config;
+import com.blogspot.mikelaud.ibl.Logger;
 
 public enum IblTimeZone {
 
@@ -31,15 +31,23 @@ public enum IblTimeZone {
 	
 	public String toDate(long aUnixTimeSec) {
 		Date date = new Date(TimeUnit.SECONDS.toMillis(aUnixTimeSec));
-		SimpleDateFormat dateFormat = new SimpleDateFormat(Config.getDefaultTimeFormat());
+		SimpleDateFormat dateFormat = new SimpleDateFormat(IblDate.getDefaultFormat());
 		dateFormat.setTimeZone(java.util.TimeZone.getTimeZone(getId()));
 		String dateString = dateFormat.format(date);
 		return dateString;
 	}
 	
 	public String toDate(String aUnixTimeSec) {
-		long unixTimeSec = Long.parseLong(aUnixTimeSec);
-		return toDate(unixTimeSec);
+		String date = "";
+		try {
+			long unixTimeSec = Long.parseLong(aUnixTimeSec);
+			date = toDate(unixTimeSec);
+		}
+		catch (Exception e) {
+			e.printStackTrace(Logger.getErrorStream());
+			date = toDate(0);
+		}
+		return date;
 	}
 	
 }

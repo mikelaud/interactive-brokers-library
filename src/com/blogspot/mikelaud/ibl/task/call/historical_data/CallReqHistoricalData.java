@@ -2,10 +2,12 @@ package com.blogspot.mikelaud.ibl.task.call.historical_data;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
+import com.blogspot.mikelaud.ibl.out.OutTerminator;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.event.historical_data.OnHistoricalData;
+import com.blogspot.mikelaud.ibl.task.event.historical_data.OnHistoricalDataEnd;
 import com.blogspot.mikelaud.ibl.util.IblCurrency;
 import com.blogspot.mikelaud.ibl.util.IblString;
 import com.ib.client.Contract;
@@ -127,6 +129,7 @@ public class CallReqHistoricalData
 	//------------------------------------------------------------------------
 
 	public final OutEvents<OnHistoricalData> OUT_HISTORICAL_DATA;
+	public final OutTerminator<OnHistoricalDataEnd> OUT_HISTORICAL_DATA_END;
 	
 	//------------------------------------------------------------------------
 	
@@ -148,7 +151,7 @@ public class CallReqHistoricalData
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s { endDateTime=\"%s\" durationStr=\"%s\" barSizeSetting=\"%s\" whatToShow=\"%s\" useRth=\"%d\" formatDate=\"%d\" }"
+		(	"%s { endDateTime=\"%s\" durationStr=\"%s\" barSizeSetting=\"%s\" whatToShow=\"%s\" useRth=%d formatDate=%d }"
 		,	super.toString()
 		,	IN.END_DATE_TIME
 		,	IN.DURATION_STR
@@ -162,6 +165,7 @@ public class CallReqHistoricalData
 	public CallReqHistoricalData(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
 		OUT_HISTORICAL_DATA = new OutEvents<>(this, OnHistoricalData.class);
+		OUT_HISTORICAL_DATA_END = new OutTerminator<>(this, OnHistoricalDataEnd.class);
 	}
 
 	public CallReqHistoricalData
@@ -200,7 +204,7 @@ public class CallReqHistoricalData
 		,	"1 min"
 		,	"TRADES"
 		,	1
-		,	1
+		,	2
 		);
 		IN.CONTRACT.m_symbol = IblString.nvl(aSymbol);
 		IN.CONTRACT.m_secType = IblString.nvl(aSecurityType);

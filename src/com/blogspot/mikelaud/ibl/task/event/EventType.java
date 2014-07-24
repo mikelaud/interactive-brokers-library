@@ -28,6 +28,7 @@ import com.blogspot.mikelaud.ibl.task.event.financial_advisors.OnManagedAccounts
 import com.blogspot.mikelaud.ibl.task.event.financial_advisors.OnReceiveFA;
 import com.blogspot.mikelaud.ibl.task.event.fundamental_data.OnFundamentalData;
 import com.blogspot.mikelaud.ibl.task.event.historical_data.OnHistoricalData;
+import com.blogspot.mikelaud.ibl.task.event.historical_data.OnHistoricalDataEnd;
 import com.blogspot.mikelaud.ibl.task.event.market_data.OnMarketDataType;
 import com.blogspot.mikelaud.ibl.task.event.market_data.OnTickEFP;
 import com.blogspot.mikelaud.ibl.task.event.market_data.OnTickGeneric;
@@ -297,6 +298,11 @@ public enum EventType implements TaskType {
 	(	OnHistoricalData.class
 	,	TaskGroup.HistoricalData
 	,	"Response for requested historical data."
+	),
+	historicalDataEnd
+	(	OnHistoricalDataEnd.class
+	,	TaskGroup.HistoricalData
+	,	"End marker after all historical data for reqContractDetails request are received."
 	),
 	//========================================================================
 	// Market Scanners

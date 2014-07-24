@@ -41,7 +41,7 @@ public class OnNextValidId
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s { orderId=\"%d\" }"
+		(	"%s { orderId=%d }"
 		,	super.toString()
 		,	INFO.ORDER_ID
 		);

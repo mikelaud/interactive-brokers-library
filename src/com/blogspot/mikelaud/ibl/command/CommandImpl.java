@@ -37,7 +37,7 @@ public class CommandImpl implements Command {
 			return false;
 		}
 	}
-
+	
 	@Override
 	public boolean isDone() {
 		return mDone;
@@ -56,14 +56,16 @@ public class CommandImpl implements Command {
 	@Override
 	public void callBefore(CallTask aCall) throws Exception {
 		Logger.logCommandBegin(aCall.getRequestId(), toString(aCall));
-		if (CallKind.NOCAST != aCall.getCallType().getKind()) {
-			aCall.getCallType().getContext().addCommand(aCall);
+		CallKind callKind = aCall.getCallKind();
+		if (CallKind.NOCAST != callKind) {
+			aCall.getCallType().getContext(callKind).addCommand(aCall);
 		}
 	}
 	
 	@Override
 	public void callAfter(CallTask aCall) throws Exception {
-		if (CallKind.NOCAST != aCall.getCallType().getKind()) {
+		CallKind callKind = aCall.getCallKind();
+		if (CallKind.NOCAST != callKind) {
 			resetTimeout();
 			for (;;) {
 				if (reachTimeout()) {
@@ -74,7 +76,7 @@ public class CommandImpl implements Command {
 					mTimeoutLock.wait(mWaitTimeMs);
 				}
 			}
-			aCall.getCallType().getContext().removeCommand(aCall);
+			aCall.getCallType().getContext(callKind).removeCommand(aCall);
 		}
 		Logger.logCommandEnd(aCall.getRequestId(), toString(aCall));
 	}
@@ -93,7 +95,7 @@ public class CommandImpl implements Command {
 	public String toString(CallTask aCall) {
 		return String.format
 		(	"%s.%s"
-		,	aCall.getCallType().getKind().toString()
+		,	aCall.getCallKind().toString()
 		,	aCall.toString()
 		);
 	}

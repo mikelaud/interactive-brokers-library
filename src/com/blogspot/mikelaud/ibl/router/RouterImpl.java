@@ -17,6 +17,16 @@ public class RouterImpl implements Router {
 	private List<Out> mTerminators = new ArrayList<>(); 
 	
 	@Override
+	public boolean hasOut() {
+		return (0 != mOutMap.size());
+	}
+	
+	@Override
+	public boolean hasNoOut() {
+		return ! hasOut();
+	}
+	
+	@Override
 	public void addOut(Out aOut) {
 		EventType key = aOut.getEventType();
 		mOutMap.put(key, aOut);

@@ -18,16 +18,40 @@ import com.blogspot.mikelaud.ibl.task.event.EventTask;
  */
 public abstract class CallTask extends Task {
 
-	private final CallType CALL_TYPE;
 	private final Command COMMAND;
 	private final Router ROUTER;
-
+	private final CallType CALL_TYPE;
+	//
+	private CallKind mCallKind;
 	private Integer mRequestId;
-		
+	
+	private CallKind createCallKind() {
+		CallKind callKind = CallKind.NOCAST;
+		if (ROUTER.hasOut()) {
+			if (hasRequestId()) {
+				callKind = CallKind.UNICAST;
+			}
+			else {
+				callKind = CallKind.MULTICAST;
+			}
+		}
+		else {
+			callKind = CallKind.NOCAST;
+		}
+		return callKind;
+	}
+	
 	public CallType getCallType() {
 		return CALL_TYPE;
 	}
 
+	public CallKind getCallKind() {
+		if (null == mCallKind) {
+			mCallKind = createCallKind();
+		}
+		return mCallKind;
+	}	
+	
 	public long getTimeout(TimeUnit aTimeoutUnit) {
 		return COMMAND.getTimeout(aTimeoutUnit);
 	}
@@ -56,6 +80,11 @@ public abstract class CallTask extends Task {
 	}
 	
 	public abstract boolean hasRequestId();
+	
+	public boolean hasNoRequestId() {
+		return ! hasRequestId();
+	}
+	
 	protected abstract Task onCall() throws Exception;
 
 	@Override
@@ -84,9 +113,10 @@ public abstract class CallTask extends Task {
 	,	TaskInnerObject aTaskInnerObject
 	) {
 		super(aContext);
-		CALL_TYPE = CallTypesFactory.get().toType(aTaskInnerObject);
 		COMMAND = new CommandImpl();
 		ROUTER = new RouterImpl();
+		CALL_TYPE = CallTypesFactory.get().toType(aTaskInnerObject);
+		mCallKind = null;
 		mRequestId = null;
 	}
 

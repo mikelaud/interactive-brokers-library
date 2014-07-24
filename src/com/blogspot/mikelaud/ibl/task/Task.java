@@ -11,7 +11,7 @@ public abstract class Task implements Callable<Task> {
 	protected ConnectionContext mContext;
 	
 	public abstract int getRequestId();
-	
+		
 	public ConnectionContext getContext() {
 		return mContext;
 	}

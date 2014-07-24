@@ -75,7 +75,7 @@ public class CallConnect
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s { host=\"%s\" port=\"%d\" clientId=\"%d\" }"
+		(	"%s { host=\"%s\" port=%d clientId=%d }"
 		,	super.toString()
 		,	IN.HOST
 		,	IN.PORT

@@ -5,7 +5,10 @@ import com.blogspot.mikelaud.ibl.task.event.EventTask;
 
 public interface Router {
 
-	void addOut(Out aOut);
+	boolean hasOut();
+	boolean hasNoOut();
+	//
+	void addOut(Out aOut);	
 	void notifyMe(EventTask aEvent);
 	boolean isDone();
 	

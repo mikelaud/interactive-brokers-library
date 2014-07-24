@@ -1,5 +1,6 @@
 package com.blogspot.mikelaud.ibl.connection;
 
+import com.blogspot.mikelaud.ibl.Config;
 import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnAccountDownloadEnd;
 import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnAccountSummary;
 import com.blogspot.mikelaud.ibl.task.event.account_and_portfolio.OnAccountSummaryEnd;
@@ -23,6 +24,7 @@ import com.blogspot.mikelaud.ibl.task.event.financial_advisors.OnManagedAccounts
 import com.blogspot.mikelaud.ibl.task.event.financial_advisors.OnReceiveFA;
 import com.blogspot.mikelaud.ibl.task.event.fundamental_data.OnFundamentalData;
 import com.blogspot.mikelaud.ibl.task.event.historical_data.OnHistoricalData;
+import com.blogspot.mikelaud.ibl.task.event.historical_data.OnHistoricalDataEnd;
 import com.blogspot.mikelaud.ibl.task.event.market_data.OnMarketDataType;
 import com.blogspot.mikelaud.ibl.task.event.market_data.OnTickEFP;
 import com.blogspot.mikelaud.ibl.task.event.market_data.OnTickGeneric;
@@ -621,20 +623,30 @@ public class ConnectionEventsHandler implements EWrapper {
 	,	double aWAP
 	,	boolean aHasGaps
 	) {
-		mContext.onTask
-		(	new OnHistoricalData(mContext
-		,	new OnHistoricalData.Info
-		(	aReqId
-		,	aDate
-		,	aOpen
-		,	aHigh
-		,	aLow
-		,	aClose
-		,	aVolume
-		,	aCount
-		,	aWAP
-		,	aHasGaps
-		)));
+		String historicalDataEndPrefix = Config.getHistoricalDataEndPrefix();
+		if (aDate.startsWith(historicalDataEndPrefix)) {
+			mContext.onTask
+			(	new OnHistoricalDataEnd(mContext
+			,	new OnHistoricalDataEnd.Info
+			(	aReqId
+			)));
+		}
+		else {
+			mContext.onTask
+			(	new OnHistoricalData(mContext
+			,	new OnHistoricalData.Info
+			(	aReqId
+			,	aDate
+			,	aOpen
+			,	aHigh
+			,	aLow
+			,	aClose
+			,	aVolume
+			,	aCount
+			,	aWAP
+			,	aHasGaps
+			)));
+		}
 	}
 
 	//========================================================================

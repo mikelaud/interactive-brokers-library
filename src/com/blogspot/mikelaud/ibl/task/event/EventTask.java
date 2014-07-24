@@ -20,7 +20,7 @@ public abstract class EventTask extends Task {
 			EventTargetsFactory.get().getTargets(EVENT_TYPE);
 		//
 		for (CallType targetCallType : targetCalls) {
-			targetCallType.getContext().addEvent(this);
+			targetCallType.getContext(null).addEvent(this);
 		}
 	}
 

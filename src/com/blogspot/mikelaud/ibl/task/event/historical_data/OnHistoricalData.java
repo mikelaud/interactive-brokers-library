@@ -4,6 +4,8 @@ import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
+import com.blogspot.mikelaud.ibl.util.IblDouble;
+import com.blogspot.mikelaud.ibl.util.IblTimeZone;
 
 /**
  * This event receives the requested historical data results.
@@ -99,16 +101,16 @@ public class OnHistoricalData
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s { date=\"%s\" open=\"%f\" high=\"%f\" low=\"%f\" close=\"%f\" volume=\"%d\" count=\"%d\" wap=\"%f\" hasGaps=\"%b\" }"
+		(	"%s { date=\"%s\" open=%s high=%s low=%s close=%s volume=%d count=%d wap=%s hasGaps=%b }"
 		,	super.toString()
-		,	INFO.DATE
-		,	INFO.OPEN
-		,	INFO.HIGH
-		,	INFO.LOW
-		,	INFO.CLOSE
+		,	IblTimeZone.NEW_YORK.toDate(INFO.DATE)
+		,	IblDouble.toString(INFO.OPEN)
+		,	IblDouble.toString(INFO.HIGH)
+		,	IblDouble.toString(INFO.LOW)
+		,	IblDouble.toString(INFO.CLOSE)
 		,	INFO.VOLUME
 		,	INFO.COUNT
-		,	INFO.WAP
+		,	IblDouble.toString(INFO.WAP)
 		,	INFO.HAS_GAPS
 		);
 	}
