@@ -18,12 +18,12 @@ public class Logger {
 		System.out.println(String.format("%s %s", currentDate, aMessage));
 	}
 	
-	public static void logEvent(final int aRequestId, final String aMessage) {
-		log(String.format("EVNT: [%d]%s", aRequestId, aMessage));
+	public static void logEvent(final int aRequestId, final long aEventsCount, final String aMessage) {
+		log(String.format("EVNT: [%d.%d]%s", aRequestId, aEventsCount, aMessage));
 	}
 
-	public static void logHist(final int aRequestId, final String aMessage) {
-		log(String.format("HIST: [%d]%s", aRequestId, aMessage));
+	public static void logHist(final int aRequestId, final long aEventsCount, final String aMessage) {
+		log(String.format("HIST: [%d.%d]%s", aRequestId, aEventsCount, aMessage));
 	}
 
 	public static void logLost(final int aRequestId, final String aMessage) {
@@ -31,7 +31,7 @@ public class Logger {
 	}
 
 	public static void logCall(final int aRequestId, final String aMessage) {
-		log(String.format("CALL: [%d]%s", aRequestId, aMessage));
+		log(String.format("CALL: [%d.0]%s", aRequestId, aMessage));
 	}
 
 	public static void logCommandBegin(final int aRequestId, final String aMessage) {

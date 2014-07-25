@@ -1,5 +1,6 @@
 package com.blogspot.mikelaud.ibl.task.event.historical_data;
 
+import com.blogspot.mikelaud.ibl.Logger;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
@@ -98,6 +99,11 @@ public class OnHistoricalData
 		return null;
 	}
 
+	@Override
+	public void logEvent(long aEventsCount) {
+		Logger.logHist(getRequestId(), aEventsCount, toString());
+	}
+	
 	@Override
 	public String toString() {
 		return String.format

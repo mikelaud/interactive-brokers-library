@@ -42,8 +42,8 @@ public abstract class EventTask extends Task {
 		return EVENT_TYPE.toString();
 	}
 
-	public void logEvent(long aEventCount) {
-		Logger.logEvent(getRequestId(), toString());
+	public void logEvent(long aEventsCount) {
+		Logger.logEvent(getRequestId(), aEventsCount, toString());
 	}
 	
 	public void logLost() {
