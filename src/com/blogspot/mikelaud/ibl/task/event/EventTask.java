@@ -3,6 +3,7 @@ package com.blogspot.mikelaud.ibl.task.event;
 import java.util.List;
 
 import com.blogspot.mikelaud.ibl.Logger;
+import com.blogspot.mikelaud.ibl.command.Command;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
@@ -42,8 +43,9 @@ public abstract class EventTask extends Task {
 		return EVENT_TYPE.toString();
 	}
 
-	public void logEvent(long aEventsCount) {
-		Logger.logEvent(getRequestId(), aEventsCount, toString());
+	public void logEvent(Command aCommand) {
+		aCommand.incrementEvents();
+		Logger.logEvent(getRequestId(), aCommand.getEventsCount(), toString());
 	}
 	
 	public void logLost() {

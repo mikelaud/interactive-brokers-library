@@ -18,6 +18,8 @@ public class CommandImpl implements Command {
 	private final Router ROUTER;
 	//
 	private long mEventsCount;
+	private long mHistoricalEventsCount;
+	//
 	private long mTimeoutMs;
 	//
 	private long mBeginTimeMs;
@@ -50,6 +52,27 @@ public class CommandImpl implements Command {
 	}
 	
 	@Override
+	public void incrementEvents() {
+		mEventsCount++;
+	}
+
+	@Override
+	public void incrementHistoricalEvents() {
+		incrementEvents();
+		mHistoricalEventsCount++;
+	}
+
+	@Override
+	public long getEventsCount() {
+		return mEventsCount;
+	}
+
+	@Override
+	public long getHistoricalEventsCount() {
+		return mHistoricalEventsCount;
+	}
+	
+	@Override
 	public void notifyMe(EventTask aEvent) {
 		if (! QUEUE.offer(aEvent)) {
 			aEvent.logLost();
@@ -74,8 +97,7 @@ public class CommandImpl implements Command {
 				EventTask eventTask = QUEUE.poll(mWaitTimeMs, TimeUnit.MILLISECONDS);
 				if (null != eventTask) {
 					if (ROUTER.notifyMe(eventTask)) {
-						mEventsCount++;
-						eventTask.logEvent(mEventsCount);
+						eventTask.logEvent(this);
 					}
 					else {
 						eventTask.logLost();
@@ -117,6 +139,8 @@ public class CommandImpl implements Command {
 		ROUTER = new RouterImpl();
 		//
 		mEventsCount = 0;
+		mHistoricalEventsCount = 0;
+		//
 		mTimeoutMs = TimeUnit.MILLISECONDS.convert
 		(	Config.getDefaultTimeoutSec()
 		,	TimeUnit.SECONDS

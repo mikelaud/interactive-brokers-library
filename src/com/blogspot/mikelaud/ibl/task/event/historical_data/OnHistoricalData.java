@@ -1,6 +1,7 @@
 package com.blogspot.mikelaud.ibl.task.event.historical_data;
 
 import com.blogspot.mikelaud.ibl.Logger;
+import com.blogspot.mikelaud.ibl.command.Command;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
@@ -100,15 +101,24 @@ public class OnHistoricalData
 	}
 
 	@Override
-	public void logEvent(long aEventsCount) {
-		Logger.logHist(getRequestId(), aEventsCount, toString());
+	public void logEvent(Command aCommand) {
+		aCommand.incrementHistoricalEvents();
+		Logger.logHist
+		(	getRequestId()
+		,	aCommand.getEventsCount()
+		,	aCommand.getHistoricalEventsCount()
+		,	toStringPrefix()
+		,	toStringSuffix()
+		);
 	}
 	
-	@Override
-	public String toString() {
+	private String toStringPrefix() {
+		return super.toString();
+	}
+	
+	private String toStringSuffix() {
 		return String.format
-		(	"%s { date=\"%s\" open=%s high=%s low=%s close=%s volume=%d count=%d wap=%s hasGaps=%b }"
-		,	super.toString()
+		(	"{ date=\"%s\" open=%s high=%s low=%s close=%s volume=%d count=%d wap=%s hasGaps=%b }"
 		,	IblTimeZone.NEW_YORK.toDate(INFO.DATE)
 		,	IblDouble.toString(INFO.OPEN)
 		,	IblDouble.toString(INFO.HIGH)
@@ -118,6 +128,15 @@ public class OnHistoricalData
 		,	INFO.COUNT
 		,	IblDouble.toString(INFO.WAP)
 		,	INFO.HAS_GAPS
+		);
+	}
+	
+	@Override
+	public String toString() {
+		return String.format
+		(	"%s %s"
+		,	toStringPrefix()
+		,	toStringSuffix()
 		);
 	}
 	

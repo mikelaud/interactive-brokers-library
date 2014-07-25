@@ -17,6 +17,12 @@ public interface Command {
 	long getTimeout(TimeUnit aTimeoutUnit);
 	void setTimeout(long aTimeout, TimeUnit aTimeoutUnit);
 	//
+	void incrementEvents();
+	void incrementHistoricalEvents();
+	//
+	long getEventsCount();
+	long getHistoricalEventsCount();	
+	//
 	String toString(CallTask aCall);
 
 }

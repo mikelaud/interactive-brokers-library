@@ -22,8 +22,14 @@ public class Logger {
 		log(String.format("EVNT: [%d.%d]%s", aRequestId, aEventsCount, aMessage));
 	}
 
-	public static void logHist(final int aRequestId, final long aEventsCount, final String aMessage) {
-		log(String.format("HIST: [%d.%d]%s", aRequestId, aEventsCount, aMessage));
+	public static void logHist
+	(	final int aRequestId
+	,	final long aEventsCount
+	,	final long aHistoricalEventsCount
+	,	final String aMessagePrefix
+	,	final String aMessageSuffix
+	) {
+		log(String.format("HIST: [%d.%d]%s[%d] %s", aRequestId, aEventsCount, aMessagePrefix, aHistoricalEventsCount, aMessageSuffix));
 	}
 
 	public static void logLost(final int aRequestId, final String aMessage) {

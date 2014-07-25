@@ -151,12 +151,17 @@ public class CallReqHistoricalData
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s { endDateTime=\"%s\" durationStr=\"%s\" barSizeSetting=\"%s\" whatToShow=\"%s\" useRth=%d formatDate=%d }"
+		(	"%s(\"%s/%s/%s/%s/%s\") { endDateTime=\"%s\" durationStr=\"%s\" barSizeSetting=\"%s\" whatToShow=\"%s\" useRth=%d formatDate=%d }"
 		,	super.toString()
-		,	IN.END_DATE_TIME
-		,	IN.DURATION_STR
-		,	IN.BAR_SIZE_SETTING
-		,	IN.WHAT_TO_SHOW
+		,	IblString.nvl(IN.CONTRACT.m_symbol)
+		,	IblString.nvl(IN.CONTRACT.m_secType)
+		,	IblString.nvl(IN.CONTRACT.m_currency)
+		,	IblString.nvl(IN.CONTRACT.m_exchange)
+		,	IblString.nvl(IN.CONTRACT.m_primaryExch)
+		,	IblString.nvl(IN.END_DATE_TIME)
+		,	IblString.nvl(IN.DURATION_STR)
+		,	IblString.nvl(IN.BAR_SIZE_SETTING)
+		,	IblString.nvl(IN.WHAT_TO_SHOW)
 		,	IN.USE_RTH
 		,	IN.FORMAT_DATE
 		);
