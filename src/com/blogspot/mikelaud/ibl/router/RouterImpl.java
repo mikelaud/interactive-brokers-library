@@ -9,11 +9,25 @@ import com.blogspot.mikelaud.ibl.out.Out;
 import com.blogspot.mikelaud.ibl.out.OutType;
 import com.blogspot.mikelaud.ibl.task.event.EventTask;
 import com.blogspot.mikelaud.ibl.task.event.EventType;
+import com.blogspot.mikelaud.ibl.task.event.connection_and_server.OnError;
 
 public class RouterImpl implements Router {
 
 	private final Map<EventType,Out> OUT_MAP;
 	private final List<Out> TERMINATORS; 
+	private OnError mOnError; 
+	
+	public boolean hasError() {
+		return (null != mOnError);
+	}
+	
+	public boolean hasNoError() {
+		return ! hasError();
+	}
+	
+	public OnError getError() {
+		return mOnError;
+	}
 	
 	@Override
 	public boolean hasOut() {
@@ -29,6 +43,7 @@ public class RouterImpl implements Router {
 	public void addOut(Out aOut) {
 		EventType key = aOut.getEventType();
 		OUT_MAP.put(key, aOut);
+		//
 		if (OutType.TERMINATOR == aOut.getOutType()) {
 			TERMINATORS.add(aOut);
 		}
@@ -43,7 +58,10 @@ public class RouterImpl implements Router {
 			out.notifyMe(aEvent);
 		}
 		else {
-			aEvent.logLost();
+			if (EventType.error == aEvent.getEventType()) {
+				mOnError = OnError.class.cast(aEvent);
+				done = true;
+			}
 		}
 		return done;
 	}
@@ -57,12 +75,13 @@ public class RouterImpl implements Router {
 				break;
 			}
 		}
-		return done;
+		return (done || hasError());
 	}
 
 	public RouterImpl() {
 		OUT_MAP = new HashMap<>();
-		TERMINATORS = new ArrayList<>(); 
+		TERMINATORS = new ArrayList<>();
+		mOnError = null;
 	}
-	
+
 }

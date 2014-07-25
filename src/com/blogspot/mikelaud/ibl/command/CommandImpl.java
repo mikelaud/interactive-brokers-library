@@ -84,6 +84,7 @@ public class CommandImpl implements Command {
 		Logger.logCommandBegin(aCall.getRequestId(), toString(aCall));
 		CallKind callKind = aCall.getCallKind();
 		if (CallKind.NOCAST != callKind) {
+			aCall.getContext().addUnicastCall(aCall);
 			aCall.getCallType().getContext(callKind).addCommand(aCall);
 		}
 	}
@@ -111,6 +112,7 @@ public class CommandImpl implements Command {
 				}
 			}
 			aCall.getCallType().getContext(callKind).removeCommand(aCall);
+			aCall.getContext().removeUnicastCall(aCall);
 		}
 		Logger.logCommandEnd(aCall.getRequestId(), toString(aCall));
 	}
@@ -135,7 +137,7 @@ public class CommandImpl implements Command {
 	}
 	
 	public CommandImpl() {
-		QUEUE = new LinkedBlockingQueue<EventTask>();
+		QUEUE = new LinkedBlockingQueue<>();
 		ROUTER = new RouterImpl();
 		//
 		mEventsCount = 0;

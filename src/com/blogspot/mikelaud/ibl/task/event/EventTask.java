@@ -2,11 +2,13 @@ package com.blogspot.mikelaud.ibl.task.event;
 
 import java.util.List;
 
+import com.blogspot.mikelaud.ibl.Config;
 import com.blogspot.mikelaud.ibl.Logger;
 import com.blogspot.mikelaud.ibl.command.Command;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
+import com.blogspot.mikelaud.ibl.task.call.CallTask;
 import com.blogspot.mikelaud.ibl.task.call.CallType;
 
 /**
@@ -16,12 +18,32 @@ public abstract class EventTask extends Task {
 
 	private final EventType EVENT_TYPE;
 
+	private boolean notifyUnicastCall() {
+		boolean done = false;
+		int requestId = getRequestId();
+		if (getRequestId() > Config.getNoRequestId()) {
+			CallTask callTask = getContext().getUnicastCall(requestId);
+			if (null != callTask) {
+				callTask.notifyMe(this);
+				done = true;
+			}
+		}
+		return done;
+	}
+	
 	private void addEvent() {
 		List<CallType> targetCalls =
 			EventTargetsFactory.get().getTargets(EVENT_TYPE);
 		//
-		for (CallType targetCallType : targetCalls) {
-			targetCallType.getContext(null).addEvent(this);
+		if (targetCalls.size() > 0) {
+			for (CallType targetCallType : targetCalls) {
+				targetCallType.getContext(null).addEvent(this);
+			}
+		}
+		else {
+			if (! notifyUnicastCall()) {
+				logLost(); 
+			}
 		}
 	}
 

@@ -11,6 +11,7 @@ import com.blogspot.mikelaud.ibl.router.Router;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTask;
+import com.blogspot.mikelaud.ibl.task.event.connection_and_server.OnError;
 
 /**
  * EClientSocket calls you use when connecting to TWS.
@@ -51,6 +52,18 @@ public abstract class CallTask extends Task {
 		return COMMAND.getRouter();
 	}
 
+	public boolean hasError() {
+		return getRouter().hasError();
+	}
+	
+	public boolean hasNoError() {
+		return getRouter().hasNoError();
+	}
+	
+	public OnError getError() {
+		return getRouter().getError();
+	}
+	
 	public CallType getCallType() {
 		return CALL_TYPE;
 	}

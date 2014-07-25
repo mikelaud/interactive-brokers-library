@@ -66,7 +66,6 @@ public class EventTargets {
 	}
 	
 	public EventTargets() {
-		//
 		final int EVENTS_COUNT = EventType.values().length;
 		mEvents = new ArrayList<>(EVENTS_COUNT);
 		for (int i = 0; i < EVENTS_COUNT; i++) {

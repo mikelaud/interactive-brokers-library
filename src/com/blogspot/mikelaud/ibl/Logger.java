@@ -33,7 +33,7 @@ public class Logger {
 	}
 
 	public static void logLost(final int aRequestId, final String aMessage) {
-		log(String.format("LOST: [%d]%s", aRequestId, aMessage));
+		log(String.format("LOST: [%d.x]%s", aRequestId, aMessage));
 	}
 
 	public static void logCall(final int aRequestId, final String aMessage) {
