@@ -44,7 +44,7 @@ public class CallServerVersion
 		OnServerVersion.Info versionInfo =
 			new OnServerVersion.Info(mServerVersion);
 		//
-		new OnServerVersion(mContext, versionInfo).call();
+		new OnServerVersion(CONTEXT, versionInfo).call();
 		return null;
 	}
 

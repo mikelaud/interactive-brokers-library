@@ -32,7 +32,6 @@ public abstract class EventTask extends Task {
 
 	@Override
 	public Task call() throws Exception {
-		Logger.logEvent(getRequestId(), toString());
 		Task nextTask = onEvent();
 		addEvent();
 		return nextTask;
@@ -42,7 +41,15 @@ public abstract class EventTask extends Task {
 	public String toString() {
 		return EVENT_TYPE.toString();
 	}
+
+	public void logEvent(long aEventCount) {
+		Logger.logEvent(getRequestId(), toString());
+	}
 	
+	public void logLost() {
+		Logger.logLost(getRequestId(), toString());
+	}
+
 	public EventTask
 	(	ConnectionContext aContext
 	,	TaskInnerObject aTaskInnerObject

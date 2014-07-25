@@ -67,7 +67,7 @@ public abstract class CallTask extends Task {
 		int requestId;
 		if (hasRequestId()) {
 			if (null == mRequestId) {
-				mRequestId = mContext.nextRequestId();
+				mRequestId = CONTEXT.nextRequestId();
 			}
 			requestId = mRequestId.intValue();
 		}
@@ -97,7 +97,7 @@ public abstract class CallTask extends Task {
 		COMMAND.callAfter(this);
 		return task;
 	}
-	
+		
 	@Override
 	public String toString() {
 		return CALL_TYPE.toString();

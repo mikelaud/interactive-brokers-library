@@ -43,7 +43,7 @@ public class CallTwsConnectionTime
 		OnTwsConnectionTime.Info timeInfo =
 			new OnTwsConnectionTime.Info(mTwsConnectionTime);
 		//
-		new OnTwsConnectionTime(mContext, timeInfo).call();
+		new OnTwsConnectionTime(CONTEXT, timeInfo).call();
 		return null;
 	}
 

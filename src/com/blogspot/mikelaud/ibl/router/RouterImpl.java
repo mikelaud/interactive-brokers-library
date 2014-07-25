@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.blogspot.mikelaud.ibl.Logger;
 import com.blogspot.mikelaud.ibl.out.Out;
 import com.blogspot.mikelaud.ibl.out.OutType;
 import com.blogspot.mikelaud.ibl.task.event.EventTask;
@@ -13,12 +12,12 @@ import com.blogspot.mikelaud.ibl.task.event.EventType;
 
 public class RouterImpl implements Router {
 
-	private Map<EventType,Out> mOutMap = new HashMap<>();
-	private List<Out> mTerminators = new ArrayList<>(); 
+	private final Map<EventType,Out> OUT_MAP;
+	private final List<Out> TERMINATORS; 
 	
 	@Override
 	public boolean hasOut() {
-		return (0 != mOutMap.size());
+		return (0 != OUT_MAP.size());
 	}
 	
 	@Override
@@ -29,28 +28,30 @@ public class RouterImpl implements Router {
 	@Override
 	public void addOut(Out aOut) {
 		EventType key = aOut.getEventType();
-		mOutMap.put(key, aOut);
+		OUT_MAP.put(key, aOut);
 		if (OutType.TERMINATOR == aOut.getOutType()) {
-			mTerminators.add(aOut);
+			TERMINATORS.add(aOut);
 		}
 	}
 
 	@Override
-	public void notifyMe(EventTask aEvent) {
+	public boolean notifyMe(EventTask aEvent) {
 		EventType eventType = aEvent.getEventType();
-		Out out = mOutMap.get(eventType);
-		if (null == out) {
-			Logger.logLost(aEvent.getRequestId(), aEvent.toString());
-		}
-		else {
+		Out out = OUT_MAP.get(eventType);
+		boolean done = (null != out);
+		if (done) {
 			out.notifyMe(aEvent);
 		}
+		else {
+			aEvent.logLost();
+		}
+		return done;
 	}
 	
 	@Override
 	public boolean isDone() {
 		boolean done = true;
-		for (Out terminator: mTerminators) {
+		for (Out terminator: TERMINATORS) {
 			if (! terminator.isDone()) {
 				done = false;
 				break;
@@ -59,4 +60,9 @@ public class RouterImpl implements Router {
 		return done;
 	}
 
+	public RouterImpl() {
+		OUT_MAP = new HashMap<>();
+		TERMINATORS = new ArrayList<>(); 
+	}
+	
 }

@@ -10,20 +10,20 @@ import com.ib.client.EClientSocket;
 
 public abstract class Task implements Callable<Task> {
 
-	protected ConnectionContext mContext;
+	protected final ConnectionContext CONTEXT;
 	
 	public abstract int getRequestId();
 		
 	public ConnectionContext getContext() {
-		return mContext;
+		return CONTEXT;
 	}
 	
 	public Connection getConnection() {
-		return mContext.getConnection();
+		return CONTEXT.getConnection();
 	}
 	
 	public EClientSocket getClientSocket() {
-		return mContext.getConnection().getClientSocket();
+		return CONTEXT.getConnection().getClientSocket();
 	}
 	
 	public Task tryCall() {
@@ -38,7 +38,7 @@ public abstract class Task implements Callable<Task> {
 	}
 	
 	public Task(ConnectionContext aContext) {
-		mContext = aContext;
+		CONTEXT = aContext;
 	}
 
 }

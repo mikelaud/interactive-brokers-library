@@ -22,6 +22,14 @@ public class Logger {
 		log(String.format("EVNT: [%d]%s", aRequestId, aMessage));
 	}
 
+	public static void logHist(final int aRequestId, final String aMessage) {
+		log(String.format("HIST: [%d]%s", aRequestId, aMessage));
+	}
+
+	public static void logLost(final int aRequestId, final String aMessage) {
+		log(String.format("LOST: [%d]%s", aRequestId, aMessage));
+	}
+
 	public static void logCall(final int aRequestId, final String aMessage) {
 		log(String.format("CALL: [%d]%s", aRequestId, aMessage));
 	}
@@ -32,10 +40,6 @@ public class Logger {
 
 	public static void logCommandEnd(final int aRequestId, final String aMessage) {
 		log(String.format("CMD<: [%d]%s", aRequestId, aMessage));
-	}
-
-	public static void logLost(final int aRequestId, final String aMessage) {
-		log(String.format("LOST: [%d]%s", aRequestId, aMessage));
 	}
 
 	//------------------------------------------------------------------------

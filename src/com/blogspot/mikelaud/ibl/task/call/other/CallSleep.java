@@ -43,7 +43,7 @@ public class CallSleep
 		long timeMs = TimeUnit.MILLISECONDS.convert(IN.TIME, IN.TIME_UNIT);
 		Thread.sleep(timeMs);
 		OnSleepDone.Info info = new OnSleepDone.Info(IN.TIME, IN.TIME_UNIT);
-		new OnSleepDone(mContext, info).call();
+		new OnSleepDone(CONTEXT, info).call();
 		return null;
 	}
 

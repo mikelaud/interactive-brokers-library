@@ -2,7 +2,6 @@ package com.blogspot.mikelaud.ibl.out;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import com.blogspot.mikelaud.ibl.Logger;
 import com.blogspot.mikelaud.ibl.router.Router;
 import com.blogspot.mikelaud.ibl.task.call.CallTask;
 import com.blogspot.mikelaud.ibl.task.event.EventTask;
@@ -11,12 +10,12 @@ import com.blogspot.mikelaud.ibl.task.event.EventTypesFactory;
 
 public abstract class OutAbstract<EVENT_TASK extends EventTask> implements Out {
 	
-	private Class<EVENT_TASK> mEventClass;
-	private EventType mEventType;
-	private AtomicReference<EVENT_TASK> mAtomicEventTask;
+	private final Class<EVENT_TASK> EVENT_CLASS;
+	private final EventType EVENT_TYPE;
+	private final AtomicReference<EVENT_TASK> ATOMIC_EVENT_TASK;
 	
 	protected boolean setEvent(EVENT_TASK aEventTask) {
-		return mAtomicEventTask.compareAndSet(null, aEventTask);
+		return ATOMIC_EVENT_TASK.compareAndSet(null, aEventTask);
 	}
 	
 	protected void addEvent(EVENT_TASK aEventTask) {
@@ -24,39 +23,39 @@ public abstract class OutAbstract<EVENT_TASK extends EventTask> implements Out {
 			// void
 		}
 		else {
-			Logger.logLost(aEventTask.getRequestId(), aEventTask.toString());
+			aEventTask.logLost();
 		}
 	}
 	
 	public EVENT_TASK getEvent() {
-		return mAtomicEventTask.get();
+		return ATOMIC_EVENT_TASK.get();
 	}
 
 	@Override
 	public EventType getEventType() {
-		return mEventType;
+		return EVENT_TYPE;
 	}
 	
 	@Override
 	public void notifyMe(EventTask aEvent) {
-		if (aEvent.getEventType() == mEventType) {
-			EVENT_TASK eventTask = mEventClass.cast(aEvent);
+		if (aEvent.getEventType() == EVENT_TYPE) {
+			EVENT_TASK eventTask = EVENT_CLASS.cast(aEvent);
 			addEvent(eventTask);
 		}
 		else {
-			Logger.logLost(aEvent.getRequestId(), aEvent.toString());
+			aEvent.logLost();
 		}
 	}
 	
 	@Override
 	public boolean isDone() {
-		return (null != mAtomicEventTask.get());
+		return (null != ATOMIC_EVENT_TASK.get());
 	}
 		
 	public OutAbstract(CallTask aCallTask, Class<EVENT_TASK> aEventClass) {
-		mEventClass = aEventClass;
-		mEventType = EventTypesFactory.get().toType(mEventClass);
-		mAtomicEventTask = new AtomicReference<>(null);
+		EVENT_CLASS = aEventClass;
+		EVENT_TYPE = EventTypesFactory.get().toType(EVENT_CLASS);
+		ATOMIC_EVENT_TASK = new AtomicReference<>(null);
 		//
 		Router router = aCallTask.getRouter(); 
 		router.addOut(this);

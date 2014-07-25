@@ -9,7 +9,7 @@ public interface Router {
 	boolean hasNoOut();
 	//
 	void addOut(Out aOut);	
-	void notifyMe(EventTask aEvent);
+	boolean notifyMe(EventTask aEvent);
 	boolean isDone();
 	
 }

@@ -14,13 +14,14 @@ import com.blogspot.mikelaud.ibl.task.event.EventTask;
 
 public class CommandImpl implements Command {
 
-	private final BlockingQueue<EventTask> QUEUE = new LinkedBlockingQueue<EventTask>();
-	private final Router ROUTER = new RouterImpl();
+	private final BlockingQueue<EventTask> QUEUE;
+	private final Router ROUTER;
 	//
-	private long mTimeoutMs = 0;
+	private long mEventsCount;
+	private long mTimeoutMs;
 	//
-	private long mBeginTimeMs = 0;
-	private long mWaitTimeMs = 0;
+	private long mBeginTimeMs;
+	private long mWaitTimeMs;
 	
 	private void resetTimeout() {
 		mBeginTimeMs = System.currentTimeMillis();
@@ -51,7 +52,7 @@ public class CommandImpl implements Command {
 	@Override
 	public void notifyMe(EventTask aEvent) {
 		if (! QUEUE.offer(aEvent)) {
-			Logger.logLost(aEvent.getRequestId(), aEvent.toString());
+			aEvent.logLost();
 		}
 	}
 
@@ -72,7 +73,13 @@ public class CommandImpl implements Command {
 			for (;;) {
 				EventTask eventTask = QUEUE.poll(mWaitTimeMs, TimeUnit.MILLISECONDS);
 				if (null != eventTask) {
-					ROUTER.notifyMe(eventTask);
+					if (ROUTER.notifyMe(eventTask)) {
+						mEventsCount++;
+						eventTask.logEvent(mEventsCount);
+					}
+					else {
+						eventTask.logLost();
+					}
 					if (ROUTER.isDone()) {
 						break;
 					}
@@ -106,10 +113,17 @@ public class CommandImpl implements Command {
 	}
 	
 	public CommandImpl() {
+		QUEUE = new LinkedBlockingQueue<EventTask>();
+		ROUTER = new RouterImpl();
+		//
+		mEventsCount = 0;
 		mTimeoutMs = TimeUnit.MILLISECONDS.convert
 		(	Config.getDefaultTimeoutSec()
 		,	TimeUnit.SECONDS
 		);
+		//
+		mBeginTimeMs = 0;
+		mWaitTimeMs = 0;
 		resetTimeout();
 	}
 	
