@@ -28,7 +28,7 @@ public class CallCancelMktData
 		
 	}
 	//------------------------------------------------------------------------
-
+	
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().cancelMktData(getRequestId());

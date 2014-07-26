@@ -1,7 +1,7 @@
 package com.blogspot.mikelaud.ibl.task.call.connection_and_server;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
-import com.blogspot.mikelaud.ibl.out.OutTerminator;
+import com.blogspot.mikelaud.ibl.out.OutEnd;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
@@ -28,7 +28,7 @@ public class CallReqCurrentTime
 	}
 	//------------------------------------------------------------------------
 	
-	public final OutTerminator<OnCurrentTime> OUT_CURRENT_TIME;
+	public final OutEnd<OnCurrentTime> OUT_CURRENT_TIME;
 	
 	//------------------------------------------------------------------------	
 
@@ -45,7 +45,7 @@ public class CallReqCurrentTime
 
 	private CallReqCurrentTime(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_CURRENT_TIME = new OutTerminator<>(this, OnCurrentTime.class);
+		OUT_CURRENT_TIME = new OutEnd<>(this, OnCurrentTime.class);
 	}
 
 	public CallReqCurrentTime(ConnectionContext aContext) {

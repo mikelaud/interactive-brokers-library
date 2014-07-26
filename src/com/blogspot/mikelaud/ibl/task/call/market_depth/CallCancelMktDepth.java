@@ -3,6 +3,7 @@ package com.blogspot.mikelaud.ibl.task.call.market_depth;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
+import com.blogspot.mikelaud.ibl.task.call.CallTask;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 
 /**
@@ -12,6 +13,10 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 public class CallCancelMktDepth
 	extends CallTaskEx<CallCancelMktDepth.In>
 {
+	@Override
+	public Class<? extends CallTask> getCancelTarget() {
+		return CallReqMktDepth.class;
+	}
 	/**
 	 * The Id that was specified in the call to CallReqMktDepth.
 	 */

@@ -2,7 +2,7 @@ package com.blogspot.mikelaud.ibl.task.call.contract_details;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
-import com.blogspot.mikelaud.ibl.out.OutTerminator;
+import com.blogspot.mikelaud.ibl.out.OutEnd;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
@@ -46,7 +46,7 @@ public class CallReqContractDetails
 
 	public final OutEvents<OnContractDetails> OUT_CONTRACT_DETAILS;
 	public final OutEvents<OnBondContractDetails> OUT_BOND_CONTRACT_DETAILS;
-	public final OutTerminator<OnContractDetailsEnd> OUT_CONTRACT_DETAILS_END;
+	public final OutEnd<OnContractDetailsEnd> OUT_CONTRACT_DETAILS_END;
 	
 	//------------------------------------------------------------------------
 	
@@ -76,7 +76,7 @@ public class CallReqContractDetails
 		super(aContext, aIn, new TaskInnerObject(){});
 		OUT_CONTRACT_DETAILS = new OutEvents<>(this, OnContractDetails.class);
 		OUT_BOND_CONTRACT_DETAILS = new OutEvents<>(this, OnBondContractDetails.class);
-		OUT_CONTRACT_DETAILS_END = new OutTerminator<>(this, OnContractDetailsEnd.class);
+		OUT_CONTRACT_DETAILS_END = new OutEnd<>(this, OnContractDetailsEnd.class);
 	}
 
 	public CallReqContractDetails

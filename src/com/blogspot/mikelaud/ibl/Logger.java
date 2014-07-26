@@ -36,6 +36,10 @@ public class Logger {
 		log(String.format("LOST: [%d.x]%s", aRequestId, aMessage));
 	}
 
+	public static void logStream(final int aRequestId, final String aMessage) {
+		log(String.format("STRM: [%d.x]%s", aRequestId, aMessage));
+	}
+
 	public static void logCall(final int aRequestId, final String aMessage) {
 		log(String.format("CALL: [%d.0]%s", aRequestId, aMessage));
 	}

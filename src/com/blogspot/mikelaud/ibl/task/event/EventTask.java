@@ -74,6 +74,10 @@ public abstract class EventTask extends Task {
 		Logger.logLost(getRequestId(), toString());
 	}
 
+	public void logStream() {
+		Logger.logStream(getRequestId(), toString());
+	}
+
 	public EventTask
 	(	ConnectionContext aContext
 	,	TaskInnerObject aTaskInnerObject

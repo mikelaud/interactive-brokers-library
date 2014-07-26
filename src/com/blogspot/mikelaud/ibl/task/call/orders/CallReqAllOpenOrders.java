@@ -2,7 +2,7 @@ package com.blogspot.mikelaud.ibl.task.call.orders;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
-import com.blogspot.mikelaud.ibl.out.OutTerminator;
+import com.blogspot.mikelaud.ibl.out.OutEnd;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
@@ -40,7 +40,7 @@ public class CallReqAllOpenOrders
 
 	public final OutEvents<OnOrderStatus> OUT_ORDER_STATUS;
 	public final OutEvents<OnOpenOrder> OUT_OPEN_ORDER;
-	public final OutTerminator<OnOpenOrderEnd> OUT_OPEN_ORDER_END;
+	public final OutEnd<OnOpenOrderEnd> OUT_OPEN_ORDER_END;
 
 	//------------------------------------------------------------------------
 
@@ -59,7 +59,7 @@ public class CallReqAllOpenOrders
 		super(aContext, aIn, new TaskInnerObject(){});
 		OUT_ORDER_STATUS = new OutEvents<>(this, OnOrderStatus.class);
 		OUT_OPEN_ORDER = new OutEvents<>(this, OnOpenOrder.class);
-		OUT_OPEN_ORDER_END = new OutTerminator<>(this, OnOpenOrderEnd.class);
+		OUT_OPEN_ORDER_END = new OutEnd<>(this, OnOpenOrderEnd.class);
 	}
 
 	public CallReqAllOpenOrders(ConnectionContext aContext) {

@@ -3,6 +3,7 @@ package com.blogspot.mikelaud.ibl.task.call.fundamental_data;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
+import com.blogspot.mikelaud.ibl.task.call.CallTask;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 
 /**
@@ -11,6 +12,10 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 public class CallCancelFundamentalData
 	extends CallTaskEx<CallCancelFundamentalData.In>
 {
+	@Override
+	public Class<? extends CallTask> getCancelTarget() {
+		return CallReqFundamentalData.class;
+	}
 	/**
 	 * The ID of the data request.
 	 */

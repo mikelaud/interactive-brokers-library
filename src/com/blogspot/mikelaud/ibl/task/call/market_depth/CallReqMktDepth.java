@@ -1,9 +1,12 @@
 package com.blogspot.mikelaud.ibl.task.call.market_depth;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.out.OutStream;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
+import com.blogspot.mikelaud.ibl.task.event.market_depth.OnUpdateMktDepth;
+import com.blogspot.mikelaud.ibl.task.event.market_depth.OnUpdateMktDepthL2;
 import com.ib.client.Contract;
 
 /**
@@ -46,6 +49,11 @@ public class CallReqMktDepth
 	}
 	//------------------------------------------------------------------------
 
+	public final OutStream<OnUpdateMktDepth> STREAM_UPDATE_MKT_DEPTH;
+	public final OutStream<OnUpdateMktDepthL2> STREAM_UPDATE_MKT_DEPTH_L2;
+	
+	//------------------------------------------------------------------------
+	
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqMktDepth
@@ -67,6 +75,8 @@ public class CallReqMktDepth
 
 	public CallReqMktDepth(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
+		STREAM_UPDATE_MKT_DEPTH = new OutStream<>(this, OnUpdateMktDepth.class);
+		STREAM_UPDATE_MKT_DEPTH_L2 = new OutStream<>(this, OnUpdateMktDepthL2.class);
 	}
 
 	public CallReqMktDepth

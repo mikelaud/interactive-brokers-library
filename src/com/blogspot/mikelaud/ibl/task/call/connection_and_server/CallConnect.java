@@ -2,7 +2,7 @@ package com.blogspot.mikelaud.ibl.task.call.connection_and_server;
 
 import com.blogspot.mikelaud.ibl.Config;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
-import com.blogspot.mikelaud.ibl.out.OutTerminator;
+import com.blogspot.mikelaud.ibl.out.OutEnd;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
@@ -57,8 +57,8 @@ public class CallConnect
 	}	
 	//------------------------------------------------------------------------
 
-	public final OutTerminator<OnManagedAccounts> OUT_MANAGED_ACCOUNTS;
-	public final OutTerminator<OnNextValidId> OUT_NEXT_VALID_ID;
+	public final OutEnd<OnManagedAccounts> OUT_MANAGED_ACCOUNTS;
+	public final OutEnd<OnNextValidId> OUT_NEXT_VALID_ID;
 	
 	//------------------------------------------------------------------------
 	
@@ -85,8 +85,8 @@ public class CallConnect
 	
 	public CallConnect(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_MANAGED_ACCOUNTS = new OutTerminator<>(this, OnManagedAccounts.class);
-		OUT_NEXT_VALID_ID = new OutTerminator<>(this, OnNextValidId.class);
+		OUT_MANAGED_ACCOUNTS = new OutEnd<>(this, OnManagedAccounts.class);
+		OUT_NEXT_VALID_ID = new OutEnd<>(this, OnNextValidId.class);
 	}
 
 	public CallConnect(ConnectionContext aContext) {

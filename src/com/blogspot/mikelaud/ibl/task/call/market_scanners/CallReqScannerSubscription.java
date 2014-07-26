@@ -2,7 +2,7 @@ package com.blogspot.mikelaud.ibl.task.call.market_scanners;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
-import com.blogspot.mikelaud.ibl.out.OutTerminator;
+import com.blogspot.mikelaud.ibl.out.OutEnd;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
@@ -42,7 +42,7 @@ public class CallReqScannerSubscription
 	//------------------------------------------------------------------------
 
 	public final OutEvents<OnScannerData> OUT_SCANNER_DATA;
-	public final OutTerminator<OnScannerDataEnd> OUT_SCANNER_DATA_END;
+	public final OutEnd<OnScannerDataEnd> OUT_SCANNER_DATA_END;
 	
 	//------------------------------------------------------------------------
 	
@@ -63,7 +63,7 @@ public class CallReqScannerSubscription
 	public CallReqScannerSubscription(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
 		OUT_SCANNER_DATA = new OutEvents<>(this, OnScannerData.class);
-		OUT_SCANNER_DATA_END = new OutTerminator<>(this, OnScannerDataEnd.class);
+		OUT_SCANNER_DATA_END = new OutEnd<>(this, OnScannerDataEnd.class);
 	}
 
 	public CallReqScannerSubscription

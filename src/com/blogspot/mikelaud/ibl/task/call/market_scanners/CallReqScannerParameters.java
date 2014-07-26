@@ -1,7 +1,7 @@
 package com.blogspot.mikelaud.ibl.task.call.market_scanners;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
-import com.blogspot.mikelaud.ibl.out.OutTerminator;
+import com.blogspot.mikelaud.ibl.out.OutEnd;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
@@ -28,7 +28,7 @@ public class CallReqScannerParameters
 	}
 	//------------------------------------------------------------------------
 
-	public final OutTerminator<OnScannerParameters> OUT_SCANNER_PARAMETERS;
+	public final OutEnd<OnScannerParameters> OUT_SCANNER_PARAMETERS;
 	
 	//------------------------------------------------------------------------
 	
@@ -45,7 +45,7 @@ public class CallReqScannerParameters
 
 	private CallReqScannerParameters(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_SCANNER_PARAMETERS = new OutTerminator<>(this, OnScannerParameters.class);
+		OUT_SCANNER_PARAMETERS = new OutEnd<>(this, OnScannerParameters.class);
 	}
 
 	public CallReqScannerParameters(ConnectionContext aContext) {

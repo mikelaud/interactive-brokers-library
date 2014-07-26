@@ -2,7 +2,7 @@ package com.blogspot.mikelaud.ibl.task.call.account_and_portfolio;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
-import com.blogspot.mikelaud.ibl.out.OutTerminator;
+import com.blogspot.mikelaud.ibl.out.OutEnd;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
@@ -90,7 +90,7 @@ public class CallReqAccountSummary
 	//------------------------------------------------------------------------
 	
 	public final OutEvents<OnAccountSummary> OUT_ACCOUNT_SUMMARY;
-	public final OutTerminator<OnAccountSummaryEnd> OUT_ACCOUNT_SUMMARY_END;
+	public final OutEnd<OnAccountSummaryEnd> OUT_ACCOUNT_SUMMARY_END;
 
 	//------------------------------------------------------------------------
 	
@@ -117,7 +117,7 @@ public class CallReqAccountSummary
 	public CallReqAccountSummary(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
 		OUT_ACCOUNT_SUMMARY = new OutEvents<>(this, OnAccountSummary.class);
-		OUT_ACCOUNT_SUMMARY_END = new OutTerminator<>(this, OnAccountSummaryEnd.class);
+		OUT_ACCOUNT_SUMMARY_END = new OutEnd<>(this, OnAccountSummaryEnd.class);
 	}
 
 }

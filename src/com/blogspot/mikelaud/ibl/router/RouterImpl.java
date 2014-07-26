@@ -14,7 +14,7 @@ import com.blogspot.mikelaud.ibl.task.event.connection_and_server.OnError;
 public class RouterImpl implements Router {
 
 	private final Map<EventType,Out> OUT_MAP;
-	private final List<Out> TERMINATORS; 
+	private final List<Out> END_LIST; 
 	private OnError mOnError; 
 	
 	public boolean hasError() {
@@ -44,8 +44,8 @@ public class RouterImpl implements Router {
 		EventType key = aOut.getEventType();
 		OUT_MAP.put(key, aOut);
 		//
-		if (OutType.TERMINATOR == aOut.getOutType()) {
-			TERMINATORS.add(aOut);
+		if (OutType.END == aOut.getOutType()) {
+			END_LIST.add(aOut);
 		}
 	}
 
@@ -69,7 +69,7 @@ public class RouterImpl implements Router {
 	@Override
 	public boolean isDone() {
 		boolean done = true;
-		for (Out terminator: TERMINATORS) {
+		for (Out terminator: END_LIST) {
 			if (! terminator.isDone()) {
 				done = false;
 				break;
@@ -80,7 +80,7 @@ public class RouterImpl implements Router {
 
 	public RouterImpl() {
 		OUT_MAP = new HashMap<>();
-		TERMINATORS = new ArrayList<>();
+		END_LIST = new ArrayList<>();
 		mOnError = null;
 	}
 

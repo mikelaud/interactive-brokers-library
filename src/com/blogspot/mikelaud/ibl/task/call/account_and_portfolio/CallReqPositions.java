@@ -2,7 +2,7 @@ package com.blogspot.mikelaud.ibl.task.call.account_and_portfolio;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
-import com.blogspot.mikelaud.ibl.out.OutTerminator;
+import com.blogspot.mikelaud.ibl.out.OutEnd;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
@@ -33,7 +33,7 @@ public class CallReqPositions
 	//------------------------------------------------------------------------
 	
 	public final OutEvents<OnPosition> OUT_POSITION;
-	public final OutTerminator<OnPositionEnd> OUT_POSITION_END;
+	public final OutEnd<OnPositionEnd> OUT_POSITION_END;
 
 	//------------------------------------------------------------------------
 	
@@ -51,7 +51,7 @@ public class CallReqPositions
 	private CallReqPositions(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
 		OUT_POSITION = new OutEvents<>(this, OnPosition.class);
-		OUT_POSITION_END = new OutTerminator<>(this, OnPositionEnd.class);
+		OUT_POSITION_END = new OutEnd<>(this, OnPositionEnd.class);
 	}
 
 	public CallReqPositions(ConnectionContext aContext) {

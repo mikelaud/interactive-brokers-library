@@ -3,7 +3,7 @@ package com.blogspot.mikelaud.ibl.task.call.account_and_portfolio;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutEvent;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
-import com.blogspot.mikelaud.ibl.out.OutTerminator;
+import com.blogspot.mikelaud.ibl.out.OutEnd;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
@@ -77,7 +77,7 @@ public class CallReqAccountUpdates
 	public final OutEvent<OnUpdateAccountTime> OUT_UPDATE_ACCOUNT_TIME;
 	public final OutEvents<OnUpdateAccountValue> OUT_UPDATE_ACCOUNT_VALUE;
 	public final OutEvents<OnUpdatePortfolio> OUT_UPDATE_PORTFOLIO;
-	public final OutTerminator<OnAccountDownloadEnd> OUT_ACCOUNT_DOWNLOAD_END;
+	public final OutEnd<OnAccountDownloadEnd> OUT_ACCOUNT_DOWNLOAD_END;
 	
 	//------------------------------------------------------------------------
 	
@@ -105,7 +105,7 @@ public class CallReqAccountUpdates
 		OUT_UPDATE_ACCOUNT_TIME = new OutEvent<>(this, OnUpdateAccountTime.class);
 		OUT_UPDATE_ACCOUNT_VALUE = new OutEvents<>(this, OnUpdateAccountValue.class);
 		OUT_UPDATE_PORTFOLIO = new OutEvents<>(this, OnUpdatePortfolio.class);
-		OUT_ACCOUNT_DOWNLOAD_END = new OutTerminator<>(this, OnAccountDownloadEnd.class);
+		OUT_ACCOUNT_DOWNLOAD_END = new OutEnd<>(this, OnAccountDownloadEnd.class);
 	}
 
 }

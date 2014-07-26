@@ -1,9 +1,11 @@
 package com.blogspot.mikelaud.ibl.task.call.fundamental_data;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.out.OutStream;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
+import com.blogspot.mikelaud.ibl.task.event.fundamental_data.OnFundamentalData;
 import com.ib.client.Contract;
 
 /**
@@ -56,6 +58,9 @@ public class CallReqFundamentalData
 	}
 	//------------------------------------------------------------------------
 
+	public final OutStream<OnFundamentalData> STREAM_FUNDAMENTAL_DATA;
+	
+	//------------------------------------------------------------------------
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqFundamentalData
@@ -77,6 +82,7 @@ public class CallReqFundamentalData
 
 	public CallReqFundamentalData(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
+		STREAM_FUNDAMENTAL_DATA = new OutStream<>(this, OnFundamentalData.class);
 	}
 
 	public CallReqFundamentalData

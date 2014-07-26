@@ -1,9 +1,11 @@
 package com.blogspot.mikelaud.ibl.task.call.news_bulletins;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
+import com.blogspot.mikelaud.ibl.out.OutStream;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
+import com.blogspot.mikelaud.ibl.task.event.news_bulletins.OnUpdateNewsBulletin;
 
 /**
  * Call this call to start receiving news bulletins.
@@ -33,6 +35,10 @@ public class CallReqNewsBulletins
 	}
 	//------------------------------------------------------------------------
 
+	public final OutStream<OnUpdateNewsBulletin> STREAM_UPDATE_NEWS_BULLETIN;
+	
+	//------------------------------------------------------------------------
+
 	@Override
 	protected Task onCall() throws Exception {
 		getClientSocket().reqNewsBulletins(IN.ALL_MSGS);
@@ -50,6 +56,7 @@ public class CallReqNewsBulletins
 
 	public CallReqNewsBulletins(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
+		STREAM_UPDATE_NEWS_BULLETIN = new OutStream<>(this, OnUpdateNewsBulletin.class);
 	}
 
 	public CallReqNewsBulletins(ConnectionContext aContext, boolean aAllMsgs) {

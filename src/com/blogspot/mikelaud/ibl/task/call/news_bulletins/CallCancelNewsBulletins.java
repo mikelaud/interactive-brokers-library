@@ -3,6 +3,7 @@ package com.blogspot.mikelaud.ibl.task.call.news_bulletins;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
+import com.blogspot.mikelaud.ibl.task.call.CallTask;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 
 /**
@@ -11,6 +12,11 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 public class CallCancelNewsBulletins
 	extends CallTaskEx<CallCancelNewsBulletins.In>
 {
+	@Override
+	public Class<? extends CallTask> getCancelTarget() {
+		return CallReqNewsBulletins.class;
+	}
+
 	@Override
 	public boolean hasRequestId() {
 		return false;

@@ -96,6 +96,10 @@ public abstract class CallTask extends Task {
 		return ! hasRequestId();
 	}
 
+	public Class<? extends CallTask> getCancelTarget() {
+		return null;
+	}
+	
 	public void notifyMe(EventTask aEvent) {
 		COMMAND.notifyMe(aEvent);
 	}

@@ -1,7 +1,7 @@
 package com.blogspot.mikelaud.ibl.task.call.financial_advisors;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
-import com.blogspot.mikelaud.ibl.out.OutTerminator;
+import com.blogspot.mikelaud.ibl.out.OutEnd;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
@@ -31,7 +31,7 @@ public class CallReqManagedAccts
 	}
 	//------------------------------------------------------------------------
 
-	public final OutTerminator<OnManagedAccounts> OUT_MANAGED_ACCOUNTS;
+	public final OutEnd<OnManagedAccounts> OUT_MANAGED_ACCOUNTS;
 	
 	//------------------------------------------------------------------------
 	
@@ -48,7 +48,7 @@ public class CallReqManagedAccts
 
 	private CallReqManagedAccts(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_MANAGED_ACCOUNTS = new OutTerminator<>(this, OnManagedAccounts.class);
+		OUT_MANAGED_ACCOUNTS = new OutEnd<>(this, OnManagedAccounts.class);
 	}
 
 	public CallReqManagedAccts(ConnectionContext aContext) {

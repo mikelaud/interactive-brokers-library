@@ -1,7 +1,7 @@
 package com.blogspot.mikelaud.ibl.task.call.financial_advisors;
 
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
-import com.blogspot.mikelaud.ibl.out.OutTerminator;
+import com.blogspot.mikelaud.ibl.out.OutEnd;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
@@ -42,7 +42,7 @@ public class CallReplaceFA
 	}
 	//------------------------------------------------------------------------
 
-	public final OutTerminator<OnReceiveFA> OUT_RECEIVE_FA;
+	public final OutEnd<OnReceiveFA> OUT_RECEIVE_FA;
 	
 	//------------------------------------------------------------------------
 	
@@ -67,7 +67,7 @@ public class CallReplaceFA
 
 	public CallReplaceFA(ConnectionContext aContext, In aIn) {
 		super(aContext, aIn, new TaskInnerObject(){});
-		OUT_RECEIVE_FA = new OutTerminator<>(this, OnReceiveFA.class);
+		OUT_RECEIVE_FA = new OutEnd<>(this, OnReceiveFA.class);
 	}
 
 	public CallReplaceFA

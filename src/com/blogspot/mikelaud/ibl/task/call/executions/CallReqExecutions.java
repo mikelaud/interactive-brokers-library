@@ -3,7 +3,7 @@ package com.blogspot.mikelaud.ibl.task.call.executions;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.out.OutEvent;
 import com.blogspot.mikelaud.ibl.out.OutEvents;
-import com.blogspot.mikelaud.ibl.out.OutTerminator;
+import com.blogspot.mikelaud.ibl.out.OutEnd;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
@@ -48,7 +48,7 @@ public class CallReqExecutions
 
 	public final OutEvent<OnCommissionReport> OUT_COMMISSION_REPORT;
 	public final OutEvents<OnExecDetails> OUT_EXEC_DETAILS;
-	public final OutTerminator<OnExecDetailsEnd> OUT_EXEC_DETAILS_END;
+	public final OutEnd<OnExecDetailsEnd> OUT_EXEC_DETAILS_END;
 	
 	//------------------------------------------------------------------------
 	
@@ -70,7 +70,7 @@ public class CallReqExecutions
 		super(aContext, aIn, new TaskInnerObject(){});
 		OUT_COMMISSION_REPORT = new OutEvent<>(this, OnCommissionReport.class);
 		OUT_EXEC_DETAILS = new OutEvents<>(this, OnExecDetails.class);
-		OUT_EXEC_DETAILS_END = new OutTerminator<>(this, OnExecDetailsEnd.class);
+		OUT_EXEC_DETAILS_END = new OutEnd<>(this, OnExecDetailsEnd.class);
 	}
 
 }

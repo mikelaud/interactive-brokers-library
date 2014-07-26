@@ -3,6 +3,7 @@ package com.blogspot.mikelaud.ibl.task.call.real_time_bars;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
+import com.blogspot.mikelaud.ibl.task.call.CallTask;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 
 /**
@@ -11,6 +12,10 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 public class CallCancelRealTimeBars
 	extends CallTaskEx<CallCancelRealTimeBars.In>
 {
+	@Override
+	public Class<? extends CallTask> getCancelTarget() {
+		return CallReqRealTimeBars.class;
+	}
 	/**
 	 * The Id that was specified in the call to CallReqRealTimeBars.
 	 */
