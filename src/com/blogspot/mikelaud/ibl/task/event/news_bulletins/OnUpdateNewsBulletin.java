@@ -5,6 +5,7 @@ import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
+import com.blogspot.mikelaud.ibl.util.IblString;
 
 /**
  * This event is triggered for each new bulletin if the client has subscribed,
@@ -44,8 +45,8 @@ public class OnUpdateNewsBulletin
 		) {
 			MSG_ID = aMsgId;
 			MSG_TYPE = aMsgType;
-			MESSAGE = aMessage;
-			ORIG_EXCHANGE = aOrigExchange;
+			MESSAGE = IblString.nvl(aMessage);
+			ORIG_EXCHANGE = IblString.nvl(aOrigExchange);
 		}
 		
 	}
