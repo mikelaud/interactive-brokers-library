@@ -1,6 +1,12 @@
 package com.blogspot.mikelaud.ibl;
 
+import java.io.PrintStream;
+
 public class Logger {
+
+	public static PrintStream getStream() {
+		return System.out;
+	}
 
 	public static void print(final String aMessage) {
 		System.out.print(aMessage);
