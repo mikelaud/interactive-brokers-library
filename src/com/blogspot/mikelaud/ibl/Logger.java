@@ -68,6 +68,10 @@ public class Logger {
 		log(String.format("WARN: %s", aMessage));
 	}
 
+	public static void logInfo(final String aMessage) {
+		log(String.format("INFO: %s", aMessage));
+	}
+	
 	public static void logDebug(final String aMessage) {
 		log(String.format("DEBG: %s", aMessage));
 	}
