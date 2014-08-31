@@ -1,6 +1,6 @@
 package com.blogspot.mikelaud.ibl;
 
-import com.blogspot.mikelaud.ibl.util.IblString;
+import com.blogspot.mikelaud.ibl.types.IblString;
 
 public class Main {
 

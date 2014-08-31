@@ -5,7 +5,7 @@ import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.util.IblString;
+import com.blogspot.mikelaud.ibl.types.IblString;
 
 /**
  * This event is triggered for each new bulletin if the client has subscribed,

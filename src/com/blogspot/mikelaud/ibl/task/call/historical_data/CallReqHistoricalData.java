@@ -8,8 +8,13 @@ import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.event.historical_data.OnHistoricalData;
 import com.blogspot.mikelaud.ibl.task.event.historical_data.OnHistoricalDataEnd;
-import com.blogspot.mikelaud.ibl.util.IblCurrency;
-import com.blogspot.mikelaud.ibl.util.IblString;
+import com.blogspot.mikelaud.ibl.types.IblBarSize;
+import com.blogspot.mikelaud.ibl.types.IblCurrency;
+import com.blogspot.mikelaud.ibl.types.IblDuration;
+import com.blogspot.mikelaud.ibl.types.IblFormatDate;
+import com.blogspot.mikelaud.ibl.types.IblString;
+import com.blogspot.mikelaud.ibl.types.IblUseRth;
+import com.blogspot.mikelaud.ibl.types.IblWhatToShow;
 import com.ib.client.Contract;
 
 /**
@@ -110,19 +115,19 @@ public class CallReqHistoricalData
 		public In
 		(	Contract aContract
 		,	String aEndDateTime
-		,	String aDurationStr
-		,	String aBarSizeSetting
-		,	String aWhatToShow
-		,	int aUseRTH
-		,	int aFormatDate
+		,	IblDuration aDuration
+		,	IblBarSize aBarSize
+		,	IblWhatToShow aWhatToShow
+		,	IblUseRth aUseRTH
+		,	IblFormatDate aFormatDate
 		) {
 			CONTRACT = aContract;
 			END_DATE_TIME = aEndDateTime;
-			DURATION_STR = aDurationStr;
-			BAR_SIZE_SETTING = aBarSizeSetting;
-			WHAT_TO_SHOW = aWhatToShow;
-			USE_RTH = aUseRTH;
-			FORMAT_DATE = aFormatDate;
+			DURATION_STR = aDuration.getValue();
+			BAR_SIZE_SETTING = aBarSize.getValue();
+			WHAT_TO_SHOW = aWhatToShow.getValue();
+			USE_RTH = aUseRTH.getValue();
+			FORMAT_DATE = aFormatDate.getValue();
 		}
 		
 	}
@@ -177,21 +182,47 @@ public class CallReqHistoricalData
 	(	ConnectionContext aContext
 	,	Contract aContract
 	,	String aEndDateTime
-	,	String aDurationStr
-	,	String aBarSizeSetting
-	,	String aWhatToShow
-	,	int aUseRTH
-	,	int aFormatDate
+	,	IblDuration aDuration
+	,	IblBarSize aBarSize
+	,	IblWhatToShow aWhatToShow
+	,	IblUseRth aUseRTH
+	,	IblFormatDate aFormatDate
 	) {
 		this(aContext, new In
 		(	aContract
 		,	aEndDateTime
-		,	aDurationStr
-		,	aBarSizeSetting
+		,	aDuration
+		,	aBarSize
 		,	aWhatToShow
 		,	aUseRTH
 		,	aFormatDate
 		));
+	}
+
+	public CallReqHistoricalData
+	(	ConnectionContext aContext
+	,	IblDuration aDuration
+	,	IblBarSize aBarSize
+	,	String aSymbol
+	,	String aSecurityType
+	,	String aExchange
+	,	String aPrimaryExchange
+	,	String aEndDateTime
+	) {
+		this(aContext
+		,	new Contract()
+		,	aEndDateTime // (yyyymmdd{space}{space}hh:mm:dd) 20140404  23:59:59
+		,	aDuration
+		,	aBarSize
+		,	IblWhatToShow.TRADES
+		,	IblUseRth.RTH_DATA
+		,	IblFormatDate.UNIX_TIME_SEC
+		);
+		IN.CONTRACT.m_symbol = IblString.nvl(aSymbol);
+		IN.CONTRACT.m_secType = IblString.nvl(aSecurityType);
+		IN.CONTRACT.m_currency = IblString.nvl(IblCurrency.USD.getValue());
+		IN.CONTRACT.m_exchange = IblString.nvl(aExchange);
+		IN.CONTRACT.m_primaryExch = IblString.nvl(aPrimaryExchange);
 	}
 
 	public CallReqHistoricalData
@@ -203,19 +234,14 @@ public class CallReqHistoricalData
 	,	String aEndDateTime
 	) {
 		this(aContext
-		,	new Contract()
-		,	aEndDateTime // (yyyymmdd{space}{space}hh:mm:dd) 20140404  23:59:59
-		,	"2 D"
-		,	"1 min"
-		,	"TRADES"
-		,	1
-		,	2
+		,	IblDuration.DURATION_2_DAYS
+		,	IblBarSize.BAR_1_MIN
+		,	aSymbol
+		,	aSecurityType
+		,	aExchange
+		,	aPrimaryExchange
+		,	aEndDateTime
 		);
-		IN.CONTRACT.m_symbol = IblString.nvl(aSymbol);
-		IN.CONTRACT.m_secType = IblString.nvl(aSecurityType);
-		IN.CONTRACT.m_currency = IblString.nvl(IblCurrency.USD.toString());
-		IN.CONTRACT.m_exchange = IblString.nvl(aExchange);
-		IN.CONTRACT.m_primaryExch = IblString.nvl(aPrimaryExchange);
 	}
 
 }

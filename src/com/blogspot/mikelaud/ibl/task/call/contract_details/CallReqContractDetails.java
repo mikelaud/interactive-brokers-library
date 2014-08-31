@@ -9,8 +9,8 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.event.contract_details.OnBondContractDetails;
 import com.blogspot.mikelaud.ibl.task.event.contract_details.OnContractDetails;
 import com.blogspot.mikelaud.ibl.task.event.contract_details.OnContractDetailsEnd;
-import com.blogspot.mikelaud.ibl.util.IblCurrency;
-import com.blogspot.mikelaud.ibl.util.IblString;
+import com.blogspot.mikelaud.ibl.types.IblCurrency;
+import com.blogspot.mikelaud.ibl.types.IblString;
 import com.ib.client.Contract;
 
 /**
@@ -96,7 +96,7 @@ public class CallReqContractDetails
 		this(aContext, new Contract());
 		IN.CONTRACT.m_symbol = IblString.nvl(aSymbol);
 		IN.CONTRACT.m_secType = IblString.nvl(aSecurityType);
-		IN.CONTRACT.m_currency = IblCurrency.USD.toString();
+		IN.CONTRACT.m_currency = IblCurrency.USD.getValue();
 		IN.CONTRACT.m_exchange = IblString.nvl(aExchange);
 		IN.CONTRACT.m_primaryExch = IblString.nvl(aPrimaryExchange);
 	}

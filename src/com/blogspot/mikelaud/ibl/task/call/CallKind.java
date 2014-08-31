@@ -4,7 +4,7 @@ import com.blogspot.mikelaud.ibl.router.context.Context;
 import com.blogspot.mikelaud.ibl.router.context.ContextMulticast;
 import com.blogspot.mikelaud.ibl.router.context.ContextNocast;
 import com.blogspot.mikelaud.ibl.router.context.ContextUnicast;
-import com.blogspot.mikelaud.ibl.util.IblString;
+import com.blogspot.mikelaud.ibl.types.IblString;
 
 public enum CallKind {
 

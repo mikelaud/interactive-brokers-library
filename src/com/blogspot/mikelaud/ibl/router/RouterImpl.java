@@ -68,6 +68,12 @@ public class RouterImpl implements Router {
 	
 	@Override
 	public boolean isDone() {
+		if (END_LIST.isEmpty()) {
+			return false;
+		}
+		if (hasError()) {
+			return false;
+		}
 		boolean done = true;
 		for (Out terminator: END_LIST) {
 			if (! terminator.isDone()) {
@@ -75,7 +81,7 @@ public class RouterImpl implements Router {
 				break;
 			}
 		}
-		return (done || hasError());
+		return done;
 	}
 
 	public RouterImpl() {

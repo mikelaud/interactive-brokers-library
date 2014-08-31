@@ -723,6 +723,7 @@ public class ConnectionEventsHandler implements EWrapper {
 		,	aWAP
 		,	aCount
 		)));
+		System.out.println("realtimeBar: reqId=" + aReqId + " time=" + aTime + " open=" + aOpen + " high=" + aHigh + " low=" + aLow + " close=" + aClose + " volume=" + aVolume + " count=" + aCount);
 	}
 
 	//========================================================================

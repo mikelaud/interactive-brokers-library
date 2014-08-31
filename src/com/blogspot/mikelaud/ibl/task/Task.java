@@ -5,7 +5,7 @@ import java.util.concurrent.Callable;
 import com.blogspot.mikelaud.ibl.Logger;
 import com.blogspot.mikelaud.ibl.connection.Connection;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
-import com.blogspot.mikelaud.ibl.util.IblString;
+import com.blogspot.mikelaud.ibl.types.IblString;
 import com.ib.client.EClientSocket;
 
 public abstract class Task implements Callable<Task> {

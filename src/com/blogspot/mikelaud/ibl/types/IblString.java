@@ -1,4 +1,4 @@
-package com.blogspot.mikelaud.ibl.util;
+package com.blogspot.mikelaud.ibl.types;
 
 public class IblString {
 

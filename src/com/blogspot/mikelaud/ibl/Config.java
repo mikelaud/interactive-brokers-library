@@ -1,6 +1,6 @@
 package com.blogspot.mikelaud.ibl;
 
-import com.blogspot.mikelaud.ibl.util.IblTimeZone;
+import com.blogspot.mikelaud.ibl.types.IblTimeZone;
 
 public class Config {
 

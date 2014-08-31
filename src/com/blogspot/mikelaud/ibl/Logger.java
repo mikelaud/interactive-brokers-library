@@ -2,6 +2,8 @@ package com.blogspot.mikelaud.ibl;
 
 import java.io.PrintStream;
 
+import com.blogspot.mikelaud.ibl.types.IblLoggerDateTime;
+
 public class Logger {
 
 	public static PrintStream getStream() {
@@ -19,8 +21,7 @@ public class Logger {
 	//------------------------------------------------------------------------
 
 	private static void log(final String aMessage) {
-		long currentTimeSec = System.currentTimeMillis() / 1000;
-		String currentDate = Config.getLocalTimeZone().toDate(currentTimeSec);
+		String currentDate = IblLoggerDateTime.get(Config.getLocalTimeZone().getValue());
 		System.out.println(String.format("%s %s", currentDate, aMessage));
 	}
 	

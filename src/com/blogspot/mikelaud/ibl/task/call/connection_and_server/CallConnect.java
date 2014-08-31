@@ -8,7 +8,7 @@ import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.event.financial_advisors.OnManagedAccounts;
 import com.blogspot.mikelaud.ibl.task.event.orders.OnNextValidId;
-import com.blogspot.mikelaud.ibl.util.IblString;
+import com.blogspot.mikelaud.ibl.types.IblString;
 
 /**
  * This call must be called before any other.

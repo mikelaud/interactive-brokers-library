@@ -6,8 +6,8 @@ import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
-import com.blogspot.mikelaud.ibl.util.IblDouble;
-import com.blogspot.mikelaud.ibl.util.IblTimeZone;
+import com.blogspot.mikelaud.ibl.types.IblDouble;
+import com.blogspot.mikelaud.ibl.types.IblTimeZone;
 
 /**
  * This event receives the requested historical data results.
@@ -118,8 +118,8 @@ public class OnHistoricalData
 	
 	private String toStringSuffix() {
 		return String.format
-		(	"{ date=\"%s\" open=%s high=%s low=%s close=%s volume=%d count=%d wap=%s hasGaps=%b }"
-		,	IblTimeZone.NEW_YORK.toDate(INFO.DATE)
+		(	"{ date=%s open=%s high=%s low=%s close=%s volume=%d count=%d wap=%s hasGaps=%b }"
+		,	IblTimeZone.NEW_YORK.getHistoricalDateTime(INFO.DATE)
 		,	IblDouble.toString(INFO.OPEN)
 		,	IblDouble.toString(INFO.HIGH)
 		,	IblDouble.toString(INFO.LOW)
