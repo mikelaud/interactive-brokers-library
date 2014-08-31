@@ -11,6 +11,7 @@ import com.blogspot.mikelaud.ibl.task.event.historical_data.OnHistoricalDataEnd;
 import com.blogspot.mikelaud.ibl.types.IblBarSize;
 import com.blogspot.mikelaud.ibl.types.IblCurrency;
 import com.blogspot.mikelaud.ibl.types.IblDuration;
+import com.blogspot.mikelaud.ibl.types.IblEndDateTime;
 import com.blogspot.mikelaud.ibl.types.IblFormatDate;
 import com.blogspot.mikelaud.ibl.types.IblString;
 import com.blogspot.mikelaud.ibl.types.IblUseRth;
@@ -114,7 +115,7 @@ public class CallReqHistoricalData
 				
 		public In
 		(	Contract aContract
-		,	String aEndDateTime
+		,	IblEndDateTime aEndDateTime
 		,	IblDuration aDuration
 		,	IblBarSize aBarSize
 		,	IblWhatToShow aWhatToShow
@@ -122,7 +123,7 @@ public class CallReqHistoricalData
 		,	IblFormatDate aFormatDate
 		) {
 			CONTRACT = aContract;
-			END_DATE_TIME = aEndDateTime;
+			END_DATE_TIME = aEndDateTime.getValue();
 			DURATION_STR = aDuration.getValue();
 			BAR_SIZE_SETTING = aBarSize.getValue();
 			WHAT_TO_SHOW = aWhatToShow.getValue();
@@ -181,7 +182,7 @@ public class CallReqHistoricalData
 	public CallReqHistoricalData
 	(	ConnectionContext aContext
 	,	Contract aContract
-	,	String aEndDateTime
+	,	IblEndDateTime aEndDateTime
 	,	IblDuration aDuration
 	,	IblBarSize aBarSize
 	,	IblWhatToShow aWhatToShow
@@ -207,11 +208,11 @@ public class CallReqHistoricalData
 	,	String aSecurityType
 	,	String aExchange
 	,	String aPrimaryExchange
-	,	String aEndDateTime
+	,	IblEndDateTime aEndDateTime
 	) {
 		this(aContext
 		,	new Contract()
-		,	aEndDateTime // (yyyymmdd{space}{space}hh:mm:dd) 20140404  23:59:59
+		,	aEndDateTime
 		,	aDuration
 		,	aBarSize
 		,	IblWhatToShow.TRADES
@@ -231,7 +232,7 @@ public class CallReqHistoricalData
 	,	String aSecurityType
 	,	String aExchange
 	,	String aPrimaryExchange
-	,	String aEndDateTime
+	,	IblEndDateTime aEndDateTime
 	) {
 		this(aContext
 		,	IblDuration.DURATION_2_DAYS

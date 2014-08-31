@@ -22,9 +22,13 @@ public class IblEndDateTime {
 		return DATE_TIME;
 	}
 	
+	public String getValue() {
+		return FORMATTER.format(DATE_TIME);
+	}
+	
 	@Override
 	public String toString() {
-		return FORMATTER.format(DATE_TIME);
+		return getValue();
 	}
 	
 	public IblEndDateTime(LocalDateTime aLocalDateTime, ZoneId aZoneId) {

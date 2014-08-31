@@ -9,6 +9,7 @@ import com.blogspot.mikelaud.ibl.task.call.contract_details.CallReqContractDetai
 import com.blogspot.mikelaud.ibl.task.call.historical_data.CallReqHistoricalData;
 import com.blogspot.mikelaud.ibl.types.IblBarSize;
 import com.blogspot.mikelaud.ibl.types.IblDuration;
+import com.blogspot.mikelaud.ibl.types.IblEndDateTime;
 import com.blogspot.mikelaud.ibl.types.IblTimeZone;
 
 public class Program implements Callable<Object> {
@@ -25,7 +26,7 @@ public class Program implements Callable<Object> {
 			new CallReqContractDetails(mContext, "JPM", "STK", "SMART", "NYSE");
 		reqContractDetails.call();
 		//--------------------------------------------------------------------
-		String endDateTime = IblTimeZone.NEW_YORK.getEndDateTime(2014, 8, 28, 11, 30).toString();
+		IblEndDateTime endDateTime = IblTimeZone.NEW_YORK.getEndDateTime(2014, 8, 28, 11, 30);
 		CallReqHistoricalData reqHistoricalData =
 			//new CallReqHistoricalData(mContext, "JPM", "STK", "SMART", "NYSE", endDateTime);
 			//new CallReqHistoricalData(mContext, IblDuration.DURATION_1_YEAR, IblBarSize.BAR_1_DAY, "JPM", "STK", "SMART", "NYSE", endDateTime);
