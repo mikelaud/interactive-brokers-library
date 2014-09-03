@@ -1,5 +1,6 @@
 package com.blogspot.mikelaud.ibl.types;
 
+import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
 import com.blogspot.mikelaud.ibl.types.common.IblEnum;
@@ -32,6 +33,7 @@ public enum IblBarSize implements IblEnum {
 	private final String DESCRIPTION;
 	private final int CHRONO_VALUE;
 	private final ChronoUnit CHRONO_UNIT;
+	private final Duration DURATION;
 		
 	private IblBarSize(String aName, int aChronoValue, ChronoUnit aChronoUnit) {
 		ID = this.ordinal();
@@ -39,6 +41,7 @@ public enum IblBarSize implements IblEnum {
 		DESCRIPTION = this.name();
 		CHRONO_VALUE = aChronoValue;
 		CHRONO_UNIT = aChronoUnit;
+		DURATION = CHRONO_UNIT.getDuration().multipliedBy(CHRONO_VALUE);
 	}
 
 	@Override
@@ -62,6 +65,10 @@ public enum IblBarSize implements IblEnum {
 
 	public ChronoUnit getChronoUnit() {
 		return CHRONO_UNIT;
+	}
+
+	public Duration getDuration() {
+		return DURATION;
 	}
 
 	@Override

@@ -68,10 +68,10 @@ public class RouterImpl implements Router {
 	
 	@Override
 	public boolean isDone() {
-		if (END_LIST.isEmpty()) {
-			return false;
-		}
 		if (hasError()) {
+			return true;
+		}
+		if (END_LIST.isEmpty()) {
 			return false;
 		}
 		boolean done = true;

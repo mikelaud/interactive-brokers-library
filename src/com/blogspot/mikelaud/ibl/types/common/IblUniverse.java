@@ -11,7 +11,7 @@ public interface IblUniverse extends IblEnumInstance<IblUniverseInstance> {
 	default Color getColor() {
 		return getInstance().getColor();
 	}
-	
+
 	default IblSymbol[] getSymbols() {
 		return getInstance().getSymbols();
 	}

@@ -22,6 +22,11 @@ public class IblUniverseInstance extends IblEnumCommon<IblUniverseInstance> impl
 		return COLOR;
 	}
 
+	@Override
+	public IblSymbol[] getSymbols() {
+		return (IblSymbol[]) UNIVERSE_CLASS.getEnumConstants();
+	}
+	
 	public IblUniverseInstance
 	(	Class<? extends Enum<? extends IblSymbol>> aUniverseClass
 	,	int aId

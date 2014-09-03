@@ -32,7 +32,7 @@ public class IblExchangeInstance extends IblEnumCommon<IblExchangeInstance> impl
 	@Override
 	public IblEndDateTime getEndDateTime2h(LocalDate aLocalDate) {
 		LocalDateTime localDateTime = LocalDateTime.of(aLocalDate, END_TIME_2H);
-		IblEndDateTime endDateTime2h = new IblEndDateTime(localDateTime, TIME_ZONE.getValue());
+		IblEndDateTime endDateTime2h = new IblEndDateTime(localDateTime, TIME_ZONE.getZoneId());
 		return endDateTime2h;
 	}
 

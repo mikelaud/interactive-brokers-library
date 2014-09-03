@@ -127,7 +127,7 @@ public class CallReqHistoricalData
 			DURATION_STR = aDuration.getName();
 			BAR_SIZE_SETTING = aBarSize.getName();
 			WHAT_TO_SHOW = aWhatToShow.getName();
-			USE_RTH = aUseRTH.getValue();
+			USE_RTH = aUseRTH.getIntegerValue();
 			FORMAT_DATE = aFormatDate.getValue();
 		}
 		

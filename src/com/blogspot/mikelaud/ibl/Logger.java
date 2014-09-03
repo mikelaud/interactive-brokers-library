@@ -21,7 +21,7 @@ public class Logger {
 	//------------------------------------------------------------------------
 
 	private static void log(final String aMessage) {
-		String currentDate = IblLoggerDateTime.get(Config.getLocalTimeZone().getValue());
+		String currentDate = IblLoggerDateTime.get(Config.getLocalTimeZone().getZoneId());
 		System.out.println(String.format("%s %s", currentDate, aMessage));
 	}
 	

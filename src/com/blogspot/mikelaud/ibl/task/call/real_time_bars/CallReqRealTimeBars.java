@@ -6,6 +6,10 @@ import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.event.real_time_bars.OnRealtimeBar;
+import com.blogspot.mikelaud.ibl.types.IblBarSize;
+import com.blogspot.mikelaud.ibl.types.IblUseRth;
+import com.blogspot.mikelaud.ibl.types.IblWhatToShow;
+import com.blogspot.mikelaud.ibl.types.common.IblSymbol;
 import com.ib.client.Contract;
 
 /**
@@ -58,14 +62,14 @@ public class CallReqRealTimeBars
 				
 		public In
 		(	Contract aContract
-		,	int aBarSize
-		,	String aWhatToShow
-		,	boolean aUseRTH
+		,	IblBarSize aBarSize
+		,	IblWhatToShow aWhatToShow
+		,	IblUseRth aUseRTH
 		) {
 			CONTRACT = aContract;
-			BAR_SIZE = aBarSize;
-			WHAT_TO_SHOW = aWhatToShow;
-			USE_RTH = aUseRTH;	
+			BAR_SIZE = (int) aBarSize.getDuration().getSeconds();
+			WHAT_TO_SHOW = aWhatToShow.getName();
+			USE_RTH = aUseRTH.getBooleanValue();
 		}
 		
 	}
@@ -105,17 +109,19 @@ public class CallReqRealTimeBars
 
 	public CallReqRealTimeBars
 	(	ConnectionContext aContext
-	,	Contract aContract
-	,	int aBarSize
-	,	String aWhatToShow
-	,	boolean aUseRTH
+	,	IblSymbol aSymbol
 	) {
 		this(aContext, new In
-		(	aContract
-		,	aBarSize
-		,	aWhatToShow
-		,	aUseRTH
+		(	new Contract()
+		,	IblBarSize.BAR_5_SEC
+		,	IblWhatToShow.TRADES
+		,	IblUseRth.RTH_DATA
 		));
+		IN.CONTRACT.m_symbol = aSymbol.getName();
+		IN.CONTRACT.m_secType = aSymbol.getSecurityType().getName(); 
+		IN.CONTRACT.m_currency = aSymbol.getCurrency().getName();
+		IN.CONTRACT.m_exchange = aSymbol.getExchange().getName();
+		IN.CONTRACT.m_primaryExch = aSymbol.getPrimaryExchange().getName();
 	}
 
 }

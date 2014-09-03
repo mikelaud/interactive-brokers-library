@@ -14,15 +14,15 @@ public enum IblTimeZone implements IblEnum {
 	NEW_YORK("America/New_York");
 
 	private final int ID;
-	private final ZoneId VALUE;
 	private final String NAME;
 	private final String DESCRIPTION;
+	private final ZoneId ZONE_ID;
 		
 	private IblTimeZone(String aName) {
 		ID = this.ordinal();
-		VALUE = ZoneId.of(aName);
 		NAME = aName;
-		DESCRIPTION = this.name();  
+		DESCRIPTION = this.name();
+		ZONE_ID = ZoneId.of(aName);
 	}
 
 	@Override
@@ -30,10 +30,7 @@ public enum IblTimeZone implements IblEnum {
 		return ID;
 	}
 	
-	public ZoneId getValue() {
-		return VALUE;
-	}
-	
+	@Override
 	public String getName() {
 		return NAME;
 	}
@@ -43,16 +40,20 @@ public enum IblTimeZone implements IblEnum {
 		return DESCRIPTION;
 	}
 	
+	public ZoneId getZoneId() {
+		return ZONE_ID;
+	}
+
 	public IblUnixTime getUnixTime(long aUnixTimeSec) {
-		return new IblUnixTime(aUnixTimeSec, VALUE);
+		return new IblUnixTime(aUnixTimeSec, ZONE_ID);
 	}	
 	
 	public IblHistoricalDateTime getHistoricalDateTime(String aUnixTimeSec) {
-		return new IblHistoricalDateTime(aUnixTimeSec, VALUE);
+		return new IblHistoricalDateTime(aUnixTimeSec, ZONE_ID);
 	}
 	
 	public IblEndDateTime getEndDateTime(LocalDateTime aLocalDateTime) {
-		return new IblEndDateTime(aLocalDateTime, VALUE);
+		return new IblEndDateTime(aLocalDateTime, ZONE_ID);
 	}
 	
 	public IblEndDateTime getEndDateTime(LocalDate aLocalDate) {
@@ -67,7 +68,7 @@ public enum IblTimeZone implements IblEnum {
 	}
 	
 	public IblEndDateTime getEndDateTimeNow() {
-		LocalDate localDate = LocalDate.now(VALUE).plusDays(1);
+		LocalDate localDate = LocalDate.now(ZONE_ID).plusDays(1);
 		return getEndDateTime(localDate);
 	}
 	
