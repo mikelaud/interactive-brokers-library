@@ -1,20 +1,29 @@
 package com.blogspot.mikelaud.ibl.types;
 
+import com.blogspot.mikelaud.ibl.types.common.IblEnum;
+
 public enum IblCurrency implements IblEnum {
 
 	USD;
 	
 	private final int ID;
-	private final String VALUE;
+	private final String NAME;
 	private final String DESCRIPTION;
+
+	private IblCurrency() {
+		ID = this.ordinal();
+		NAME = this.name();
+		DESCRIPTION = NAME; 
+	}
 
 	@Override
 	public int getId() {
 		return ID;
 	}
 
-	public String getValue() {
-		return VALUE;
+	@Override
+	public String getName() {
+		return NAME;
 	}
 
 	@Override
@@ -25,16 +34,10 @@ public enum IblCurrency implements IblEnum {
 	@Override
 	public String toString() {
 		String message = String.format
-		(	"value=\"%s\""
-		,	VALUE
+		(	"name=\"%s\""
+		,	NAME
 		);
 		return message;
-	}
-
-	private IblCurrency() {
-		ID = this.ordinal();
-		VALUE = this.name();
-		DESCRIPTION = VALUE; 
 	}
 		
 }

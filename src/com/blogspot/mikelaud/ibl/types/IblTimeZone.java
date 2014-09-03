@@ -1,7 +1,11 @@
 package com.blogspot.mikelaud.ibl.types;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
+
+import com.blogspot.mikelaud.ibl.types.common.IblEnum;
 
 public enum IblTimeZone implements IblEnum {
 
@@ -14,6 +18,13 @@ public enum IblTimeZone implements IblEnum {
 	private final String NAME;
 	private final String DESCRIPTION;
 		
+	private IblTimeZone(String aName) {
+		ID = this.ordinal();
+		VALUE = ZoneId.of(aName);
+		NAME = aName;
+		DESCRIPTION = this.name();  
+	}
+
 	@Override
 	public int getId() {
 		return ID;
@@ -44,9 +55,20 @@ public enum IblTimeZone implements IblEnum {
 		return new IblEndDateTime(aLocalDateTime, VALUE);
 	}
 	
-	public IblEndDateTime getEndDateTime(int aYear, int aMonth, int aDayOfMonth, int aHour, int aMinute) {
-		LocalDateTime dateTime = LocalDateTime.of(aYear, aMonth, aDayOfMonth, aHour, aMinute); 
-		return new IblEndDateTime(dateTime, VALUE);
+	public IblEndDateTime getEndDateTime(LocalDate aLocalDate) {
+		LocalTime localTime = LocalTime.of(0, 0);
+		LocalDateTime localDateTime = LocalDateTime.of(aLocalDate, localTime);
+		return getEndDateTime(localDateTime);
+	}
+	
+	public IblEndDateTime getEndDateTime(int aYear, int aMonth, int aDayOfMonth) {
+		LocalDate localDate = LocalDate.of(aYear, aMonth, aDayOfMonth);
+		return getEndDateTime(localDate);
+	}
+	
+	public IblEndDateTime getEndDateTimeNow() {
+		LocalDate localDate = LocalDate.now(VALUE).plusDays(1);
+		return getEndDateTime(localDate);
 	}
 	
 	@Override
@@ -56,13 +78,6 @@ public enum IblTimeZone implements IblEnum {
 		,	NAME
 		);
 		return message;
-	}
-	
-	private IblTimeZone(String aName) {
-		ID = this.ordinal();
-		VALUE = ZoneId.of(aName);
-		NAME = aName;
-		DESCRIPTION = this.name();  
 	}
 
 }

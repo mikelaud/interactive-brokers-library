@@ -9,8 +9,8 @@ import com.blogspot.mikelaud.ibl.task.call.CallTaskEx;
 import com.blogspot.mikelaud.ibl.task.event.contract_details.OnBondContractDetails;
 import com.blogspot.mikelaud.ibl.task.event.contract_details.OnContractDetails;
 import com.blogspot.mikelaud.ibl.task.event.contract_details.OnContractDetailsEnd;
-import com.blogspot.mikelaud.ibl.types.IblCurrency;
 import com.blogspot.mikelaud.ibl.types.IblString;
+import com.blogspot.mikelaud.ibl.types.common.IblSymbol;
 import com.ib.client.Contract;
 
 /**
@@ -88,17 +88,14 @@ public class CallReqContractDetails
 
 	public CallReqContractDetails
 	(	ConnectionContext aContext
-	,	String aSymbol
-	,	String aSecurityType
-	,	String aExchange
-	,	String aPrimaryExchange
+	,	IblSymbol aSymbol 
 	) {
 		this(aContext, new Contract());
-		IN.CONTRACT.m_symbol = IblString.nvl(aSymbol);
-		IN.CONTRACT.m_secType = IblString.nvl(aSecurityType);
-		IN.CONTRACT.m_currency = IblCurrency.USD.getValue();
-		IN.CONTRACT.m_exchange = IblString.nvl(aExchange);
-		IN.CONTRACT.m_primaryExch = IblString.nvl(aPrimaryExchange);
+		IN.CONTRACT.m_symbol = aSymbol.getName();
+		IN.CONTRACT.m_secType = aSymbol.getSecurityType().getName(); 
+		IN.CONTRACT.m_currency = aSymbol.getCurrency().getName();
+		IN.CONTRACT.m_exchange = aSymbol.getExchange().getName();
+		IN.CONTRACT.m_primaryExch = aSymbol.getPrimaryExchange().getName();
 	}
 
 }

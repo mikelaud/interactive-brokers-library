@@ -119,7 +119,7 @@ public class OnHistoricalData
 	private String toStringSuffix() {
 		return String.format
 		(	"{ date=%s open=%s high=%s low=%s close=%s volume=%d count=%d wap=%s hasGaps=%b }"
-		,	IblTimeZone.NEW_YORK.getHistoricalDateTime(INFO.DATE)
+		,	IblTimeZone.NEW_YORK.getHistoricalDateTime(INFO.DATE).toString()
 		,	IblDouble.toString(INFO.OPEN)
 		,	IblDouble.toString(INFO.HIGH)
 		,	IblDouble.toString(INFO.LOW)

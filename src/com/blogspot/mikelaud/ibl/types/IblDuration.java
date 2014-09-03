@@ -2,6 +2,8 @@ package com.blogspot.mikelaud.ibl.types;
 
 import java.time.temporal.ChronoUnit;
 
+import com.blogspot.mikelaud.ibl.types.common.IblEnum;
+
 /**
 Minimum Bar Size Settings for Historical Data Requests:
 Duration        Minimum Bar Size
@@ -38,18 +40,27 @@ public enum IblDuration implements IblEnum {
 	DURATION_1_MINUTE("60 S", 1, ChronoUnit.MINUTES);		// Bar Size: 30 secs, 15 secs, 5 secs, 1 secs
 	
 	private final int ID;
-	private final String VALUE;
+	private final String NAME;
 	private final String DESCRIPTION;
 	private final int CHRONO_VALUE;
 	private final ChronoUnit CHRONO_UNIT;
 	
+	private IblDuration(String aName, int aChronoValue, ChronoUnit aChronoUnit) {
+		ID = this.ordinal();
+		NAME = aName;
+		DESCRIPTION = this.name(); 
+		CHRONO_VALUE = aChronoValue;
+		CHRONO_UNIT = aChronoUnit;
+	}
+
 	@Override
 	public int getId() {
 		return ID;
 	}
 
-	public String getValue() {
-		return VALUE;
+	@Override
+	public String getName() {
+		return NAME;
 	}
 
 	@Override
@@ -68,18 +79,11 @@ public enum IblDuration implements IblEnum {
 	@Override
 	public String toString() {
 		String message = String.format
-		(	"value=\"%s\""
-		,	VALUE
+		(	"name=\"%s\" description=\"%s\""
+		,	NAME
+		,	DESCRIPTION
 		);
 		return message;
-	}
-	
-	private IblDuration(String aValue, int aChronoValue, ChronoUnit aChronoUnit) {
-		ID = this.ordinal();
-		VALUE = aValue;
-		DESCRIPTION = this.name(); 
-		CHRONO_VALUE = aChronoValue;
-		CHRONO_UNIT = aChronoUnit;
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.blogspot.mikelaud.ibl.types;
 
+import com.blogspot.mikelaud.ibl.types.common.IblEnum;
+
 /**
  * Determines whether to return all data
  * available during the requested time span,
@@ -20,16 +22,25 @@ public enum IblUseRth implements IblEnum {
 	RTH_DATA(1);
 
 	private final int ID;
-	private final int VALUE;
+	private final String NAME;
 	private final String DESCRIPTION;
+	private final int VALUE;
+	
+	private IblUseRth(int aValue) {
+		ID = this.ordinal();
+		NAME = this.name();
+		DESCRIPTION = NAME;
+		VALUE = aValue;
+	}
 	
 	@Override
 	public int getId() {
 		return ID;
 	}
 
-	public int getValue() {
-		return VALUE;
+	@Override
+	public String getName() {
+		return NAME;
 	}
 
 	@Override
@@ -37,19 +48,18 @@ public enum IblUseRth implements IblEnum {
 		return DESCRIPTION;
 	}
 
+	public int getValue() {
+		return VALUE;
+	}
+
 	@Override
 	public String toString() {
 		String message = String.format
-		(	"value=\"%d\""
+		(	"name=\"%s\" value=\"%d\""
+		,	NAME
 		,	VALUE
 		);
 		return message;
-	}
-	
-	private IblUseRth(int aValue) {
-		ID = this.ordinal();
-		VALUE = aValue;
-		DESCRIPTION = this.name();
 	}
 	
 }

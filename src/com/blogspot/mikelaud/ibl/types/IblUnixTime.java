@@ -18,7 +18,7 @@ public class IblUnixTime {
 		return zonedDateTime;
 	}
 	
-	public ZonedDateTime get() {
+	public ZonedDateTime getValue() {
 		return DATE_TIME;
 	}
 	
