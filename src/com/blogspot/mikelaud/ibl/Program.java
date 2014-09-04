@@ -5,6 +5,7 @@ import java.util.concurrent.Callable;
 import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.call.connection_and_server.CallConnect;
 import com.blogspot.mikelaud.ibl.task.call.connection_and_server.CallDisconnect;
+import com.blogspot.mikelaud.ibl.task.call.connection_and_server.CallReqCurrentTime;
 import com.blogspot.mikelaud.ibl.task.call.contract_details.CallReqContractDetails;
 import com.blogspot.mikelaud.ibl.task.call.historical_data.CallReqHistoricalData;
 import com.blogspot.mikelaud.ibl.task.call.real_time_bars.CallReqRealTimeBars;
@@ -19,8 +20,11 @@ public class Program implements Callable<Object> {
 	@Override
 	public Object call() throws Exception {
 		//--------------------------------------------------------------------
-		CallConnect callConnect = new CallConnect(mContext);
-		callConnect.call();
+		CallConnect connect = new CallConnect(mContext);
+		connect.call();
+		//--------------------------------------------------------------------
+		CallReqCurrentTime reqCurrentTime = new CallReqCurrentTime(mContext);
+		reqCurrentTime.call();
 		//--------------------------------------------------------------------
 		CallReqContractDetails reqContractDetails = new CallReqContractDetails
 		(	mContext
@@ -32,8 +36,8 @@ public class Program implements Callable<Object> {
 		(	mContext
 		,	IblBarSize.BAR_1_DAY
 		,	IblDuration.DURATION_1_YEAR
-		,	SampleSymbols.XXX123
-		,	SampleSymbols.XXX123.getEndDateTimeNow()
+		,	SampleSymbols.JPM
+		,	SampleSymbols.JPM.getEndDateTimeNow()
 		);
 		CallReqHistoricalData reqHistoricalDataMin = new CallReqHistoricalData
 		(	mContext
@@ -57,11 +61,11 @@ public class Program implements Callable<Object> {
 		(	mContext
 		,	SampleSymbols.JPM
 		);
-		//reqRealTimeBars.call();
-		//Thread.sleep(1000 * 5 * 10);
+		reqRealTimeBars.call();
+		Thread.sleep(1000 * 5 * 10);
 		//--------------------------------------------------------------------
-		CallDisconnect callDisconnect = new CallDisconnect(mContext);
-		callDisconnect.call();
+		CallDisconnect disconnect = new CallDisconnect(mContext);
+		disconnect.call();
 		//--------------------------------------------------------------------
 		/*
 		mContext.onTask(callConnect);

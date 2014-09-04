@@ -5,9 +5,9 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class IblUnixTime {
+public class IblCurrentTime {
 
-	private static final String PATTERN = "yyyy-MM-dd/HH:mm:ss[VV]";
+	private static final String PATTERN = "yyyy-MM-dd/HH:mm:ss/VV";
 	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(PATTERN);
 
 	private final ZonedDateTime DATE_TIME;
@@ -27,8 +27,8 @@ public class IblUnixTime {
 		return FORMATTER.format(DATE_TIME);
 	}
 	
-	public IblUnixTime(long aUnixTimeSec, ZoneId aZoneId) {
+	public IblCurrentTime(long aUnixTimeSec, ZoneId aZoneId) {
 		DATE_TIME = toDateTime(aUnixTimeSec, aZoneId);
 	}
-
+	
 }

@@ -41,10 +41,10 @@ public class OnCurrentTime
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s(%d sec) { \"%s\" }"
+		(	"%s { unixTimeSec=\"%d\" dateTime=\"%s\" }"
 		,	super.toString()
 		,	INFO.UNIX_TIME_SEC
-		,	IblTimeZone.NEW_YORK.getUnixTime(INFO.UNIX_TIME_SEC)
+		,	IblTimeZone.NEW_YORK.getCurrentTime(INFO.UNIX_TIME_SEC).toString()
 		);
 	}
 

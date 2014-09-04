@@ -4,6 +4,8 @@ import com.blogspot.mikelaud.ibl.connection.ConnectionContext;
 import com.blogspot.mikelaud.ibl.task.Task;
 import com.blogspot.mikelaud.ibl.task.TaskInnerObject;
 import com.blogspot.mikelaud.ibl.task.event.EventTaskEx;
+import com.blogspot.mikelaud.ibl.types.IblDouble;
+import com.blogspot.mikelaud.ibl.types.IblTimeZone;
 
 /**
  * This event receives the real-time bars data results.
@@ -91,16 +93,16 @@ public class OnRealtimeBar
 	@Override
 	public String toString() {
 		return String.format
-		(	"%s { time=\"%s\" open=\"%f\" high=\"%f\" low=\"%f\" close=\"%f\" volume=\"%d\" wap=\"%f\" count=\"%d\" }"
+		(	"%s { time=%s open=%s high=%s low=%s close=%s volume=%d count=%d wap=%s }"
 		,	super.toString()
-		,	INFO.TIME
-		,	INFO.OPEN
-		,	INFO.HIGH
-		,	INFO.LOW
-		,	INFO.CLOSE
+		,	IblTimeZone.NEW_YORK.getRealtimeBarTime(INFO.TIME).toString()
+		,	IblDouble.toString(INFO.OPEN)
+		,	IblDouble.toString(INFO.HIGH)
+		,	IblDouble.toString(INFO.LOW)
+		,	IblDouble.toString(INFO.CLOSE)
 		,	INFO.VOLUME
-		,	INFO.WAP
 		,	INFO.COUNT
+		,	IblDouble.toString(INFO.WAP)
 		);
 	}
 	

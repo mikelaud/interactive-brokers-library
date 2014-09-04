@@ -44,8 +44,12 @@ public enum IblTimeZone implements IblEnum {
 		return ZONE_ID;
 	}
 
-	public IblUnixTime getUnixTime(long aUnixTimeSec) {
-		return new IblUnixTime(aUnixTimeSec, ZONE_ID);
+	public IblCurrentTime getCurrentTime(long aUnixTimeSec) {
+		return new IblCurrentTime(aUnixTimeSec, ZONE_ID);
+	}	
+	
+	public IblRealtimeBarTime getRealtimeBarTime(long aUnixTimeSec) {
+		return new IblRealtimeBarTime(aUnixTimeSec, ZONE_ID);
 	}	
 	
 	public IblHistoricalDateTime getHistoricalDateTime(String aUnixTimeSec) {

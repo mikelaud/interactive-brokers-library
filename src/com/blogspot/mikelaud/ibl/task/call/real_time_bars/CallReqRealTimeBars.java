@@ -115,7 +115,7 @@ public class CallReqRealTimeBars
 		(	new Contract()
 		,	IblBarSize.BAR_5_SEC
 		,	IblWhatToShow.TRADES
-		,	IblUseRth.RTH_DATA
+		,	IblUseRth.ALL_DATA
 		));
 		IN.CONTRACT.m_symbol = aSymbol.getName();
 		IN.CONTRACT.m_secType = aSymbol.getSecurityType().getName(); 
