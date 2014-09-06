@@ -8,7 +8,7 @@ public class IblDouble {
 	private static DecimalFormat DECIMAL_FORMAT = createDecimalFormat();
 	
 	private static DecimalFormat createDecimalFormat() {
-		DecimalFormat decimalFormat = new DecimalFormat(".##");
+		DecimalFormat decimalFormat = new DecimalFormat("#.##");
 		decimalFormat.setRoundingMode(RoundingMode.HALF_UP);
 		return decimalFormat; 
 	}

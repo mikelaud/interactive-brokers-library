@@ -16,6 +16,7 @@ public class IblHistoricalDateTime {
 	private static final DateTimeFormatter FORMATTER_TO_DATE = DateTimeFormatter.ofPattern(PATTERN_TO_DATE);
 	private static final DateTimeFormatter FORMATTER_TO_DATE_TIME = DateTimeFormatter.ofPattern(PATTERN_TO_DATE_TIME);
 
+	private final LocalDate LOCAL_DATE;
 	private final String FORMATTED_DATE_TIME;
 
 	private long parseUnixTimeSec(String aUnixTimeSec) {
@@ -23,16 +24,14 @@ public class IblHistoricalDateTime {
 		return unixTimeSec;
 	}
 	
-	private ZonedDateTime toDateTime(long aUnixTimeSec, ZoneId aZoneId) {
+	private ZonedDateTime toZonedDateTime(long aUnixTimeSec, ZoneId aZoneId) {
 		Instant timePoint = Instant.ofEpochSecond(aUnixTimeSec);
 		ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(timePoint, aZoneId);
 		return zonedDateTime;
 	}
 	
-	private String formatDateTime(long aUnixTimeSec, ZoneId aZoneId) {
-		ZonedDateTime zonedDateTime = toDateTime(aUnixTimeSec, aZoneId);
-		String stringDateTime = zonedDateTime.format(FORMATTER_TO_DATE_TIME);
-		return stringDateTime;
+	public LocalDate getLocalDate() {
+		return LOCAL_DATE;
 	}
 	
 	@Override
@@ -42,12 +41,14 @@ public class IblHistoricalDateTime {
 	
 	public IblHistoricalDateTime(String aUnixTimeSec, ZoneId aZoneId) {
 		if (aUnixTimeSec.length() == PATTERN_FROM_DATE.length()) {
-			LocalDate date = LocalDate.parse(aUnixTimeSec, FORMATTER_FROM_DATE);
-			FORMATTED_DATE_TIME = FORMATTER_TO_DATE.format(date);
+			LOCAL_DATE = LocalDate.parse(aUnixTimeSec, FORMATTER_FROM_DATE);
+			FORMATTED_DATE_TIME = FORMATTER_TO_DATE.format(LOCAL_DATE);
 		}
 		else {
 			long unixTimeSec = parseUnixTimeSec(aUnixTimeSec);
-			FORMATTED_DATE_TIME = formatDateTime(unixTimeSec, aZoneId);
+			ZonedDateTime zonedDateTime = toZonedDateTime(unixTimeSec, aZoneId);
+			LOCAL_DATE = zonedDateTime.toLocalDate();
+			FORMATTED_DATE_TIME = zonedDateTime.format(FORMATTER_TO_DATE_TIME);
 		}
 	}
 
