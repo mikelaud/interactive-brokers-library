@@ -53,7 +53,7 @@ public enum IblFormatDate implements IblEnum {
 	@Override
 	public String toString() {
 		String message = String.format
-		(	"name=\"%s\" value=\"%d\""
+		(	"name={%s} value={%d}"
 		,	NAME
 		,	VALUE
 		);

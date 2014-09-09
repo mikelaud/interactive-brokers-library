@@ -73,7 +73,7 @@ public enum IblUseRth implements IblEnum {
 	@Override
 	public String toString() {
 		String message = String.format
-		(	"name=\"%s\" integerValue=\"%d\""
+		(	"name={%s} integerValue={%d}"
 		,	NAME
 		,	INTEGER_VALUE
 		);

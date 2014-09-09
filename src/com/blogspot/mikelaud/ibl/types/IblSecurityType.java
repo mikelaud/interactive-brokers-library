@@ -35,7 +35,7 @@ public enum IblSecurityType implements IblEnum {
 	@Override
 	public String toString() {
 		String message = String.format
-		(	"name=\"%s\" description=\"%s\""
+		(	"name={%s} description={%s}"
 		,	NAME
 		,	DESCRIPTION
 		);

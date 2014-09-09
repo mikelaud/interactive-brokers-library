@@ -1,5 +1,6 @@
 package com.blogspot.mikelaud.ibl.types;
 
+import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
 import com.blogspot.mikelaud.ibl.types.common.IblEnum;
@@ -44,6 +45,7 @@ public enum IblDuration implements IblEnum {
 	private final String DESCRIPTION;
 	private final int CHRONO_VALUE;
 	private final ChronoUnit CHRONO_UNIT;
+	private final Duration DURATION;
 	
 	private IblDuration(String aName, int aChronoValue, ChronoUnit aChronoUnit) {
 		ID = this.ordinal();
@@ -51,6 +53,7 @@ public enum IblDuration implements IblEnum {
 		DESCRIPTION = this.name(); 
 		CHRONO_VALUE = aChronoValue;
 		CHRONO_UNIT = aChronoUnit;
+		DURATION = CHRONO_UNIT.getDuration().multipliedBy(CHRONO_VALUE);
 	}
 
 	@Override
@@ -76,10 +79,14 @@ public enum IblDuration implements IblEnum {
 		return CHRONO_UNIT;
 	}
 		
+	public Duration getDuration() {
+		return DURATION;
+	}
+		
 	@Override
 	public String toString() {
 		String message = String.format
-		(	"name=\"%s\" description=\"%s\""
+		(	"name={%s} description={%s}"
 		,	NAME
 		,	DESCRIPTION
 		);

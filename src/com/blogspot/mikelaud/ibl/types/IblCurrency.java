@@ -34,7 +34,7 @@ public enum IblCurrency implements IblEnum {
 	@Override
 	public String toString() {
 		String message = String.format
-		(	"name=\"%s\""
+		(	"name={%s}"
 		,	NAME
 		);
 		return message;
