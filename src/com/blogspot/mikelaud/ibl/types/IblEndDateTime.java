@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  * where the time zone is allowed (optionally) after a space at the end
  * (see reqHistoricalData()).
  */
-public class IblEndDateTime {
+public class IblEndDateTime implements Comparable<IblEndDateTime> {
 	
 	private static final String PATTERN = "yyyyMMdd HH:mm:ss VV";
 	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(PATTERN);
@@ -25,7 +25,12 @@ public class IblEndDateTime {
 	public String getValue() {
 		return FORMATTER.format(DATE_TIME);
 	}
-	
+
+	@Override
+	public int compareTo(IblEndDateTime aOther) {
+		return DATE_TIME.compareTo(aOther.DATE_TIME);
+	}
+
 	@Override
 	public String toString() {
 		return getValue();

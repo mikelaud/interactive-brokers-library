@@ -10,7 +10,6 @@ import com.blogspot.mikelaud.ibl.task.call.contract_details.CallReqContractDetai
 import com.blogspot.mikelaud.ibl.task.call.historical_data.CallReqHistoricalData;
 import com.blogspot.mikelaud.ibl.task.call.real_time_bars.CallReqRealTimeBars;
 import com.blogspot.mikelaud.ibl.types.IblBarSize;
-import com.blogspot.mikelaud.ibl.types.IblDuration;
 import com.blogspot.mikelaud.ibl.types.sample.SampleSymbols;
 
 public class Program implements Callable<Object> {
@@ -34,22 +33,19 @@ public class Program implements Callable<Object> {
 		//--------------------------------------------------------------------
 		CallReqHistoricalData reqHistoricalDataYear = new CallReqHistoricalData
 		(	mContext
-		,	IblBarSize.BAR_1_DAY
-		,	IblDuration.DURATION_1_YEAR
+		,	IblBarSize.BAR_1_MIN
 		,	SampleSymbols.JPM
-		,	SampleSymbols.JPM.getEndDateTimeNow()
+		,	SampleSymbols.JPM.getEndDateTime(2004, 1, 24)
 		);
 		CallReqHistoricalData reqHistoricalDataMin = new CallReqHistoricalData
 		(	mContext
 		,	IblBarSize.BAR_1_MIN
-		,	IblDuration.DURATION_2_DAYS
 		,	SampleSymbols.JPM
 		,	SampleSymbols.JPM.getEndDateTime(2014, 8, 29)
 		);
 		CallReqHistoricalData reqHistoricalDataSec = new CallReqHistoricalData
 		(	mContext
 		,	IblBarSize.BAR_5_SEC
-		,	IblDuration.DURATION_2_HOURS
 		,	SampleSymbols.JPM
 		,	SampleSymbols.JPM.getEndDateTime2h(2014, 8, 28)
 		);
@@ -61,8 +57,8 @@ public class Program implements Callable<Object> {
 		(	mContext
 		,	SampleSymbols.JPM
 		);
-		reqRealTimeBars.call();
-		Thread.sleep(1000 * 5 * 10);
+		//reqRealTimeBars.call();
+		//Thread.sleep(1000 * 5 * 10);
 		//--------------------------------------------------------------------
 		CallDisconnect disconnect = new CallDisconnect(mContext);
 		disconnect.call();

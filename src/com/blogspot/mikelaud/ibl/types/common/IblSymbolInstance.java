@@ -1,5 +1,6 @@
 package com.blogspot.mikelaud.ibl.types.common;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -61,6 +62,14 @@ public class IblSymbolInstance extends IblEnumCommon<IblSymbolInstance> implemen
 	
 	public IblEndDateTime getEndDateTime(int aYear, int aMonth, int aDayOfMonth) {
 		return getTimeZone().getEndDateTime(aYear, aMonth, aDayOfMonth);
+	}
+	
+	public IblEndDateTime getEndDateTime(Duration aDuration, LocalDate aLocalDate) {
+		return getPrimaryExchange().getEndDateTime(aDuration, aLocalDate);
+	}
+	
+	public IblEndDateTime getEndDateTime(Duration aDuration, int aYear, int aMonth, int aDayOfMonth) {
+		return getPrimaryExchange().getEndDateTime(aDuration, aYear, aMonth, aDayOfMonth);
 	}
 	
 	public IblEndDateTime getEndDateTime2h(LocalDate aLocalDate) {

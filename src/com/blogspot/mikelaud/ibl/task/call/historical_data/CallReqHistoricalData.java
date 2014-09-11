@@ -182,14 +182,13 @@ public class CallReqHistoricalData
 	public CallReqHistoricalData
 	(	ConnectionContext aContext
 	,	IblBarSize aBarSize
-	,	IblDuration aDuration
 	,	IblSymbol aSymbol
 	,	IblEndDateTime aEndDateTime
 	) {
 		this(aContext, new In
 		(	new Contract()
 		,	aEndDateTime
-		,	aDuration
+		,	aBarSize.getHistoricalLimit()
 		,	aBarSize
 		,	IblWhatToShow.TRADES
 		,	IblUseRth.RTH_DATA

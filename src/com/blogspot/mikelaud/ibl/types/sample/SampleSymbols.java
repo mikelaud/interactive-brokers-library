@@ -9,7 +9,6 @@ import com.blogspot.mikelaud.ibl.types.common.IblSymbolInstance;
 public enum SampleSymbols implements IblSymbol {
 
 	JPM(SampleExchanges.NYSE),
-	ORCL(SampleExchanges.NYSE),
 	XXX123(SampleExchanges.NYSE);
 	
 	private final IblSymbolInstance INSTANCE;
