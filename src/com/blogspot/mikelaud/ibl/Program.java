@@ -33,9 +33,9 @@ public class Program implements Callable<Object> {
 		//--------------------------------------------------------------------
 		CallReqHistoricalData reqHistoricalDataYear = new CallReqHistoricalData
 		(	mContext
-		,	IblBarSize.BAR_1_MIN
+		,	IblBarSize.BAR_1_DAY
 		,	SampleSymbols.JPM
-		,	SampleSymbols.JPM.getEndDateTime(2004, 1, 24)
+		,	SampleSymbols.JPM.getEndDateTimeNow()
 		);
 		CallReqHistoricalData reqHistoricalDataMin = new CallReqHistoricalData
 		(	mContext
