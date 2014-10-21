@@ -49,7 +49,7 @@ public class IblEnumCommon<T extends IblEnum> implements IblEnum, Comparable<T> 
 	@Override
 	public String toString() {
 		String message = String.format
-		(	"id=\"%d\" name=\"%s\" description=\"%s\""
+		(	"id={%d} name={%s} description={%s}"
 		,	ID
 		,	NAME
 		,	DESCRIPTION

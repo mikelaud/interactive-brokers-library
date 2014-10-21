@@ -104,6 +104,19 @@ public class IblSymbolInstance extends IblEnumCommon<IblSymbolInstance> implemen
 		}
 	}
 
+	@Override
+	public String toString() {
+		String message = String.format
+		(	"%s securityType={%s} exchange={%s} primaryExchange={%s} currency={%s}"
+		,	super.toString()
+		,	SECURITY_TYPE.getName()
+		,	EXCHANGE.getName()
+		,	PRIMARY_EXCHANGE.getName()
+		,	CURRENCY.getName()
+		);
+		return message;
+	}
+
 	public IblSymbolInstance
 	(	int aId
 	,	String aName
