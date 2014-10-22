@@ -6,13 +6,13 @@ import com.blogspot.mikelaud.ibl.types.common.IblSymbol;
 import com.blogspot.mikelaud.ibl.types.common.IblUniverse;
 import com.blogspot.mikelaud.ibl.types.common.IblUniverseInstance;
 
-public enum SampleUniverses implements IblUniverse {
+public enum SampleUniverse implements IblUniverse {
 
-	MISC(SampleSymbols.class, "MISC", new Color(0, 0, 0));
+	MISC(SampleSymbol.class, "MISC", new Color(0, 0, 0));
 	
 	private final IblUniverseInstance INSTANCE;
 	
-	private SampleUniverses
+	private SampleUniverse
 	(	Class<? extends Enum<? extends IblSymbol>> aUniverseClass
 	,	String aDescription
 	,	Color aColor
@@ -25,7 +25,7 @@ public enum SampleUniverses implements IblUniverse {
 		,	aColor
 		);
 	}
-	
+		
 	@Override
 	public IblUniverseInstance getInstance() {
 		return INSTANCE;

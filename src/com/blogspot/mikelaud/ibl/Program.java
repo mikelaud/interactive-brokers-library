@@ -10,7 +10,7 @@ import com.blogspot.mikelaud.ibl.task.call.contract_details.CallReqContractDetai
 import com.blogspot.mikelaud.ibl.task.call.historical_data.CallReqHistoricalData;
 import com.blogspot.mikelaud.ibl.task.call.real_time_bars.CallReqRealTimeBars;
 import com.blogspot.mikelaud.ibl.types.IblBarSize;
-import com.blogspot.mikelaud.ibl.types.sample.SampleSymbols;
+import com.blogspot.mikelaud.ibl.types.sample.SampleSymbol;
 
 public class Program implements Callable<Object> {
 
@@ -27,27 +27,27 @@ public class Program implements Callable<Object> {
 		//--------------------------------------------------------------------
 		CallReqContractDetails reqContractDetails = new CallReqContractDetails
 		(	mContext
-		,	SampleSymbols.JPM
+		,	SampleSymbol.JPM
 		);
 		reqContractDetails.call();
 		//--------------------------------------------------------------------
 		CallReqHistoricalData reqHistoricalDataYear = new CallReqHistoricalData
 		(	mContext
 		,	IblBarSize.BAR_1_DAY
-		,	SampleSymbols.JPM
-		,	SampleSymbols.JPM.getEndDateTimeNow()
+		,	SampleSymbol.JPM
+		,	SampleSymbol.JPM.getEndDateTimeNow()
 		);
 		CallReqHistoricalData reqHistoricalDataMin = new CallReqHistoricalData
 		(	mContext
 		,	IblBarSize.BAR_1_MIN
-		,	SampleSymbols.JPM
-		,	SampleSymbols.JPM.getEndDateTime(2014, 8, 29)
+		,	SampleSymbol.JPM
+		,	SampleSymbol.JPM.getEndDateTime(2014, 8, 29)
 		);
 		CallReqHistoricalData reqHistoricalDataSec = new CallReqHistoricalData
 		(	mContext
 		,	IblBarSize.BAR_5_SEC
-		,	SampleSymbols.JPM
-		,	SampleSymbols.JPM.getEndDateTime2h(2014, 8, 28)
+		,	SampleSymbol.JPM
+		,	SampleSymbol.JPM.getEndDateTime2h(2014, 8, 28)
 		);
 		reqHistoricalDataYear.call();
 		//reqHistoricalDataMin.call();
@@ -55,7 +55,7 @@ public class Program implements Callable<Object> {
 		//--------------------------------------------------------------------
 		CallReqRealTimeBars reqRealTimeBars = new CallReqRealTimeBars
 		(	mContext
-		,	SampleSymbols.JPM
+		,	SampleSymbol.JPM
 		);
 		//reqRealTimeBars.call();
 		//Thread.sleep(1000 * 5 * 10);

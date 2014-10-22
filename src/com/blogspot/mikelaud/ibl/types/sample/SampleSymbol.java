@@ -6,25 +6,25 @@ import com.blogspot.mikelaud.ibl.types.common.IblExchange;
 import com.blogspot.mikelaud.ibl.types.common.IblSymbol;
 import com.blogspot.mikelaud.ibl.types.common.IblSymbolInstance;
 
-public enum SampleSymbols implements IblSymbol {
+public enum SampleSymbol implements IblSymbol {
 
-	JPM(SampleExchanges.NYSE),
-	XXX123(SampleExchanges.NYSE);
+	JPM(SampleExchange.NYSE),
+	XXX123(SampleExchange.NYSE);
 	
 	private final IblSymbolInstance INSTANCE;
 	
-	private SampleSymbols(IblExchange aPrimaryExchange) {
+	private SampleSymbol(IblExchange aPrimaryExchange) {
 		INSTANCE = new IblSymbolInstance
 		(	this.ordinal()
 		,	this.name()
 		,	this.name()
 		//
 		,	IblSecurityType.STK
-		,	SampleExchanges.SMART
+		,	SampleExchange.SMART
 		,	aPrimaryExchange
 		,	IblCurrency.USD
 		//
-		,	SampleUniverses.MISC
+		,	SampleUniverse.MISC
 		);
 	}
 

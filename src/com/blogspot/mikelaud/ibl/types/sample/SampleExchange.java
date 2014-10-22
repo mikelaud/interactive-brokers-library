@@ -5,14 +5,14 @@ import com.blogspot.mikelaud.ibl.types.IblTradingHours;
 import com.blogspot.mikelaud.ibl.types.common.IblExchange;
 import com.blogspot.mikelaud.ibl.types.common.IblExchangeInstance;
 
-public enum SampleExchanges implements IblExchange {
+public enum SampleExchange implements IblExchange {
 
 	NYSE("New York Stock Exchange"),
 	SMART("SMART Exchange");
 	
 	private final IblExchangeInstance INSTANCE;
 	
-	private SampleExchanges(String aDescription) {
+	private SampleExchange(String aDescription) {
 		INSTANCE = new IblExchangeInstance
 		(	this.ordinal()
 		,	this.name()
