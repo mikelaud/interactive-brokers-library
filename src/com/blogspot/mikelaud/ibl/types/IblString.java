@@ -6,4 +6,8 @@ public class IblString {
 		return (null == aString ? "" : aString);
 	}
 	
+	public static String nvl(Object aArgument) {
+		return (null == aArgument ? "" : aArgument.toString());
+	}
+	
 }
